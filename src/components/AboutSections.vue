@@ -142,7 +142,7 @@ const api = computed(() => apiItems[props.locale])
 .community-service h3 { font-family: var(--font-display); font-weight: 700; color: var(--text); font-size: 1.18rem; margin-bottom: 0.4rem; }
 .community-service p { color: var(--text-dim); margin-bottom: 0.9rem; font-size: 0.95rem; }
 .community-quickstart { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; margin: 1.5rem 0; }
-.community-quickstart code { background: rgba(0, 0, 0, 0.4); padding: 0.6rem 1.2rem; border-radius: 9px; font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent); border: 1px solid var(--line); }
+.community-quickstart code { background: var(--accent-soft); padding: 0.6rem 1.2rem; border-radius: 9px; font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent); border: 1px solid rgba(var(--accent-rgb), 0.18); }
 .community-quickstart span { color: var(--text-dim); font-size: 0.92rem; }
 .community-steps { max-width: 640px; margin: 1.5rem auto; text-align: left; line-height: 1.7; padding-left: 1.4rem; color: var(--text-dim); }
 .community-steps li { margin-bottom: 0.6rem; }

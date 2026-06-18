@@ -24,32 +24,72 @@
   font-weight: 400;
   font-display: swap;
 }
+/* Quicksand (variable 300–700) — display+texto del sistema Cool & Cozy.
+   Autohospedada (woff2 en /public/fonts), sin Google Fonts en runtime. */
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/quicksand.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/quicksand-ext.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Comfortaa Bold — exclusiva del wordmark "dotrino" del logo. Autohospedada. */
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('/fonts/comfortaa.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('/fonts/comfortaa-ext.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 :root {
-  /* Superficie: tinta profunda con matiz frío. */
-  --ink:        #090c11;
-  --ink-2:      #0d1117;
-  --surface:    rgba(255, 255, 255, 0.025);
-  --surface-2:  rgba(255, 255, 255, 0.05);
-  --line:       rgba(255, 255, 255, 0.08);
-  --line-2:     rgba(255, 255, 255, 0.16);
+  /* ── Cool & Cozy ──  Superficie clara, cálida-fría: crema azulada en vez de
+     tinta oscura. Las cards van blanco puro sobre el fondo crema, separadas por
+     sombra ambiental suave (no bordes duros). */
+  --ink:        #f4f7f9;   /* fondo base de página */
+  --ink-2:      #eaeff3;   /* secciones alternas / fondo apenas más hondo */
+  --surface:    #ffffff;            /* cards: blanco puro */
+  --surface-2:  #f1f4f6;            /* superficie elevada suave */
+  --line:       #e3e9ed;            /* borde suave */
+  --line-2:     #cfd8de;            /* borde un poco más marcado */
 
-  /* Texto. */
-  --text:       #e9eef3;
-  --text-dim:   #94a1b0;
-  --text-faint: #5c6775;
+  /* Texto sobre superficie clara (carbón cálido, no negro puro). */
+  --text:       #181c1e;
+  --text-dim:   #4a5560;
+  --text-faint: #8a95a0;
 
-  /* Acento de marca: lima, 5% menos saturado que el original (#c8f751). */
-  --accent:       #c6f355;
-  --accent-press: #b4e440;
-  --accent-rgb:   198, 243, 85;
-  --accent-soft:  rgba(var(--accent-rgb), 0.13);
-  --accent-ink:   #0a0d05;
-  /* Secundario frío para etiquetas WIP / matices. */
-  --mint:         #6ee7c8;
+  /* Acento de marca: azul "Cool & Cozy" (el ave azul). Botones primarios =
+     azul con texto blanco; también sirve como color de texto/borde de énfasis. */
+  --accent:       #00658c;
+  --accent-press: #00506f;
+  --accent-rgb:   0, 101, 140;
+  --accent-soft:  rgba(var(--accent-rgb), 0.10);
+  --accent-ink:   #ffffff;
+  /* Azul claro de marca + secundario menta (para chips/etiquetas WIP). */
+  --brand-soft:   #72c1f0;
+  --mint:         #00897b;
 
-  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
-  --font-body:    'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
+  /* Geometría redondeada (squircle / pill) del sistema Cool & Cozy. */
+  --radius:       1rem;
+  --radius-lg:    1.75rem;
+  --radius-pill:  9999px;
+
+  --font-display: 'Quicksand', 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body:    'Quicksand', 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, 'Consolas', monospace;
 }
 
@@ -70,14 +110,27 @@ body {
 
 #app { width: 100%; min-height: 100vh; }
 
+/* Tema Cool & Cozy para el Web Component <dotrino-support> (moneda + modal).
+   Sus estilos viven en Shadow DOM, pero estas CSS custom properties penetran y
+   lo tematizan claro (el paquete las lee con fallback al oscuro por defecto). */
+dotrino-support {
+  --ds-accent: #00658c;
+  --ds-accent-press: #00506f;
+  --ds-modal-bg: #ffffff;
+  --ds-modal-text: #181c1e;
+  --ds-modal-muted: #4a5560;
+  --ds-modal-border: #e3e9ed;
+  --ds-modal-hover: rgba(0, 0, 0, 0.06);
+}
+
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--ink); }
-::-webkit-scrollbar-thumb { background: #2a323d; border-radius: 6px; border: 2px solid var(--ink); }
-::-webkit-scrollbar-thumb:hover { background: #3a444f; }
+::-webkit-scrollbar-thumb { background: #c2cdd5; border-radius: 6px; border: 2px solid var(--ink); }
+::-webkit-scrollbar-thumb:hover { background: #a9b6bf; }
 
 button:focus-visible,
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

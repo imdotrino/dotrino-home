@@ -99,22 +99,24 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   position: fixed; top: 0; width: 100%;
   /* Sin backdrop-filter: el blur sobre un elemento fijo es el disparador #1 de
      artefactos en Adreno/Mali (MIUI). Tinta casi opaca en su lugar. */
-  background: rgba(9, 12, 17, 0.85);
+  background: rgba(244, 247, 249, 0.88);
   z-index: 1000;
   border-bottom: 1px solid transparent;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 .navbar.scrolled {
-  background: rgba(9, 12, 17, 0.94);
+  background: rgba(244, 247, 249, 0.95);
   border-bottom-color: var(--line);
+  box-shadow: 0 8px 30px rgba(74, 85, 96, 0.06);
 }
 .nav-container { max-width: 1240px; margin: 0 auto; padding: 0.85rem 2rem; display: flex; align-items: center; gap: 1rem; }
 .logo { display: flex; align-items: center; gap: 0.6rem; }
 .cc-back { color: var(--text); --cc-back-size: 34px; margin-left: -6px; }
 .logo-img { height: 34px; width: auto; border-radius: 8px; }
 .logo-text {
-  font-family: var(--font-display);
-  font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text);
+  font-family: 'Comfortaa', var(--font-display);
+  font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+  text-transform: lowercase;
 }
 .nav-actions { display: flex; align-items: center; gap: 0.6rem; margin-left: auto; }
 
@@ -132,7 +134,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .nav-link:hover::after { width: 100%; }
 
 .lang-selector {
-  display: inline-flex; border: 1px solid var(--line-2); border-radius: 8px;
+  display: inline-flex; border: 1px solid var(--line-2); border-radius: 999px;
   overflow: hidden; background: var(--surface);
 }
 .lang-selector button {
@@ -149,7 +151,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   --cc-install-bg: var(--accent);
   --cc-install-color: var(--accent-ink);
   --cc-install-bg-hover: var(--accent-press);
-  --cc-install-radius: 8px;
+  --cc-install-radius: 999px;
   --cc-install-pad: 0.5rem 1.05rem;
   --cc-install-font-size: 0.86rem;
 }
@@ -185,7 +187,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
 .mobile-menu {
   display: none; flex-direction: column;
-  background: rgba(9, 12, 17, 0.96); border-top: 1px solid var(--line);
+  background: rgba(244, 247, 249, 0.98); border-top: 1px solid var(--line);
   max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
 }
 .mobile-menu.open { max-height: 320px; }

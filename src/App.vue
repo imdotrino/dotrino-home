@@ -86,12 +86,12 @@ const openMyProfile = async () => {
 const bindProfile = (el: any) => { if (!el) return; ensureProvider().then((p: any) => { if (p) el.provider = p }) }
 const onProfileName = (e: any) => { const n = e?.detail?.name; if (n) myName.value = n }
 
-// Tema del Web Component de perfil acorde al home (tinta + lima, fuentes propias).
+// Tema del Web Component de perfil acorde al home (Cool & Cozy: claro + azul, fuentes propias).
 const profileTheme = {
-  '--ccp-bg': '#0d1117', '--ccp-bg-2': '#12161d', '--ccp-bg-3': '#171c24', '--ccp-bg-4': '#1f2630',
-  '--ccp-border': 'rgba(255,255,255,0.16)', '--ccp-text': '#e9eef3', '--ccp-muted': '#94a1b0',
-  '--ccp-accent': '#c6f355', '--ccp-accent-2': '#b4e440', '--ccp-accent-text': '#0a0d05', '--ccp-gold': '#ffd166', '--ccp-derived': '#d49a00',
-  '--ccp-online': '#6ee7c8', '--ccp-affinity': '#7cc4ff', '--ccp-input-bg': '#0b0f15', '--ccp-radius': '16px',
+  '--ccp-bg': '#ffffff', '--ccp-bg-2': '#f4f7f9', '--ccp-bg-3': '#eaeff3', '--ccp-bg-4': '#e3e9ed',
+  '--ccp-border': '#cfd8de', '--ccp-text': '#181c1e', '--ccp-muted': '#4a5560',
+  '--ccp-accent': '#00658c', '--ccp-accent-2': '#00506f', '--ccp-accent-text': '#ffffff', '--ccp-gold': '#c98a00', '--ccp-derived': '#b07f00',
+  '--ccp-online': '#00897b', '--ccp-affinity': '#2f8fd6', '--ccp-input-bg': '#f1f4f6', '--ccp-radius': '16px',
   '--ccp-font': "'Hanken Grotesk', system-ui, sans-serif",
   '--ccp-font-headline': "'Bricolage Grotesque', system-ui, sans-serif",
   '--ccp-font-mono': "'JetBrains Mono', ui-monospace, monospace",
@@ -199,9 +199,9 @@ const scrollToSection = (sectionId: string) => {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(60rem 40rem at 78% -8%, rgba(var(--accent-rgb), 0.10), transparent 60%),
-    radial-gradient(50rem 38rem at 8% 12%, rgba(70, 120, 150, 0.12), transparent 62%),
-    linear-gradient(180deg, #0b0f15, var(--ink) 38%);
+    radial-gradient(60rem 40rem at 78% -8%, rgba(var(--accent-rgb), 0.08), transparent 60%),
+    radial-gradient(50rem 38rem at 8% 12%, rgba(114, 193, 240, 0.14), transparent 62%),
+    linear-gradient(180deg, var(--ink-2), var(--ink) 38%);
 }
 /* Grilla técnica tenue, con desvanecido radial hacia los bordes.
    El fundido se HORNEA como viñeta de tinta dentro del mismo background en vez

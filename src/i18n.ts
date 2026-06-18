@@ -38,6 +38,11 @@ export const messages = {
       fullHome: '¿Qué es Dotrino?',
       info: 'Ver descripción',
       close: 'Cerrar',
+      requestTitle: 'Solicita o recomienda una aplicación',
+      requestPlaceholder: 'Quiero una app que lea QRs',
+      requestSend: 'Enviar',
+      requestThanks: '¡Gracias! Recibimos tu sugerencia.',
+      requestError: 'No se pudo enviar. Inténtalo de nuevo.',
     },
     service: {
       title: 'Servicio',
@@ -101,6 +106,11 @@ export const messages = {
       fullHome: 'What is Dotrino?',
       info: 'View description',
       close: 'Close',
+      requestTitle: 'Request or recommend an app',
+      requestPlaceholder: 'I want an app that reads QR codes',
+      requestSend: 'Send',
+      requestThanks: 'Thanks! We got your suggestion.',
+      requestError: "Couldn't send. Please try again.",
     },
     service: {
       title: 'Service',

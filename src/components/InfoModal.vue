@@ -34,11 +34,11 @@ const t = computed(() => messages[props.locale])
 </template>
 
 <style scoped>
-.info-modal-overlay { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background: rgba(5, 7, 10, 0.88); }
-.info-modal { position: relative; width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto; background: var(--ink-2); border: 1px solid var(--line-2); border-radius: 18px; padding: 2.2rem 1.8rem 1.8rem; text-align: center; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+.info-modal-overlay { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background: rgba(24, 28, 30, 0.42); }
+.info-modal { position: relative; width: 100%; max-width: 440px; max-height: 85vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--line-2); border-radius: 18px; padding: 2.2rem 1.8rem 1.8rem; text-align: center; box-shadow: 0 30px 80px rgba(0, 101, 140, 0.18); }
 .info-modal-x { position: absolute; top: 0.7rem; right: 0.7rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: transparent; color: var(--text-dim); border: none; border-radius: 50%; font-size: 1.5rem; line-height: 1; cursor: pointer; transition: all 0.2s ease; }
 .info-modal-x:hover { background: var(--surface-2); color: var(--text); }
-.info-modal-logo { width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4); margin-bottom: 1rem; }
+.info-modal-logo { width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 10px 26px rgba(74, 85, 96, 0.16); margin-bottom: 1rem; }
 .info-modal-title { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 1.5rem; color: var(--text); margin-bottom: 1rem; }
 .info-modal-desc { line-height: 1.65; margin-bottom: 1.75rem; color: var(--text-dim); text-align: left; }
 .info-modal-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
