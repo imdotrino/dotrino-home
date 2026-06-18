@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, provide } from 'vue'
 import { detectLocale, LANG_KEY, type Locale } from './i18n'
 import type { AppEntry } from './data/apps'
 import SiteNav from './components/SiteNav.vue'
@@ -84,7 +84,43 @@ const openMyProfile = async () => {
   profilePk.value = pk
 }
 const bindProfile = (el: any) => { if (!el) return; ensureProvider().then((p: any) => { if (p) el.provider = p }) }
-const onProfileName = (e: any) => { const n = e?.detail?.name; if (n) myName.value = n }
+
+/* "Exigir apodo": acciones que se firman con la identidad (p. ej. enviar una
+   solicitud de app) requieren nickname. Si falta, se abre el perfil (mode="self")
+   para ponerlo y la acción pendiente se reanuda al guardarlo. Mismo patrón que
+   pronóstico y otras apps. Se expone a los hijos vía provide. */
+const pendingAction = ref<null | (() => void)>(null)
+async function ensureNick (run: () => void) {
+  const id = await ensureIdentity()
+  if (id && !id.me?.nickname) {
+    pendingAction.value = run
+    await openMyProfile()
+    return
+  }
+  run()
+}
+const getMyIdentity = async () => {
+  const id = await ensureIdentity()
+  return {
+    pubkey: id?.me?.publickey || '',
+    nickname: id?.me?.nickname || '',
+    signData: (data: any) => id?.signData?.(data),
+  }
+}
+provide('ensureNick', ensureNick)
+provide('getMyIdentity', getMyIdentity)
+
+const onProfileName = (e: any) => {
+  const n = e?.detail?.name
+  if (n) myName.value = n
+  if (n && pendingAction.value) {
+    const run = pendingAction.value
+    pendingAction.value = null
+    profilePk.value = null
+    run()
+  }
+}
+const onProfileClose = () => { profilePk.value = null; pendingAction.value = null }
 
 // Tema del Web Component de perfil acorde al home (Cool & Cozy: claro + azul, fuentes propias).
 const profileTheme = {
@@ -165,7 +201,7 @@ const scrollToSection = (sectionId: string) => {
       :lang="locale"
       :style="profileTheme"
       @cc-profile-name="onProfileName"
-      @cc-profile-close="profilePk = null"
+      @cc-profile-close="onProfileClose"
     ></dotrino-profile>
   </div>
 </template>

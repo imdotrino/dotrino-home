@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, inject } from 'vue'
 import { messages, type Locale } from '../i18n'
 import { apps, defaultRecentApps, type AppEntry, type SubKey } from '../data/apps'
 import { recents, loadRecents } from '../recents'
@@ -63,15 +63,36 @@ watch(activeTab, (tab) => {
 const FEEDBACK_URL = import.meta.env.VITE_FEEDBACK_URL || 'https://feedback.dotrino.com'
 const reqText = ref('')
 const reqState = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
-async function submitRequest() {
+
+// Provistos por App.vue: exigir apodo (abre el perfil si falta) + leer mi identidad.
+const ensureNick = inject<((run: () => void) => void) | null>('ensureNick', null)
+type MyId = { pubkey: string; nickname: string; signData?: (d: unknown) => Promise<unknown> }
+const getMyIdentity = inject<(() => Promise<MyId>) | null>('getMyIdentity', null)
+
+async function doSendRequest() {
   const text = reqText.value.trim()
-  if (!text || reqState.value === 'sending' || reqState.value === 'sent') return
+  if (!text) return
   reqState.value = 'sending'
+  let pubkey = '', nickname = '', signature = ''
+  const ts = Date.now()
+  try {
+    if (getMyIdentity) {
+      const me = await getMyIdentity()
+      pubkey = me.pubkey; nickname = me.nickname
+      // Firma del contenido con tu identidad → el destinatario puede validar.
+      if (me.signData && pubkey) {
+        try {
+          const sig = (await me.signData({ op: 'app-request', text, ts })) as string | { signature?: string }
+          signature = (typeof sig === 'string' ? sig : sig?.signature) || ''
+        } catch { /* firma opcional */ }
+      }
+    }
+  } catch { /* sin identidad: envío anónimo */ }
   try {
     const res = await fetch(FEEDBACK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, app: 'home', locale: props.locale }),
+      body: JSON.stringify({ text, app: 'home', locale: props.locale, pubkey, nickname, ts, signature }),
     })
     if (!res.ok) throw new Error('bad')
     reqState.value = 'sent'
@@ -79,6 +100,14 @@ async function submitRequest() {
   } catch {
     reqState.value = 'error'
   }
+}
+
+function submitRequest() {
+  const text = reqText.value.trim()
+  if (!text || reqState.value === 'sending' || reqState.value === 'sent') return
+  // Enviar firma con tu identidad → exige apodo; si falta, abre el perfil (popup).
+  if (ensureNick) ensureNick(() => { doSendRequest() })
+  else doSendRequest()
 }
 </script>
 
