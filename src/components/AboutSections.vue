@@ -79,7 +79,7 @@ const api = computed(() => apiItems[props.locale])
       <p class="community-note">{{ t.community.note }}</p>
       <a
         class="community-cta"
-        href="https://github.com/imdotrino/dotrino#colabora-suma-tu-nodo-autohosteo"
+        href="https://github.com/imdotrino/dotrino-home#colabora-suma-tu-nodo-autohosteo"
         target="_blank"
         rel="noopener"
       >{{ t.community.cta }}</a>

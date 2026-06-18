@@ -78,7 +78,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       <dotrino-support
         class="nav-support"
         href="https://ko-fi.com/dotrino"
-        repo="dotrino/dotrino"
+        repo="imdotrino/dotrino-home"
         discord="https://discord.gg/D648uq7cth"
         :lang="locale"
       ></dotrino-support>

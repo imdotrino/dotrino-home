@@ -29,14 +29,14 @@ servicios son **livianos** y vienen **dockerizados turnkey**, con imágenes en
 
 | Servicio | Qué es | Imagen | Repo |
 |----------|--------|--------|------|
-| **proxy** | transporte (mensajería, canales, WebRTC, federado) | `ghcr.io/dotrino/simple-websocket-proxy` | [simple-websocket-proxy](https://github.com/imdotrino/simple-websocket-proxy) |
-| **geo** | descubrimiento georreferenciado (PostGIS, federado) | `ghcr.io/dotrino/dotrino-geo` | [dotrino-geo](https://github.com/imdotrino/dotrino-geo) |
-| **reputation** | registro de reputación (atestaciones firmadas) | `ghcr.io/dotrino/dotrino-reputation` | [dotrino-reputation](https://github.com/imdotrino/dotrino-reputation) |
+| **proxy** | transporte (mensajería, canales, WebRTC, federado) | `ghcr.io/imdotrino/dotrino-proxy` | [simple-websocket-proxy](https://github.com/imdotrino/dotrino-proxy) |
+| **geo** | descubrimiento georreferenciado (PostGIS, federado) | `ghcr.io/imdotrino/dotrino-geo` | [dotrino-geo](https://github.com/imdotrino/dotrino-geo) |
+| **reputation** | registro de reputación (atestaciones firmadas) | `ghcr.io/imdotrino/dotrino-reputation` | [dotrino-reputation](https://github.com/imdotrino/dotrino-reputation) |
 
 ### Levantar un nodo (1 comando)
 
 ```bash
-git clone https://github.com/imdotrino/simple-websocket-proxy   # o geo / reputation
+git clone https://github.com/imdotrino/dotrino-proxy   # o geo / reputation
 cd simple-websocket-proxy
 cp .env.docker.example .env     # completá tu dominio + secretos
 docker compose up -d            # baja la imagen de GHCR y arranca con TLS automático (Caddy)
@@ -58,7 +58,7 @@ Cada repo tiene su **`SELF-HOSTING.md`** con el detalle. Reglas:
    failover **sin rebuild**.
 
 Diseño completo en
-[`FEDERATION.md`](https://github.com/imdotrino/simple-websocket-proxy/blob/main/FEDERATION.md).
+[`FEDERATION.md`](https://github.com/imdotrino/dotrino-proxy/blob/main/FEDERATION.md).
 
 ---
 

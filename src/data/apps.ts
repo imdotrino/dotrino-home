@@ -42,7 +42,7 @@ export const apps: AppEntry[] = [
     name: 'here',
     url: 'https://here.dotrino.com/',
     logo: hereLogo,
-    repo: 'dotrino/here',
+    repo: 'imdotrino/dotrino-here',
     cat: 'social',
     desc: {
       es: 'Comparte tu ubicación en vivo con tus círculos de familia y amigos, privada y efímera. Configura OwnTracks (que hace el seguimiento en segundo plano) contra el pilar geo: cada círculo va cifrado de punta a punta, autorizado por capacidades firmadas desde tu identidad (revocables, con vencimiento) y sin historial. El servidor solo ve datos cifrados; nada de broadcast ni descubrimiento por cercanía.',
@@ -53,7 +53,7 @@ export const apps: AppEntry[] = [
     name: 'Pronóstico Mundialista',
     url: 'https://mundial.dotrino.com/',
     logo: mundialLogo,
-    repo: 'dotrino/pronostico-mundialista',
+    repo: 'imdotrino/dotrino-pronostico-mundialista',
     cat: 'juegos',
     sub: 'multi',
     desc: {
@@ -65,7 +65,7 @@ export const apps: AppEntry[] = [
     name: 'Dotrino Chat',
     url: 'https://chat.dotrino.com/',
     logo: chatLogo,
-    repo: 'dotrino/simple-websocket-chat',
+    repo: 'imdotrino/dotrino-chat',
     cat: 'social',
     desc: {
       es: 'Chat en tiempo real con salas públicas y mensajes directos.',
@@ -76,7 +76,7 @@ export const apps: AppEntry[] = [
     name: 'Dotrino Messenger',
     url: 'https://messenger.dotrino.com/',
     logo: messengerLogo,
-    repo: 'dotrino/dotrino-messenger',
+    repo: 'imdotrino/dotrino-messenger',
     cat: 'social',
     desc: {
       es: 'Mensajería privada 1-a-1 con cifrado de extremo a extremo; recibe mensajes aunque estés desconectado. PWA instalable y extensión de Chrome.',
@@ -87,7 +87,7 @@ export const apps: AppEntry[] = [
     name: 'Trueque',
     url: 'https://trueque.dotrino.com/',
     logo: truequeLogo,
-    repo: 'dotrino/trueque',
+    repo: 'imdotrino/dotrino-trueque',
     cat: 'social',
     desc: {
       es: 'Anuncios georreferenciados <strong>efímeros</strong> (vendo / regalo / busco) cerca de ti: descubre por radio con un <strong>radar de proximidad</strong> y cierra el trato por mensaje. Caducan en 24 h y tu ubicación no se guarda.',
@@ -98,7 +98,7 @@ export const apps: AppEntry[] = [
     name: 'Eco',
     url: 'https://eco.dotrino.com/',
     logo: ecoLogo,
-    repo: 'dotrino/eco',
+    repo: 'imdotrino/dotrino-eco',
     cat: 'social',
     desc: {
       es: 'Microblogging <strong>efímero y georreferenciado</strong>: publicas un eco (texto, enlaces y tags) y quien lo tenga en su <strong>radio de escucha</strong> lo descubre. A las <strong>24 h muere en la red</strong>. Tu voz, en tu zona, bajo tus reglas.',
@@ -109,7 +109,7 @@ export const apps: AppEntry[] = [
     name: 'QRShare',
     url: 'https://qrshare.dotrino.com/',
     logo: qrshareLogo,
-    repo: 'dotrino/qrshare',
+    repo: 'imdotrino/dotrino-qrshare',
     cat: 'apps',
     desc: {
       es: 'Transferencia de archivos directa entre dispositivos, sin pasar por un servidor. Comparte por QR.',
@@ -120,7 +120,7 @@ export const apps: AppEntry[] = [
     name: 'Dotrino Chess',
     url: 'https://chess.dotrino.com/',
     logo: chessLogo,
-    repo: 'dotrino/simple-websocket-chess',
+    repo: 'imdotrino/dotrino-chess',
     cat: 'juegos',
     sub: 'multi',
     desc: {
@@ -132,7 +132,7 @@ export const apps: AppEntry[] = [
     name: 'Cuarenta (40)',
     url: 'https://cuarenta.dotrino.com/',
     logo: cuarentaLogo,
-    repo: 'dotrino/cuarenta',
+    repo: 'imdotrino/dotrino-cuarenta',
     cat: 'juegos',
     sub: 'multi',
     desc: {
@@ -144,7 +144,7 @@ export const apps: AppEntry[] = [
     name: 'Contador Ecuavóley',
     url: 'https://ecuavoley.dotrino.com/',
     logo: ecuavoleyLogo,
-    repo: 'dotrino/ecuavoley-contador',
+    repo: 'imdotrino/dotrino-ecuavoley-contador',
     cat: 'deportes',
     desc: {
       es: 'Marcador para partidos de ecuavóley: dos paneles táctiles, indicador de saque, deshacer, cambio y reinicio. Gana el primero en llegar a 15.',
@@ -155,7 +155,7 @@ export const apps: AppEntry[] = [
     name: 'Contador Pádel',
     url: 'https://padel.dotrino.com/',
     logo: padelLogo,
-    repo: 'dotrino/padel-contador',
+    repo: 'imdotrino/dotrino-padel-contador',
     cat: 'deportes',
     desc: {
       es: 'Marcador para partidos de pádel con puntuación de tenis (0/15/30/40, juegos y sets): dos paneles táctiles, indicador de saque, tie-break, punto de oro opcional, deshacer y reinicio.',
@@ -166,7 +166,7 @@ export const apps: AppEntry[] = [
     name: 'GymBro Timer',
     url: 'https://gymbro.dotrino.com/',
     logo: gymbroLogo,
-    repo: 'dotrino/gymbro',
+    repo: 'imdotrino/dotrino-gymbro',
     cat: 'deportes',
     desc: {
       es: 'Timer por intervalos para el gimnasio: define tu tiempo de entrenamiento y de descanso, una cuenta atrás de preparación y el número de rondas. Avisos sonoros, vibración, notificaciones en segundo plano y pantalla siempre encendida. Funciona sin conexión.',
@@ -177,7 +177,7 @@ export const apps: AppEntry[] = [
     name: 'Diamonds',
     url: 'https://diamonds.dotrino.com/',
     logo: diamondsLogo,
-    repo: 'dotrino/diamonds',
+    repo: 'imdotrino/dotrino-diamonds',
     cat: 'juegos',
     sub: 'solo',
     desc: {
@@ -189,7 +189,7 @@ export const apps: AppEntry[] = [
     name: 'Sudoku',
     url: 'https://sudoku.dotrino.com/',
     logo: sudokuLogo,
-    repo: 'dotrino/sudoku',
+    repo: 'imdotrino/dotrino-sudoku',
     cat: 'juegos',
     sub: 'solo',
     desc: {
@@ -201,7 +201,7 @@ export const apps: AppEntry[] = [
     name: 'Critters',
     url: 'https://critters.dotrino.com/',
     logo: crittersLogo,
-    repo: 'dotrino/critters',
+    repo: 'imdotrino/dotrino-critters',
     cat: 'juegos',
     sub: 'solo',
     desc: {
@@ -213,7 +213,7 @@ export const apps: AppEntry[] = [
     name: 'Trivia',
     url: 'https://trivia.dotrino.com/',
     logo: triviaLogo,
-    repo: 'dotrino/trivia',
+    repo: 'imdotrino/dotrino-trivia',
     cat: 'juegos',
     sub: 'config',
     desc: {
@@ -225,7 +225,7 @@ export const apps: AppEntry[] = [
     name: 'GridGame',
     url: 'https://gridgame.dotrino.com/',
     logo: gridgameLogo,
-    repo: 'dotrino/gridgame',
+    repo: 'imdotrino/dotrino-gridgame',
     cat: 'juegos',
     sub: 'multi',
     wip: true,
@@ -238,7 +238,7 @@ export const apps: AppEntry[] = [
     name: 'Favicon Generator',
     url: 'https://favicon.dotrino.com/',
     logo: faviconLogo,
-    repo: 'dotrino/favicon-generator',
+    repo: 'imdotrino/dotrino-favicon-generator',
     cat: 'apps',
     desc: {
       es: 'Genera favicons e íconos <code>.ico</code> compatibles con Windows a partir de una imagen PNG/JPG, listos para tu sitio o PWA. Todo en el navegador, sin subir nada a un servidor.',
@@ -247,10 +247,10 @@ export const apps: AppEntry[] = [
   },
   {
     name: 'Android Launcher',
-    url: 'https://github.com/imdotrino/android-launcher/releases/latest/download/android-launcher.apk',
-    apk: 'https://github.com/imdotrino/android-launcher/releases/latest/download/android-launcher.apk',
+    url: 'https://github.com/imdotrino/dotrino-android-launcher/releases/latest/download/android-launcher.apk',
+    apk: 'https://github.com/imdotrino/dotrino-android-launcher/releases/latest/download/android-launcher.apk',
     logo: androidLauncherLogo,
-    repo: 'dotrino/android-launcher',
+    repo: 'imdotrino/dotrino-android-launcher',
     cat: 'android',
     desc: {
       es: 'Launcher de Android nativo: carrusel de apps paginado por letra con índice lateral, recientes y dock. Permite <strong>ocultar apps</strong> detrás de tu huella o patrón, con un atajo camuflado. APK firmado, instalable por sideload (Android 8+).',
