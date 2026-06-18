@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-02",
+  "note": "Directorio de nodos del ecosistema Dotrino. Los clientes lo bajan para descubrir proxios/servicios sin hardcodear. Los proxios estan federados entre si. Podes agregar nodos propios en el cliente; este directorio es solo un seed.",
+  "proxies": [
+    { "url": "wss://proxy.dotrino.com", "label": "Dotrino", "region": "us" },
+    { "url": "wss://proxy2.dotrino.com", "label": "Dotrino 2", "region": "us" }
+  ],
+  "geo": [
+    { "url": "https://geo.dotrino.com", "label": "Dotrino" }
+  ],
+  "reputation": [
+    { "url": "https://reputation.dotrino.com", "label": "Dotrino" }
+  ]
+}

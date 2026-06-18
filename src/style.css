@@ -1,0 +1,121 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Dotrino — base global
+   Fuentes AUTOHOSPEDADAS (filosofía del ecosistema: sin JS ni recursos de
+   terceros, no se filtra la IP del visitante a Google Fonts). woff2 en
+   /public/fonts. Bricolage Grotesque (display) + Hanken Grotesk (texto) +
+   JetBrains Mono (código/subdominios).
+   ───────────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/bricolage-grotesque.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Hanken Grotesk';
+  src: url('/fonts/hanken-grotesk.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* Superficie: tinta profunda con matiz frío. */
+  --ink:        #090c11;
+  --ink-2:      #0d1117;
+  --surface:    rgba(255, 255, 255, 0.025);
+  --surface-2:  rgba(255, 255, 255, 0.05);
+  --line:       rgba(255, 255, 255, 0.08);
+  --line-2:     rgba(255, 255, 255, 0.16);
+
+  /* Texto. */
+  --text:       #e9eef3;
+  --text-dim:   #94a1b0;
+  --text-faint: #5c6775;
+
+  /* Acento de marca: lima, 5% menos saturado que el original (#c8f751). */
+  --accent:       #c6f355;
+  --accent-press: #b4e440;
+  --accent-rgb:   198, 243, 85;
+  --accent-soft:  rgba(var(--accent-rgb), 0.13);
+  --accent-ink:   #0a0d05;
+  /* Secundario frío para etiquetas WIP / matices. */
+  --mint:         #6ee7c8;
+
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body:    'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'Consolas', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#app { width: 100%; min-height: 100vh; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: #2a323d; border-radius: 6px; border: 2px solid var(--ink); }
+::-webkit-scrollbar-thumb:hover { background: #3a444f; }
+
+button:focus-visible,
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fadeInUp 0.6s ease-out; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Primitivas de layout compartidas entre secciones (antes scoped en App.vue;
+   ahora globales porque las usan varios componentes: AppsCatalog y
+   AboutSections). Las clases `.aplicaciones-section`/`.apps-only` específicas
+   del catálogo siguen scoped en su componente.
+   ───────────────────────────────────────────────────────────────────────── */
+.section { position: relative; padding: 5.5rem 2rem; display: flex; justify-content: center; }
+.section-content { position: relative; z-index: 2; width: 100%; max-width: 1180px; text-align: center; }
+.section-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.03em; color: var(--text); margin-bottom: 1rem; }
+.section-text { font-size: 1.1rem; line-height: 1.7; color: var(--text-dim); max-width: 680px; margin: 0 auto 2.5rem; }
+
+/* Código en línea (chips lima). Global para que también aplique al contenido
+   inyectado con v-html en las descripciones de apps y en Servicio/API, que las
+   reglas scoped no alcanzan. */
+code, .section-text code, .info-modal-desc code, .service-item code, .api-item code, .community-service code {
+  font-family: var(--font-mono); font-size: 0.85em;
+  background: rgba(var(--accent-rgb), 0.08); color: var(--accent);
+  padding: 0.12em 0.42em; border-radius: 5px; border: 1px solid rgba(var(--accent-rgb), 0.14);
+}
+
+@media (max-width: 768px) {
+  .section { padding: 4rem 1.2rem; }
+}
+@media (max-width: 480px) {
+  .section-content { padding: 0; }
+}
+
+@media print {
+  .navbar, .cta-button { display: none; }
+  .section { break-inside: avoid; }
+}

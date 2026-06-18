@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Limpia cualquier cache de versiones anteriores del SW
+      if ('caches' in window) {
+        caches.keys().then(keys => keys.forEach(k => caches.delete(k)))
+      }
+    </script>
+    <script>
+      // KILL-SWITCH de efectos GPU: algunas GPUs móviles (Adreno/Mali en Android/MIUI/Poco)
+      // y los teléfonos flojos artefactan al recomponer las capas grandes (atmósfera de
+      // gradientes + grilla + glows) al hacer scroll. En esos equipos aplanamos TODO (clase
+      // `reduce-fx` sobre <html>, antes del primer paint → sin flash). Desktop/iOS conservan el efecto.
+      (function () {
+        try {
+          var ua = navigator.userAgent || '';
+          var android = /Android/i.test(ua);
+          var xiaomi = /MIUI|XiaoMi|Redmi|POCO|HyperOS/i.test(ua);
+          var mem = navigator.deviceMemory || 0;            // GB (Chrome)
+          var cores = navigator.hardwareConcurrency || 0;
+          var weak = (mem && mem <= 4) || (cores && cores <= 4);
+          // Android cubre Adreno/Mali (las GPUs que artefactan); + cualquier equipo flojo.
+          if (android || xiaomi || weak) document.documentElement.classList.add('reduce-fx');
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      /* En equipos marcados (reduce-fx) NO hay atmósfera, grilla, glow ni blur:
+         fondo plano y cero capas que la GPU pueda corromper al scrollear. */
+      html.reduce-fx .app::before,
+      html.reduce-fx .app::after,
+      html.reduce-fx .hero-glow { display: none !important; }
+      html.reduce-fx body,
+      html.reduce-fx .app { background: #0b0f15 !important; }
+      html.reduce-fx * {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        filter: none !important;
+        background-attachment: scroll !important;
+      }
+    </style>
+    <title>Dotrino - Ecosistema de Aplicaciones</title>
+    <meta name="theme-color" content="#f1f1f1" />
+    <meta name="description" content="Ecosistema de apps autohosteadas que comparten identidad, transporte y almacenamiento. Tu información, en tu servidor, bajo tus reglas." />
+    <link rel="canonical" href="https://dotrino.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Dotrino" />
+    <meta property="og:title" content="Dotrino — Ecosistema de Aplicaciones" />
+    <meta property="og:description" content="Apps autohosteadas que comparten identidad, transporte y almacenamiento. Tu info, en tu servidor, bajo tus reglas." />
+    <meta property="og:url" content="https://dotrino.com/" />
+    <meta property="og:image" content="https://dotrino.com/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dotrino — Ecosistema de Aplicaciones" />
+    <meta name="twitter:description" content="Apps autohosteadas: tu información, en tu servidor, bajo tus reglas." />
+    <meta name="twitter:image" content="https://dotrino.com/og.jpg" />
+    <!-- Analítica cookieless autohosteada (GoatCounter); no cuenta en localhost/LAN. -->
+    <script>window.goatcounter={path:function(p){return location.hostname+p}}</script>
+    <script data-goatcounter="https://goat.dotrino.com/count" async src="https://goat.dotrino.com/count.js"></script>
+      <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Dotrino",
+      "url": "https://dotrino.com/",
+      "description": "Ecosistema de apps autohosteadas que comparten identidad, transporte y almacenamiento.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@type": "Organization", "name": "Dotrino", "url": "https://dotrino.com/" }
+    }
+    </script>
+</head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
