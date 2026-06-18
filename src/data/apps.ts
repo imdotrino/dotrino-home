@@ -2,7 +2,6 @@
    App.vue. Cada entrada se registra también en el tab "Recientes" cuando el
    usuario la abre (ver ../recents.ts). */
 
-import mundialLogo from '../assets/apps/mundial.svg'
 import chatLogo from '../assets/apps/chat.svg'
 import messengerLogo from '../assets/apps/messenger.svg'
 import qrshareLogo from '../assets/apps/qrshare.svg'
@@ -47,18 +46,6 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Comparte tu ubicación en vivo con tus círculos de familia y amigos, privada y efímera. Configura OwnTracks (que hace el seguimiento en segundo plano) contra el pilar geo: cada círculo va cifrado de punta a punta, autorizado por capacidades firmadas desde tu identidad (revocables, con vencimiento) y sin historial. El servidor solo ve datos cifrados; nada de broadcast ni descubrimiento por cercanía.',
       en: 'Share your live location with your family and friends circles, private and ephemeral. Configure OwnTracks (which does the background tracking) against the geo pillar: each circle is end-to-end encrypted, authorized by signed capabilities from your identity (revocable, expiring) and with no history. The server only sees encrypted data; no broadcast, no proximity discovery.',
-    },
-  },
-  {
-    name: 'Pronóstico Mundialista',
-    url: 'https://mundial.dotrino.com/',
-    logo: mundialLogo,
-    repo: 'imdotrino/dotrino-pronostico-mundialista',
-    cat: 'juegos',
-    sub: 'multi',
-    desc: {
-      es: 'Arma tu pronóstico del Mundial 2026 (48 selecciones) en tres modos (simple, gana/pierde o con marcador), compite con tus amigos y lleva tu tabla de aciertos.',
-      en: 'Build your 2026 World Cup predictions (48 teams) in three modes (simple, win/lose or with scoreline), compete with your friends and track your hit table.',
     },
   },
   {
@@ -260,15 +247,13 @@ export const apps: AppEntry[] = [
 ]
 
 /* Selección inicial del tab "Recientes" cuando aún no hay historial local
-   (ver ../recents.ts). Destaca, en orden: Mundial, los contadores deportivos
-   (Ecuavóley / Pádel) y el resto de los juegos. Sin duplicar el Mundial, que
-   también es un juego. */
+   (ver ../recents.ts). Destaca, en orden: los contadores deportivos
+   (Ecuavóley / Pádel) y el resto de los juegos. */
 export const defaultRecentApps = (): AppEntry[] => {
-  const mundial = apps.find((a) => a.url === 'https://mundial.dotrino.com/')
   const counters = apps.filter((a) => a.cat === 'deportes' && /contador/i.test(a.name))
   const games = apps.filter((a) => a.cat === 'juegos' && !a.wip)
   const seen = new Set<string>()
-  return [...(mundial ? [mundial] : []), ...counters, ...games].filter(
+  return [...counters, ...games].filter(
     (a) => !seen.has(a.url) && seen.add(a.url),
   )
 }

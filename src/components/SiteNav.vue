@@ -24,7 +24,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
              volver, así que el chevron solo aparece cuando hay algo atrás
              (vista /que-es o un modal/menú abierto). -->
         <dotrino-back v-if="hasBack" class="cc-back"></dotrino-back>
-        <img src="/images/logo.png" alt="Dotrino Logo" class="logo-img" />
+        <img src="/images/imagoWBG.png" alt="Dotrino Logo" class="logo-img" />
         <span class="logo-text">Dotrino</span>
       </div>
 
