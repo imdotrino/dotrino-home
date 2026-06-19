@@ -57,6 +57,11 @@
 }
 
 :root {
+  /* La app es SIEMPRE clara. Declarar color-scheme evita el "force dark" de los
+     navegadores móviles (Chrome Android, Samsung Internet), que oscurecen sitios
+     sin opt-out → fondo negro no deseado. */
+  color-scheme: light;
+
   /* ── Cool & Cozy ──  Superficie clara, cálida-fría: crema azulada en vez de
      tinta oscura. Las cards van blanco puro sobre el fondo crema, separadas por
      sombra ambiental suave (no bordes duros). */
