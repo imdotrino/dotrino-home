@@ -233,7 +233,7 @@ function submitRequest() {
 .apps-tabs {
   display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem;
   margin: 2.2rem auto 0; padding: 0.35rem;
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-pill);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
   box-shadow: 0 10px 30px rgba(74, 85, 96, 0.05);
 }
 .apps-tab {

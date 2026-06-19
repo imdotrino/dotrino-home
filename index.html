@@ -10,41 +10,6 @@
         caches.keys().then(keys => keys.forEach(k => caches.delete(k)))
       }
     </script>
-    <script>
-      // KILL-SWITCH de efectos GPU: algunas GPUs móviles (Adreno/Mali en Android/MIUI/Poco)
-      // y los teléfonos flojos artefactan al recomponer las capas grandes (atmósfera de
-      // gradientes + grilla + glows) al hacer scroll. En esos equipos aplanamos TODO (clase
-      // `reduce-fx` sobre <html>, antes del primer paint → sin flash). Desktop/iOS conservan el efecto.
-      (function () {
-        try {
-          var ua = navigator.userAgent || '';
-          var android = /Android/i.test(ua);
-          var xiaomi = /MIUI|XiaoMi|Redmi|POCO|HyperOS/i.test(ua);
-          var mem = navigator.deviceMemory || 0;            // GB (Chrome)
-          var cores = navigator.hardwareConcurrency || 0;
-          var weak = (mem && mem <= 4) || (cores && cores <= 4);
-          // Android cubre Adreno/Mali (las GPUs que artefactan); + cualquier equipo flojo.
-          if (android || xiaomi || weak) document.documentElement.classList.add('reduce-fx');
-        } catch (e) {}
-      })();
-    </script>
-    <style>
-      /* En equipos marcados (reduce-fx) NO hay atmósfera, grilla, glow ni blur:
-         fondo plano y cero capas que la GPU pueda corromper al scrollear. */
-      html.reduce-fx .app::before,
-      html.reduce-fx .app::after,
-      html.reduce-fx .hero-glow { display: none !important; }
-      html.reduce-fx body,
-      html.reduce-fx .app { background: #f4f7f9 !important; }
-      html.reduce-fx * {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        -webkit-mask-image: none !important;
-        mask-image: none !important;
-        filter: none !important;
-        background-attachment: scroll !important;
-      }
-    </style>
     <title>Dotrino - Ecosistema de Aplicaciones</title>
     <meta name="theme-color" content="#f4f7f9" />
     <meta name="color-scheme" content="light" />
