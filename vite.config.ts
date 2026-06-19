@@ -20,11 +20,15 @@ export default defineConfig({
         name: 'Dotrino',
         short_name: 'Dotrino',
         description: 'Ecosistema de aplicaciones cliente conectadas por proxy WebSocket',
-        theme_color: '#2c3e50',
-        background_color: '#1b2533',
+        theme_color: '#f4f7f9',
+        background_color: '#f4f7f9',
         display: 'standalone',
         start_url: './',
         scope: './',
+        // Deep-links: enfocar la instancia instalada en vez de abrir ventana nueva
+        // (Chrome/Edge desktop + Android). Los share-links por #fragment ya caen en
+        // scope, así que en Android abren la app instalada.
+        launch_handler: { client_mode: 'focus-existing' },
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
           { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
