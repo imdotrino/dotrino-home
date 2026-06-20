@@ -5,6 +5,7 @@
 import chatLogo from '../assets/apps/chat.svg'
 import messengerLogo from '../assets/apps/messenger.svg'
 import qrshareLogo from '../assets/apps/qrshare.svg'
+import qrreaderLogo from '../assets/apps/qrreader.svg'
 import chessLogo from '../assets/apps/chess.svg'
 import cuarentaLogo from '../assets/apps/cuarenta.svg'
 import ecuavoleyLogo from '../assets/apps/ecuavoley.svg'
@@ -101,6 +102,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Transferencia de archivos directa entre dispositivos, sin pasar por un servidor. Comparte por QR.',
       en: 'Direct device-to-device file transfer, without going through a server. Share by QR.',
+    },
+  },
+  {
+    name: 'QR Reader',
+    url: 'https://qrreader.dotrino.com/',
+    logo: qrreaderLogo,
+    repo: 'imdotrino/dotrino-qrreader',
+    cat: 'apps',
+    desc: {
+      es: 'Lector de códigos QR: escanea con la cámara o sube una imagen, mira la información y abre el enlace con un botón. Todo en el navegador, sin subir nada a un servidor.',
+      en: 'QR code reader: scan with the camera or upload an image, see the information and open the link with one button. All in the browser, nothing uploaded to a server.',
     },
   },
   {
