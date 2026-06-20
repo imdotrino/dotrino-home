@@ -20,18 +20,6 @@ const activeTab = ref<TabKey>('recientes')
 // El store cuenta por id de app = hostname; mapeamos cada app.url a su hostname.
 const hostOf = (url: string): string => { try { return new URL(url).hostname } catch { return url } }
 
-// Cuando el home corre INSTALADO (standalone), al abrir una sub-app esta cae en un
-// Custom Tab (Android) que puede reportarse como standalone y confundir la
-// detección de "instalada". Marcamos el enlace con `?hub=1` para que la sub-app
-// (vía @dotrino/install) sepa que viene del hub y ofrezca instalarse en Chrome.
-const homeStandalone = (): boolean => {
-  try { return matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone === true } catch { return false }
-}
-const appHref = (a: AppEntry): string => {
-  if (a.apk || !/^https?:\/\//i.test(a.url) || !homeStandalone()) return a.url
-  return a.url + (a.url.includes('?') ? '&' : '?') + 'hub=1'
-}
-
 onMounted(loadRecents)
 
 const recentApps = computed<AppEntry[]>(() => {
@@ -200,7 +188,7 @@ function submitRequest() {
             @click="$emit('info', a)"
           >i</button>
           <a
-            :href="appHref(a)"
+            :href="a.url"
             :target="a.apk ? '_blank' : '_self'"
             rel="noopener"
             class="app-logo-link"
