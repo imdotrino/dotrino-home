@@ -13,8 +13,8 @@ const t = computed(() => messages[props.locale])
    <dotrino-support> en cada app; ver ../recents.ts), así cuenta incluso el
    acceso directo a cada subdominio. Sin historial todavía, destaca una selección
    inicial (Mundial, contadores, juegos) desde defaultRecentApps(). */
-type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip'
-const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip']
+type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers'
+const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers']
 const activeTab = ref<TabKey>('recientes')
 
 // El store cuenta por id de app = hostname; mapeamos cada app.url a su hostname.

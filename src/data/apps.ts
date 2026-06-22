@@ -24,6 +24,7 @@ import triviaLogo from '../assets/apps/trivia.svg'
 import truequeLogo from '../assets/apps/trueque.svg'
 import ecoLogo from '../assets/apps/eco.svg'
 import sudokuLogo from '../assets/apps/sudoku.svg'
+import tunnelLogo from '../assets/apps/tunnel.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -33,7 +34,7 @@ export type AppEntry = {
   repo: string
   url: string
   logo: string
-  cat: 'social' | 'apps' | 'deportes' | 'juegos' | 'android'
+  cat: 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'developers'
   sub?: SubKey
   desc: { es: string; en: string }
   wip?: boolean
@@ -290,6 +291,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Launcher de Android nativo: carrusel de apps paginado por letra con índice lateral, recientes y dock. Permite <strong>ocultar apps</strong> detrás de tu huella o patrón, con un atajo camuflado. APK firmado, instalable por sideload (Android 8+).',
       en: 'Native Android launcher: app carousel paginated by letter with a side index, recents and dock. Lets you <strong>hide apps</strong> behind your fingerprint or pattern, via a disguised shortcut. Signed APK, sideload-installable (Android 8+).',
+    },
+  },
+  {
+    name: 'Dotrino Tunnel',
+    url: 'https://r.dotrino.com/',
+    logo: tunnelLogo,
+    repo: 'imdotrino/dotrino-tunnel',
+    cat: 'developers',
+    desc: {
+      es: 'Túnel reverso autohospedado: expón un puerto o servicio local en una URL pública e inspecciona las requests en vivo. Incluye librería + CLI <code>@dotrino/tunnel</code>. Sin cuentas, sin rastreo.',
+      en: 'Self-hosted reverse tunnel: expose a local port or service at a public URL and inspect requests live. Includes the <code>@dotrino/tunnel</code> library + CLI. No accounts, no tracking.',
     },
   },
 ]
