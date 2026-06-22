@@ -10,6 +10,7 @@ import chessLogo from '../assets/apps/chess.svg'
 import cuarentaLogo from '../assets/apps/cuarenta.svg'
 import ecuavoleyLogo from '../assets/apps/ecuavoley.svg'
 import mundialLogo from '../assets/apps/mundial.svg'
+import mundialResLogo from '../assets/apps/mundial-resultados.svg'
 import padelLogo from '../assets/apps/padel.svg'
 import gridgameLogo from '../assets/apps/gridgame.svg'
 import gymbroLogo from '../assets/apps/gymbro.svg'
@@ -149,6 +150,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Arma tu pronóstico del Mundial 2026 (48 selecciones) en tres modos, compite con amigos y lleva tu tabla de aciertos. Firmado con tu identidad y compartible por QR.',
       en: 'Build your 2026 World Cup bracket (48 teams) in three modes, compete with friends and track your hit table. Signed with your identity and shareable by QR.',
+    },
+  },
+  {
+    name: 'Mundial 2026',
+    url: 'https://mundial.dotrino.com/',
+    logo: mundialResLogo,
+    repo: 'imdotrino/dotrino-mundial',
+    cat: 'deportes',
+    desc: {
+      es: 'Resultados oficiales del Mundial 2026 en vivo: qué equipos juegan hoy, la tabla de cada grupo (PJ, ganados, perdidos, diferencia de gol) y qué necesita cada selección para clasificar. Sin anuncios ni rastreo.',
+      en: 'Official 2026 World Cup results live: who plays today, each group standings (played, won, lost, goal difference) and what each team needs to advance. No ads, no tracking.',
     },
   },
   {
