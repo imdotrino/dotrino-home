@@ -142,7 +142,7 @@ export const apps: AppEntry[] = [
   },
   {
     name: 'Pronóstico Mundialista',
-    url: 'https://mundial.dotrino.com/',
+    url: 'https://pronostico.dotrino.com/',
     logo: mundialLogo,
     repo: 'imdotrino/dotrino-pronostico-mundialista',
     cat: 'deportes',
