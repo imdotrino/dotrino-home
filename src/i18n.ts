@@ -24,7 +24,7 @@ export const messages = {
     langLabel: 'Cambiar idioma a inglés',
     hero: {
       subtitle:
-        'Un ecosistema de aplicaciones que corren del lado del cliente, conectándose a través de un proxy descentralizado para gestionar y compartir contenido',
+        'Aplicaciones que resuelven problemas comunes, respetando tu privacidad: sin anuncios, sin cookies, sin rastreo de datos, sin vender tu identidad a nadie',
       manifestoStrong: 'Tu información, en tu servidor, bajo tus reglas.',
       manifestoRest:
         ' Lo que es tuyo, se queda contigo: tú decides qué compartes, cómo lo compartes y cuándo lo compartes. Sin intermediarios, sin nubes ajenas, sin letra pequeña.',
@@ -75,7 +75,7 @@ export const messages = {
       what: { h: 'Qué comparto', p: 'Solo la información que decido exponer, nada más.' },
       how: { h: 'Cómo lo comparto', p: 'Con el formato, el acceso y las condiciones que yo defino.' },
       when: { h: 'Cuándo lo comparto', p: 'En el momento que quiero, y lo retiro cuando quiero.' },
-      tagline: 'Todo sobre infraestructura que tú controlas. Eso es autohosteo. Eso es soberanía digital.',
+      tagline: 'Aplicaciones útiles que no te espían: sin anuncios, sin cookies, sin rastreo, sin vender tu identidad. Sobre infraestructura que tú controlas. Eso es Dotrino.',
       copy: '© 2024 Team Dotrino. Todos los derechos reservados.',
     },
   },
@@ -92,7 +92,7 @@ export const messages = {
     langLabel: 'Switch language to Spanish',
     hero: {
       subtitle:
-        'An ecosystem of client-side applications that connect through a decentralized proxy to manage and share content',
+        'Apps that solve everyday problems while respecting your privacy: no ads, no cookies, no data tracking, no selling your identity to anyone',
       manifestoStrong: 'Your data, on your server, under your rules.',
       manifestoRest:
         ' What is yours stays with you: you decide what you share, how you share it and when you share it. No middlemen, no third-party clouds, no fine print.',
@@ -143,7 +143,7 @@ export const messages = {
       what: { h: 'What I share', p: 'Only the information I choose to expose, nothing more.' },
       how: { h: 'How I share it', p: 'With the format, access and conditions that I define.' },
       when: { h: 'When I share it', p: 'The moment I want, and I take it back whenever I want.' },
-      tagline: 'All on infrastructure you control. That is self-hosting. That is digital sovereignty.',
+      tagline: 'Useful apps that do not spy on you: no ads, no cookies, no tracking, no selling your identity. On infrastructure you control. That is Dotrino.',
       copy: '© 2024 Team Dotrino. All rights reserved.',
     },
   },
