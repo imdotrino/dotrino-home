@@ -9,6 +9,7 @@ import qrreaderLogo from '../assets/apps/qrreader.svg'
 import chessLogo from '../assets/apps/chess.svg'
 import cuarentaLogo from '../assets/apps/cuarenta.svg'
 import ecuavoleyLogo from '../assets/apps/ecuavoley.svg'
+import mundialLogo from '../assets/apps/mundial.svg'
 import padelLogo from '../assets/apps/padel.svg'
 import gridgameLogo from '../assets/apps/gridgame.svg'
 import gymbroLogo from '../assets/apps/gymbro.svg'
@@ -137,6 +138,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'El <strong>Cuarenta</strong>, el juego de naipes tradicional del Ecuador, en línea para <strong>2 ó 4 jugadores</strong>.',
       en: 'The <strong>Cuarenta</strong> (40), Ecuador\'s traditional card game, online for <strong>2 or 4 players</strong>.',
+    },
+  },
+  {
+    name: 'Pronóstico Mundialista',
+    url: 'https://mundial.dotrino.com/',
+    logo: mundialLogo,
+    repo: 'imdotrino/dotrino-pronostico-mundialista',
+    cat: 'deportes',
+    desc: {
+      es: 'Arma tu pronóstico del Mundial 2026 (48 selecciones) en tres modos, compite con amigos y lleva tu tabla de aciertos. Firmado con tu identidad y compartible por QR.',
+      en: 'Build your 2026 World Cup bracket (48 teams) in three modes, compete with friends and track your hit table. Signed with your identity and shareable by QR.',
     },
   },
   {
