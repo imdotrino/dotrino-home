@@ -6,6 +6,7 @@ import chatLogo from '../assets/apps/chat.svg'
 import messengerLogo from '../assets/apps/messenger.svg'
 import qrshareLogo from '../assets/apps/qrshare.svg'
 import qrreaderLogo from '../assets/apps/qrreader.svg'
+import qrgeneratorLogo from '../assets/apps/qrgenerator.svg'
 import chessLogo from '../assets/apps/chess.svg'
 import cuarentaLogo from '../assets/apps/cuarenta.svg'
 import ecuavoleyLogo from '../assets/apps/ecuavoley.svg'
@@ -115,6 +116,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Lector de códigos QR: escanea con la cámara o sube una imagen, mira la información y abre el enlace con un botón. Todo en el navegador, sin subir nada a un servidor.',
       en: 'QR code reader: scan with the camera or upload an image, see the information and open the link with one button. All in the browser, nothing uploaded to a server.',
+    },
+  },
+  {
+    name: 'QR Generator',
+    url: 'https://qrgenerator.dotrino.com/',
+    logo: qrgeneratorLogo,
+    repo: 'imdotrino/dotrino-qrgenerator',
+    cat: 'apps',
+    desc: {
+      es: 'Generador de códigos QR: crea un QR de un enlace, texto, red Wi-Fi, contacto o ubicación y descárgalo en PNG o SVG. Todo en el navegador, sin subir nada a un servidor.',
+      en: 'QR code generator: create a QR from a link, text, Wi-Fi network, contact or location and download it as PNG or SVG. All in the browser, nothing uploaded to a server.',
     },
   },
   {
