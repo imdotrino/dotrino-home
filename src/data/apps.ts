@@ -25,6 +25,7 @@ import truequeLogo from '../assets/apps/trueque.svg'
 import ecoLogo from '../assets/apps/eco.svg'
 import sudokuLogo from '../assets/apps/sudoku.svg'
 import tunnelLogo from '../assets/apps/tunnel.svg'
+import agendaLogo from '../assets/apps/agenda.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -42,6 +43,17 @@ export type AppEntry = {
 }
 
 export const apps: AppEntry[] = [
+  {
+    name: 'Agenda',
+    url: 'https://agenda.dotrino.com/',
+    logo: agendaLogo,
+    repo: 'imdotrino/dotrino-agenda',
+    cat: 'apps',
+    desc: {
+      es: 'Tu billetera de eventos: guarda invitaciones y archivos <code>.ics</code> como tarjetas, agrupadas por proximidad (hoy, esta semana, próximos). Impórtalos, créalos a mano, edítalos y compártelos por QR o enlace; exporta a <code>.ics</code> o añádelos al calendario de tu dispositivo. Todo se guarda en tu propio almacén, sin anuncios ni rastreo.',
+      en: 'Your wallet of events: keep invitations and <code>.ics</code> files as cards, grouped by proximity (today, this week, upcoming). Import them, create them by hand, edit and share them via QR or link; export to <code>.ics</code> or add them to your device calendar. Everything is stored in your own vault, no ads, no tracking.',
+    },
+  },
   {
     name: 'here',
     url: 'https://here.dotrino.com/',
