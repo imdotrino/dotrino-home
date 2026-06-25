@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { messages, type Locale } from '../i18n'
+import { avatarDataUri } from '@dotrino/identity/capabilities'
 
-defineProps<{ hasBack: boolean }>()
+const props = defineProps<{ hasBack: boolean; profilePk?: string | null }>()
+const avatarUrl = computed(() => props.profilePk ? avatarDataUri(props.profilePk, { size: 64 }) : null)
 const locale = defineModel<Locale>('locale', { required: true })
 const menuOpen = defineModel<boolean>('open', { required: true })
 defineEmits<{ navigate: [sectionId: string]; profile: [] }>()
@@ -68,7 +70,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         :aria-label="t.nav.profile"
         :title="t.nav.profile"
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <img v-if="avatarUrl" :src="avatarUrl" alt="" class="nav-avatar" />
+        <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="8" r="4" />
           <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6" />
         </svg>
@@ -172,6 +175,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
 }
 .nav-profile svg { width: 20px; height: 20px; display: block; }
+.nav-profile { overflow: hidden; }
+.nav-avatar { width: 100%; height: 100%; border-radius: 8px; object-fit: cover; display: block; }
 .nav-profile:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
 
 .hamburger {

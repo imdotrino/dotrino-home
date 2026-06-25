@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, provide } from 'vue'
+import { ref, computed, watch, provide, onMounted } from 'vue'
 import { detectLocale, LANG_KEY, type Locale } from './i18n'
 import type { AppEntry } from './data/apps'
 import SiteNav from './components/SiteNav.vue'
@@ -60,6 +60,7 @@ const openInfo = (a: AppEntry) => { infoApp.value = a }
    id.dotrino.com. Es el MISMO perfil que en el resto del ecosistema. */
 const profilePk = ref<string | null>(null)
 const myName = ref<string | null>(null)
+const myPk = ref<string | null>(null) // pubkey del perfil ACTIVO → avatar en el header
 let _identity: any = null
 let _profileProvider: any = null
 const ensureIdentity = async () => {
@@ -84,6 +85,18 @@ const openMyProfile = async () => {
   profilePk.value = pk
 }
 const bindProfile = (el: any) => { if (!el) return; ensureProvider().then((p: any) => { if (p) el.provider = p }) }
+
+/* Avatar del perfil ACTIVO en el header (multi-perfil): cada app muestra el avatar del
+   perfil que está usando. Se carga al montar; cambiar de perfil se hace desde profile.dotrino.com. */
+onMounted(async () => {
+  const id = await ensureIdentity()
+  if (!id) return
+  try {
+    const p = id.currentProfile ? await id.currentProfile() : null
+    myPk.value = p?.pubkey || id?.me?.publickey || null
+    if (!myName.value) myName.value = p?.name || id?.me?.nickname || null
+  } catch { myPk.value = id?.me?.publickey || null }
+})
 
 /* "Exigir apodo": acciones que se firman con la identidad (p. ej. enviar una
    solicitud de app) requieren nickname. Si falta, se abre el perfil (mode="self")
@@ -177,6 +190,7 @@ const scrollToSection = (sectionId: string) => {
       v-model:locale="locale"
       v-model:open="menuOpen"
       :has-back="hasBack"
+      :profile-pk="myPk"
       @navigate="scrollToSection"
       @profile="openMyProfile"
     />
