@@ -26,6 +26,7 @@ import ecoLogo from '../assets/apps/eco.svg'
 import sudokuLogo from '../assets/apps/sudoku.svg'
 import tunnelLogo from '../assets/apps/tunnel.svg'
 import walletLogo from '../assets/apps/wallet.svg'
+import vaultLogo from '../assets/apps/vault.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -43,6 +44,17 @@ export type AppEntry = {
 }
 
 export const apps: AppEntry[] = [
+  {
+    name: 'Dotrino Vault',
+    url: 'https://vault.dotrino.com/',
+    logo: vaultLogo,
+    repo: 'imdotrino/dotrino-vault',
+    cat: 'developers',
+    desc: {
+      es: 'Tu certificador personal: un servicio self-hosted que custodia tu clave maestra y te convierte en tu propia autoridad. Enrola tus dispositivos (cada uno con su certificado firmado y revocable), firma y avala sin depender de las CAs, del «Inicia sesión con Google/Apple» ni de verificadores de identidad. La maestra nunca sale de tu máquina. Sin anuncios, sin rastreo.',
+      en: 'Your personal certifier: a self-hosted service that guards your master key and makes you your own authority. Enroll your devices (each with its own signed, revocable certificate), sign and vouch without depending on CAs, "Sign in with Google/Apple" or identity verifiers. The master key never leaves your machine. No ads, no tracking.',
+    },
+  },
   {
     name: 'Wallet',
     url: 'https://wallet.dotrino.com/',
