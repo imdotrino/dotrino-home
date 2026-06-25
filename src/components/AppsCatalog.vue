@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, inject } from 'vue'
+import { ref, computed, onMounted, inject } from 'vue'
 import { messages, type Locale } from '../i18n'
 import { apps, defaultRecentApps, type AppEntry, type SubKey } from '../data/apps'
 import { recents, loadRecents } from '../recents'
@@ -40,21 +40,25 @@ const tabApps = (tab: TabKey): AppEntry[] =>
 
 const visibleTabs = computed(() => TAB_ORDER.filter((tab) => tabApps(tab).length > 0))
 
-// Subcategorías del tab "Juegos": solo / multijugador / configurables.
+// El tab "Juegos" se muestra COMPLETO, separado por secciones (sin subtabs):
+// solo / multijugador / configurables, todas visibles a la vez.
 const SUB_ORDER: SubKey[] = ['solo', 'multi', 'config']
-const activeSub = ref<SubKey>('solo')
 const subApps = (sub: SubKey) => tabApps('juegos').filter((a) => (a.sub ?? 'solo') === sub)
 const visibleSubs = computed(() => SUB_ORDER.filter((sub) => subApps(sub).length > 0))
 
-const visibleApps = computed(() =>
-  activeTab.value === 'juegos' ? subApps(activeSub.value) : tabApps(activeTab.value),
-)
-
-// Al entrar al tab Juegos, asegurar una subcategoría visible seleccionada.
-watch(activeTab, (tab) => {
-  if (tab === 'juegos' && !visibleSubs.value.includes(activeSub.value)) {
-    activeSub.value = visibleSubs.value[0] ?? 'solo'
+// Lista a renderizar: en Juegos intercala un encabezado por sección + sus apps;
+// en el resto de tabs, solo las apps. Un solo grid, con los encabezados a ancho completo.
+type DisplayItem = { header: SubKey } | { app: AppEntry }
+const displayItems = computed<DisplayItem[]>(() => {
+  if (activeTab.value === 'juegos') {
+    const out: DisplayItem[] = []
+    for (const sub of visibleSubs.value) {
+      if (visibleSubs.value.length > 1) out.push({ header: sub })
+      for (const a of subApps(sub)) out.push({ app: a })
+    }
+    return out
   }
+  return tabApps(activeTab.value).map((a) => ({ app: a }))
 })
 
 /* "Solicita/Recomienda una app" → relay compartido @dotrino/feedback (Cloudflare
@@ -158,53 +162,42 @@ function submitRequest() {
         >{{ t.tabs[tab] }}</button>
       </div>
 
-      <div
-        v-if="activeTab === 'juegos' && visibleSubs.length > 1"
-        class="apps-subtabs"
-        role="tablist"
-      >
-        <button
-          v-for="sub in visibleSubs"
-          :key="sub"
-          type="button"
-          role="tab"
-          :aria-selected="activeSub === sub"
-          :class="['apps-subtab', { active: activeSub === sub }]"
-          @click="activeSub = sub"
-        >{{ t.subtabs[sub] }}</button>
-      </div>
-
       <div class="apps-grid" :class="{ 'wip-grid': activeTab === 'wip' }">
-        <div
-          class="app-card"
-          :class="{ wip: a.wip }"
-          v-for="a in visibleApps"
-          :key="a.url"
+        <template
+          v-for="item in displayItems"
+          :key="'header' in item ? 'h-' + item.header : item.app.url"
         >
-          <button
-            type="button"
-            class="app-info-btn"
-            :aria-label="t.apps.info + ': ' + a.name"
-            @click="$emit('info', a)"
-          >i</button>
-          <a
-            :href="a.url"
-            :target="a.apk ? '_blank' : '_self'"
-            rel="noopener"
-            class="app-logo-link"
-            :aria-label="t.apps.open + ': ' + a.name"
+          <h3 v-if="'header' in item" class="apps-section-title">{{ t.subtabs[item.header] }}</h3>
+          <div
+            v-else
+            class="app-card"
+            :class="{ wip: item.app.wip }"
           >
-            <img class="app-logo" :src="a.logo" :alt="a.name" width="120" height="120" />
-          </a>
-          <h3>{{ a.name }}</h3>
-          <p v-html="a.desc[locale]"></p>
-          <a
-            :href="'https://github.com/' + a.repo"
-            target="_blank"
-            rel="noopener"
-            class="app-repo"
-          >github.com/{{ a.repo }}</a>
-        </div>
+            <button
+              type="button"
+              class="app-info-btn"
+              :aria-label="t.apps.info + ': ' + item.app.name"
+              @click="$emit('info', item.app)"
+            >i</button>
+            <a
+              :href="item.app.url"
+              :target="item.app.apk ? '_blank' : '_self'"
+              rel="noopener"
+              class="app-logo-link"
+              :aria-label="t.apps.open + ': ' + item.app.name"
+            >
+              <img class="app-logo" :src="item.app.logo" :alt="item.app.name" width="120" height="120" />
+            </a>
+            <h3>{{ item.app.name }}</h3>
+            <p v-html="item.app.desc[locale]"></p>
+            <a
+              :href="'https://github.com/' + item.app.repo"
+              target="_blank"
+              rel="noopener"
+              class="app-repo"
+            >github.com/{{ item.app.repo }}</a>
+          </div>
+        </template>
       </div>
     </div>
   </section>
@@ -257,6 +250,12 @@ function submitRequest() {
 
 /* ───────────────────────── Grid de apps ───────────────────────── */
 .apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; margin-top: 2.4rem; }
+/* Encabezado de sección (Juegos): ocupa toda la fila, separa sin filtrar. */
+.apps-section-title {
+  grid-column: 1 / -1; margin: 1rem 0 0; text-align: left;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--accent);
+}
+.apps-section-title:first-child { margin-top: 0; }
 .apps-grid.wip-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 .app-card {
   position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
