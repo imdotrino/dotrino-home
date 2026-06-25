@@ -308,7 +308,6 @@ export const apps: AppEntry[] = [
   {
     name: 'Android Launcher',
     url: 'https://android-launcher.dotrino.com/',
-    apk: 'https://github.com/imdotrino/dotrino-android-launcher/releases/latest/download/android-launcher.apk',
     logo: androidLauncherLogo,
     repo: 'imdotrino/dotrino-android-launcher',
     cat: 'android',
