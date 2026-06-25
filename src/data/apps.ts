@@ -307,14 +307,14 @@ export const apps: AppEntry[] = [
   },
   {
     name: 'Android Launcher',
-    url: 'https://github.com/imdotrino/dotrino-android-launcher/releases/latest/download/android-launcher.apk',
+    url: 'https://android-launcher.dotrino.com/',
     apk: 'https://github.com/imdotrino/dotrino-android-launcher/releases/latest/download/android-launcher.apk',
     logo: androidLauncherLogo,
     repo: 'imdotrino/dotrino-android-launcher',
     cat: 'android',
     desc: {
-      es: 'Launcher de Android nativo: carrusel de apps paginado por letra con índice lateral, recientes y dock. Permite <strong>ocultar apps</strong> detrás de tu huella o patrón, con un atajo camuflado. APK firmado, instalable por sideload (Android 8+).',
-      en: 'Native Android launcher: app carousel paginated by letter with a side index, recents and dock. Lets you <strong>hide apps</strong> behind your fingerprint or pattern, via a disguised shortcut. Signed APK, sideload-installable (Android 8+).',
+      es: 'Reemplaza la pantalla de inicio de tu Android: ordena tus apps de la A a la Z con un índice al costado y te deja <strong>esconder apps</strong> detrás de tu huella o patrón. Sin anuncios, sin rastreo.',
+      en: 'Replaces your Android home screen: sorts your apps A to Z with a side index and lets you <strong>hide apps</strong> behind your fingerprint or pattern. No ads, no tracking.',
     },
   },
   {
