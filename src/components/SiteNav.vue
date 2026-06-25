@@ -48,7 +48,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       <div class="nav-links desktop-links">
         <a @click="$emit('navigate', 'aplicaciones')" class="nav-link">{{ t.nav.apps }}</a>
         <a @click="$emit('navigate', 'servicio')" class="nav-link">{{ t.nav.service }}</a>
-        <a @click="$emit('navigate', 'api')" class="nav-link">{{ t.nav.api }}</a>
         <a @click="$emit('navigate', 'comunidad')" class="nav-link">{{ t.nav.community }}</a>
       </div>
 
@@ -87,7 +86,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     <div class="mobile-menu" :class="{ open: menuOpen }">
       <a @click="$emit('navigate', 'aplicaciones')" class="nav-link">{{ t.nav.apps }}</a>
       <a @click="$emit('navigate', 'servicio')" class="nav-link">{{ t.nav.service }}</a>
-      <a @click="$emit('navigate', 'api')" class="nav-link">{{ t.nav.api }}</a>
       <a @click="$emit('navigate', 'comunidad')" class="nav-link">{{ t.nav.community }}</a>
     </div>
   </nav>

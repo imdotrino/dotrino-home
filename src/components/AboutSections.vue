@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { messages, type Locale } from '../i18n'
-import { serviceItems, apiItems } from '../data/content'
+import { serviceItems } from '../data/content'
 
 const props = defineProps<{ locale: Locale }>()
 defineEmits<{ navigate: [sectionId: string] }>()
 const t = computed(() => messages[props.locale])
 const service = computed(() => serviceItems[props.locale])
-const api = computed(() => apiItems[props.locale])
 </script>
 
 <template>
@@ -31,19 +30,6 @@ const api = computed(() => apiItems[props.locale])
       <p class="section-text">{{ t.service.text }}</p>
       <div class="service-features">
         <div class="service-item" v-for="(item, i) in service" :key="i">
-          <h3>{{ item.h }}</h3>
-          <p v-html="item.p"></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="api" class="section api-section">
-    <div class="section-content">
-      <h2 class="section-title">{{ t.api.title }}</h2>
-      <p class="section-text">{{ t.api.text }}</p>
-      <div class="api-features">
-        <div class="api-item" v-for="(item, i) in api" :key="i">
           <h3>{{ item.h }}</h3>
           <p v-html="item.p"></p>
         </div>

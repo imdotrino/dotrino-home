@@ -49,10 +49,10 @@ export const apps: AppEntry[] = [
     url: 'https://vault.dotrino.com/',
     logo: vaultLogo,
     repo: 'imdotrino/dotrino-vault',
-    cat: 'developers',
+    cat: 'apps',
     desc: {
-      es: 'Tu certificador personal: un servicio self-hosted que custodia tu clave maestra y te convierte en tu propia autoridad. Enrola tus dispositivos (cada uno con su certificado firmado y revocable), firma y avala sin depender de las CAs, del «Inicia sesión con Google/Apple» ni de verificadores de identidad. La maestra nunca sale de tu máquina. Sin anuncios, sin rastreo.',
-      en: 'Your personal certifier: a self-hosted service that guards your master key and makes you your own authority. Enroll your devices (each with its own signed, revocable certificate), sign and vouch without depending on CAs, "Sign in with Google/Apple" or identity verifiers. The master key never leaves your machine. No ads, no tracking.',
+      es: 'Tu bóveda personal: guarda toda tu información —archivos, contactos, contraseñas y lo que usan tus apps— en un solo lugar seguro, dentro de tu propia computadora. No en la nube de una empresa: en tu máquina, bajo tu control. Tus dispositivos acceden de forma segura y tú decides quién entra. Sin anuncios, sin rastreo.',
+      en: 'Your personal vault: keep all your information —files, contacts, passwords and whatever your apps use— in one safe place, on your own computer. Not on a company’s cloud: on your machine, under your control. Your devices connect securely and you decide who gets in. No ads, no tracking.',
     },
   },
   {
