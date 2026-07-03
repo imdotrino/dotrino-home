@@ -24,7 +24,7 @@ export const messages = {
     langLabel: 'Cambiar idioma a inglés',
     hero: {
       subtitle:
-        'Aplicaciones que resuelven problemas comunes, respetando tu privacidad: sin anuncios, sin cookies, sin rastreo de datos, sin vender tu identidad a nadie',
+        'Desarrollamos aplicaciones y juegos a medida: utilidades, juegos casuales y juegos de marketing/BTL. Con la privacidad por delante: sin anuncios, sin cookies, sin rastreo.',
       manifestoStrong: 'Tu información, en tu servidor, bajo tus reglas.',
       manifestoRest:
         ' Lo que es tuyo, se queda contigo: tú decides qué compartes, cómo lo compartes y cuándo lo compartes. Sin intermediarios, sin nubes ajenas, sin letra pequeña.',
@@ -92,7 +92,7 @@ export const messages = {
     langLabel: 'Switch language to Spanish',
     hero: {
       subtitle:
-        'Apps that solve everyday problems while respecting your privacy: no ads, no cookies, no data tracking, no selling your identity to anyone',
+        'We build custom apps and games: utilities, casual games and marketing/BTL games. Privacy first: no ads, no cookies, no tracking.',
       manifestoStrong: 'Your data, on your server, under your rules.',
       manifestoRest:
         ' What is yours stays with you: you decide what you share, how you share it and when you share it. No middlemen, no third-party clouds, no fine print.',
