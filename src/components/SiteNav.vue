@@ -82,7 +82,9 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         href="https://ko-fi.com/dotrino"
         repo="imdotrino/dotrino-home"
         discord="https://discord.gg/D648uq7cth"
+        contact
         :lang="locale"
+        @cc-support-contact="$emit('contact')"
       ></dotrino-support>
     </div>
 
