@@ -37,40 +37,6 @@ const service = computed(() => serviceItems[props.locale])
     </div>
   </section>
 
-  <section id="comunidad" class="section comunidad-section">
-    <div class="section-content">
-      <h2 class="section-title">{{ t.community.title }}</h2>
-      <p class="section-text">{{ t.community.intro }}</p>
-      <div class="community-services">
-        <a
-          v-for="(s, i) in t.community.services"
-          :key="i"
-          class="community-service"
-          :href="`https://github.com/imdotrino/${s.img.split('/').pop()}`"
-          target="_blank"
-          rel="noopener"
-        >
-          <h3>{{ s.name }}</h3>
-          <p>{{ s.desc }}</p>
-          <code>{{ s.img }}</code>
-        </a>
-      </div>
-      <div class="community-quickstart">
-        <code>{{ t.community.cmd }}</code>
-        <span>{{ t.community.cmdNote }}</span>
-      </div>
-      <ol class="community-steps">
-        <li v-for="(step, i) in t.community.steps" :key="i">{{ step }}</li>
-      </ol>
-      <p class="community-note">{{ t.community.note }}</p>
-      <a
-        class="community-cta"
-        href="https://github.com/imdotrino/dotrino-home#colabora-suma-tu-nodo-autohosteo"
-        target="_blank"
-        rel="noopener"
-      >{{ t.community.cta }}</a>
-    </div>
-  </section>
 </template>
 
 <style scoped>
@@ -113,7 +79,7 @@ const service = computed(() => serviceItems[props.locale])
 }
 .cta-button:hover { background: var(--accent-press); transform: translateY(-2px); box-shadow: 0 12px 38px rgba(var(--accent-rgb), 0.28); }
 
-/* ───────────────────────── Servicio / API / Comunidad ───────────────────────── */
+/* ───────────────────────── Servicio / API ───────────────────────── */
 .service-features, .api-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 3rem; text-align: left; }
 .service-item, .api-item { background: var(--surface-2); padding: 1.6rem; border-radius: 14px; border: 1px solid var(--line); transition: border-color 0.2s ease, transform 0.2s ease; }
 .service-item:hover, .api-item:hover { border-color: var(--line-2); transform: translateY(-3px); }
@@ -121,20 +87,6 @@ const service = computed(() => serviceItems[props.locale])
 .service-item h3 { color: var(--mint); }
 .api-item h3 { color: var(--accent); }
 .service-item p, .api-item p { line-height: 1.6; color: var(--text-dim); font-size: 0.95rem; }
-
-.community-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin: 2.5rem 0; text-align: left; }
-.community-service { display: block; text-decoration: none; color: var(--text); background: var(--surface); padding: 1.5rem; border-radius: 14px; border: 1px solid var(--line); transition: transform 0.2s ease, border-color 0.2s ease; }
-.community-service:hover { transform: translateY(-4px); border-color: var(--accent); }
-.community-service h3 { font-family: var(--font-display); font-weight: 700; color: var(--text); font-size: 1.18rem; margin-bottom: 0.4rem; }
-.community-service p { color: var(--text-dim); margin-bottom: 0.9rem; font-size: 0.95rem; }
-.community-quickstart { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; margin: 1.5rem 0; }
-.community-quickstart code { background: var(--accent-soft); padding: 0.6rem 1.2rem; border-radius: 9px; font-family: var(--font-mono); font-size: 0.95rem; color: var(--accent); border: 1px solid rgba(var(--accent-rgb), 0.18); }
-.community-quickstart span { color: var(--text-dim); font-size: 0.92rem; }
-.community-steps { max-width: 640px; margin: 1.5rem auto; text-align: left; line-height: 1.7; padding-left: 1.4rem; color: var(--text-dim); }
-.community-steps li { margin-bottom: 0.6rem; }
-.community-note { color: var(--text-faint); font-style: italic; margin: 1.5rem auto; max-width: 640px; }
-.community-cta { display: inline-block; margin-top: 1rem; background: var(--accent); color: var(--accent-ink); text-decoration: none; padding: 0.75rem 1.9rem; border-radius: 10px; font-family: var(--font-body); font-weight: 700; transition: background 0.2s ease, transform 0.15s ease; }
-.community-cta:hover { background: var(--accent-press); transform: translateY(-2px); }
 
 /* ───────────────────────── Animación de entrada ───────────────────────── */
 @keyframes cc-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
@@ -149,6 +101,6 @@ const service = computed(() => serviceItems[props.locale])
 }
 
 @media (max-width: 768px) {
-  .service-features, .api-features, .community-services { grid-template-columns: 1fr; }
+  .service-features, .api-features { grid-template-columns: 1fr; }
 }
 </style>

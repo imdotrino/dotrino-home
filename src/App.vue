@@ -7,6 +7,7 @@ import AboutSections from './components/AboutSections.vue'
 import AppsCatalog from './components/AppsCatalog.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import InfoModal from './components/InfoModal.vue'
+import ContactModal from './components/ContactModal.vue'
 import { useBackLayer } from '@dotrino/nav/vue'
 import { Identity } from '@dotrino/identity'
 import { createVaultProfileProvider } from '@dotrino/profile'
@@ -54,6 +55,13 @@ watch(aboutOpen, (open) => {
 /* ---------------- Modal de info de cada app ---------------- */
 const infoApp = ref<AppEntry | null>(null)
 const openInfo = (a: AppEntry) => { infoApp.value = a }
+
+/* ---------------- Formulario de contacto (modal) ----------------
+   Enlazable por #contacto y abierto desde el link del footer. El envío usa el
+   MISMO relay/identidad que el input "Solicita una app" (ver ContactModal). */
+const contactOpen = ref(window.location.hash === '#contacto')
+const openContact = () => { contactOpen.value = true }
+window.addEventListener('hashchange', () => { if (window.location.hash === '#contacto') contactOpen.value = true })
 
 /* ---------------- Mi perfil (Web Component compartido) ----------------
    Abre <dotrino-profile> en modo edición con mi identidad del vault
@@ -154,10 +162,11 @@ useBackLayer(infoApp, { onClose: () => { infoApp.value = null } })
 useBackLayer(menuOpen)
 useBackLayer(aboutOpen, { url: ABOUT_PATH })
 useBackLayer(profilePk, { onClose: () => { profilePk.value = null } })
+useBackLayer(contactOpen, { onClose: () => { contactOpen.value = false } })
 
 // dotrino.com es el root del ecosistema: el chevron solo aparece cuando hay
 // algo "atrás" (vista /que-es o un modal/menú abierto).
-const hasBack = computed(() => !!(aboutOpen.value || infoApp.value || menuOpen.value || profilePk.value))
+const hasBack = computed(() => !!(aboutOpen.value || infoApp.value || menuOpen.value || profilePk.value || contactOpen.value))
 
 /* ---------------- Navegación entre vistas ----------------
    El cambio de vista y la URL los gestiona la capa de back (aboutOpen + { url });
@@ -200,9 +209,11 @@ const scrollToSection = (sectionId: string) => {
     <div v-if="compact" class="compact-spacer"></div>
     <AppsCatalog v-if="compact" :locale="locale" @info="openInfo" @about="showFullHome" />
 
-    <SiteFooter :locale="locale" />
+    <SiteFooter :locale="locale" @contact="openContact" />
 
     <InfoModal v-if="infoApp" :app="infoApp" :locale="locale" @close="infoApp = null" />
+
+    <ContactModal v-if="contactOpen" :locale="locale" @close="contactOpen = false" />
 
     <!-- Mi perfil del ecosistema (Web Component compartido, vault id.dotrino.com). -->
     <dotrino-profile

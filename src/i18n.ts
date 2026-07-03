@@ -13,7 +13,7 @@ export const detectLocale = (): Locale => {
 export const messages = {
   es: {
     htmlLang: 'es',
-    nav: { apps: 'Aplicaciones', service: 'Servicio', api: 'API', community: 'Suma un nodo', install: 'Instalar App', profile: 'Mi perfil' },
+    nav: { apps: 'Aplicaciones', service: 'Servicio', api: 'API', install: 'Instalar App', profile: 'Mi perfil' },
     tabs: { recientes: 'Recientes', social: 'Social', apps: 'Herramientas', deportes: 'Deportes', juegos: 'Juegos', android: 'Android', wip: 'En Desarrollo', developers: 'Developers' },
     subtabs: { solo: 'Un jugador', multi: 'Multijugador', config: 'Configurables' },
     install: {
@@ -44,6 +44,20 @@ export const messages = {
       requestThanks: '¡Gracias! Recibimos tu sugerencia.',
       requestError: 'No se pudo enviar. Inténtalo de nuevo.',
     },
+    contact: {
+      link: 'Contacto',
+      title: 'Contáctanos',
+      intro: 'Déjanos tu correo, teléfono y mensaje, y te respondemos.',
+      email: 'Correo',
+      emailPh: 'tucorreo@ejemplo.com',
+      phone: 'Teléfono',
+      phonePh: '+593 99 123 4567',
+      message: 'Mensaje',
+      messagePh: 'Cuéntanos qué necesitas…',
+      send: 'Enviar',
+      thanks: '¡Gracias! Recibimos tu mensaje.',
+      error: 'No se pudo enviar. Inténtalo de nuevo.',
+    },
     service: {
       title: 'Servicio',
       text: 'Comunicación por WebSocket ligero que enruta mensajes entre clientes mediante tokens cortos, sin almacenar conversaciones ni requerir cuentas.',
@@ -51,24 +65,6 @@ export const messages = {
     api: {
       title: 'API',
       text: 'Una sola conexión WebSocket. Mensajes JSON. Sin endpoints HTTP, sin SDK obligatorio.',
-    },
-    community: {
-      title: 'Suma tu nodo',
-      intro: 'El ecosistema lo sostiene una red de nodos que cualquiera puede correr. Los servicios son livianos y vienen dockerizados, con imágenes en GHCR (multi-arch, también para Raspberry Pi).',
-      services: [
-        { name: 'proxy', desc: 'transporte federado', img: 'ghcr.io/imdotrino/dotrino-proxy' },
-        { name: 'geo', desc: 'descubrimiento georreferenciado', img: 'ghcr.io/imdotrino/dotrino-geo' },
-        { name: 'reputation', desc: 'reputación firmada', img: 'ghcr.io/imdotrino/dotrino-reputation' },
-      ],
-      cmd: 'docker compose up -d',
-      cmdNote: 'Baja la imagen y arranca con TLS automático (Caddy).',
-      steps: [
-        'Levanta el nodo con un comando.',
-        'Federa: cruza PROXY_PEERS con otros nodos (solo el proxy).',
-        'Anúnciate: agrega tu nodo a nodes.json (un PR) y los clientes lo descubren solos.',
-      ],
-      note: 'DNS directo (sin nube naranja) y diversifica proveedor/región — eso hace la descentralización real.',
-      cta: 'Cómo colaborar',
     },
     footer: {
       title: 'La filosofía Dotrino',
@@ -81,7 +77,7 @@ export const messages = {
   },
   en: {
     htmlLang: 'en',
-    nav: { apps: 'Applications', service: 'Service', api: 'API', community: 'Run a node', install: 'Install App', profile: 'My profile' },
+    nav: { apps: 'Applications', service: 'Service', api: 'API', install: 'Install App', profile: 'My profile' },
     tabs: { recientes: 'Recent', social: 'Social', apps: 'Tools', deportes: 'Sports', juegos: 'Games', android: 'Android', wip: 'In Development', developers: 'Developers' },
     subtabs: { solo: 'Single player', multi: 'Multiplayer', config: 'Configurable' },
     install: {
@@ -112,6 +108,20 @@ export const messages = {
       requestThanks: 'Thanks! We got your suggestion.',
       requestError: "Couldn't send. Please try again.",
     },
+    contact: {
+      link: 'Contact',
+      title: 'Contact us',
+      intro: 'Leave your email, phone and message, and we’ll get back to you.',
+      email: 'Email',
+      emailPh: 'you@example.com',
+      phone: 'Phone',
+      phonePh: '+1 555 123 4567',
+      message: 'Message',
+      messagePh: 'Tell us what you need…',
+      send: 'Send',
+      thanks: 'Thanks! We got your message.',
+      error: "Couldn't send. Please try again.",
+    },
     service: {
       title: 'Service',
       text: 'Lightweight WebSocket communication that routes messages between clients via short tokens, without storing conversations or requiring accounts.',
@@ -119,24 +129,6 @@ export const messages = {
     api: {
       title: 'API',
       text: 'A single WebSocket connection. JSON messages. No HTTP endpoints, no mandatory SDK.',
-    },
-    community: {
-      title: 'Run a node',
-      intro: 'The ecosystem runs on a network of nodes anyone can host. The services are lightweight and shipped as Docker images on GHCR (multi-arch, Raspberry Pi included).',
-      services: [
-        { name: 'proxy', desc: 'federated transport', img: 'ghcr.io/imdotrino/dotrino-proxy' },
-        { name: 'geo', desc: 'georeferenced discovery', img: 'ghcr.io/imdotrino/dotrino-geo' },
-        { name: 'reputation', desc: 'signed reputation', img: 'ghcr.io/imdotrino/dotrino-reputation' },
-      ],
-      cmd: 'docker compose up -d',
-      cmdNote: 'Pulls the image and starts with automatic TLS (Caddy).',
-      steps: [
-        'Bring up the node with one command.',
-        'Federate: cross PROXY_PEERS with other nodes (proxy only).',
-        'Announce it: add your node to nodes.json (a PR) and clients discover it on their own.',
-      ],
-      note: 'Direct DNS (no orange cloud) and diversify provider/region — that makes decentralization real.',
-      cta: 'How to contribute',
     },
     footer: {
       title: 'The Dotrino philosophy',
