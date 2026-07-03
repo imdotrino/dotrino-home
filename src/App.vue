@@ -202,6 +202,7 @@ const scrollToSection = (sectionId: string) => {
       :profile-pk="myPk"
       @navigate="scrollToSection"
       @profile="openMyProfile"
+      @contact="openContact"
     />
 
     <AboutSections v-if="!compact" :locale="locale" @navigate="scrollToSection" />
@@ -209,7 +210,7 @@ const scrollToSection = (sectionId: string) => {
     <div v-if="compact" class="compact-spacer"></div>
     <AppsCatalog v-if="compact" :locale="locale" @info="openInfo" @about="showFullHome" />
 
-    <SiteFooter :locale="locale" @contact="openContact" />
+    <SiteFooter :locale="locale" />
 
     <InfoModal v-if="infoApp" :app="infoApp" :locale="locale" @close="infoApp = null" />
 

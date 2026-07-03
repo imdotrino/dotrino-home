@@ -3,7 +3,6 @@ import { computed } from 'vue'
 import { messages, type Locale } from '../i18n'
 
 const props = defineProps<{ locale: Locale }>()
-defineEmits<{ contact: [] }>()
 const t = computed(() => messages[props.locale])
 </script>
 
@@ -26,9 +25,6 @@ const t = computed(() => messages[props.locale])
         </div>
       </div>
       <p class="footer-tagline">{{ t.footer.tagline }}</p>
-      <p class="footer-contact">
-        <a href="#contacto" class="footer-contact-link" @click.prevent="$emit('contact')">{{ t.contact.link }}</a>
-      </p>
       <p class="footer-copy">{{ t.footer.copy }}</p>
     </div>
   </footer>
@@ -43,13 +39,6 @@ const t = computed(() => messages[props.locale])
 .footer-pillar h4 { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: 1.08rem; margin-bottom: 0.6rem; }
 .footer-pillar p { line-height: 1.6; color: var(--text-dim); font-size: 0.94rem; }
 .footer-tagline { font-size: 1.02rem; line-height: 1.7; max-width: 640px; margin: 0 auto 2rem; color: var(--text-dim); }
-.footer-contact { margin-bottom: 1rem; }
-.footer-contact-link {
-  display: inline-block; padding: 0.5rem 1.5rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 700;
-  color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: var(--radius-pill);
-  text-decoration: none; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-}
-.footer-contact-link:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); transform: translateY(-2px); }
 .footer-copy { font-size: 0.86rem; color: var(--text-faint); font-family: var(--font-mono); }
 
 @media (max-width: 768px) {

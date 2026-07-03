@@ -7,7 +7,7 @@ const props = defineProps<{ hasBack: boolean; profilePk?: string | null }>()
 const avatarUrl = computed(() => props.profilePk ? avatarDataUri(props.profilePk, { size: 64 }) : null)
 const locale = defineModel<Locale>('locale', { required: true })
 const menuOpen = defineModel<boolean>('open', { required: true })
-defineEmits<{ navigate: [sectionId: string]; profile: [] }>()
+defineEmits<{ navigate: [sectionId: string]; profile: []; contact: [] }>()
 
 const t = computed(() => messages[locale.value])
 
@@ -50,6 +50,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       <div class="nav-links desktop-links">
         <a @click="$emit('navigate', 'aplicaciones')" class="nav-link">{{ t.nav.apps }}</a>
         <a @click="$emit('navigate', 'servicio')" class="nav-link">{{ t.nav.service }}</a>
+        <a @click="$emit('contact')" class="nav-link">{{ t.contact.link }}</a>
       </div>
 
       <button
@@ -88,6 +89,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     <div class="mobile-menu" :class="{ open: menuOpen }">
       <a @click="$emit('navigate', 'aplicaciones')" class="nav-link">{{ t.nav.apps }}</a>
       <a @click="$emit('navigate', 'servicio')" class="nav-link">{{ t.nav.service }}</a>
+      <a @click="menuOpen = false; $emit('contact')" class="nav-link">{{ t.contact.link }}</a>
     </div>
   </nav>
 </template>
