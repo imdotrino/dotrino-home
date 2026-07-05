@@ -26,6 +26,7 @@ import ecoLogo from '../assets/apps/eco.svg'
 import sudokuLogo from '../assets/apps/sudoku.svg'
 import tunnelLogo from '../assets/apps/tunnel.svg'
 import terminalLogo from '../assets/apps/terminal.svg'
+import telegramBotLogo from '../assets/apps/telegram-bot.svg'
 import walletLogo from '../assets/apps/wallet.svg'
 import vaultLogo from '../assets/apps/vault.svg'
 
@@ -337,6 +338,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Abre una consola en tu propia máquina —la que corre tu vault— desde el navegador de otro dispositivo. Solo un dispositivo que enlaces con tu vault puede entrar, y todo viaja cifrado de punta a punta. Requiere el vault. Sin cuentas, sin rastreo.',
       en: 'Open a console on your own machine —the one running your vault— from the browser of another device. Only a device you link to your vault can get in, and everything is end-to-end encrypted. Requires the vault. No accounts, no tracking.',
+    },
+  },
+  {
+    name: 'Telegram Bot',
+    url: 'https://telegram-bot.dotrino.com/',
+    logo: telegramBotLogo,
+    repo: 'imdotrino/dotrino-telegram-claude-bot',
+    cat: 'developers',
+    desc: {
+      es: 'Chatea con un asistente de IA (Claude, DeepSeek u otro) desde Telegram, corriendo en <strong>tu</strong> máquina y con memoria de la conversación. Se expone sin abrir puertos ni tocar el router, gracias al túnel <code>@dotrino/tunnel</code>. Solo te responde a ti. Sin cuentas, sin rastreo.',
+      en: 'Chat with an AI assistant (Claude, DeepSeek or another) from Telegram, running on <strong>your</strong> machine and remembering the conversation. Exposed with no open ports and no router setup, thanks to the <code>@dotrino/tunnel</code>. It only answers you. No accounts, no tracking.',
     },
   },
 ]
