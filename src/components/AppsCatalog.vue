@@ -15,12 +15,32 @@ const t = computed(() => messages[props.locale])
    inicial (Mundial, contadores, juegos) desde defaultRecentApps(). */
 type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers'
 const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers']
-const activeTab = ref<TabKey>('recientes')
+
+// Recuerda el tab elegido SOLO dentro de la sesión de la pestaña (sessionStorage):
+// sobrevive al refresco, pero al cerrar la pestaña vuelve a "recientes".
+const TAB_STORE_KEY = 'dotrino-home:tab'
+const storedTab = (() => {
+  try {
+    const v = sessionStorage.getItem(TAB_STORE_KEY)
+    return v && (TAB_ORDER as string[]).includes(v) ? (v as TabKey) : 'recientes'
+  } catch { return 'recientes' as TabKey }
+})()
+const activeTab = ref<TabKey>(storedTab)
+
+function setActiveTab(tab: TabKey) {
+  activeTab.value = tab
+  try { sessionStorage.setItem(TAB_STORE_KEY, tab) } catch { /* modo privado */ }
+}
 
 // El store cuenta por id de app = hostname; mapeamos cada app.url a su hostname.
 const hostOf = (url: string): string => { try { return new URL(url).hostname } catch { return url } }
 
 onMounted(loadRecents)
+
+// Si el tab recordado ya no tiene apps (p. ej. se vació "wip"), cae a "recientes".
+onMounted(() => {
+  if (!visibleTabs.value.includes(activeTab.value)) activeTab.value = 'recientes'
+})
 
 const recentApps = computed<AppEntry[]>(() => {
   const map = recents.value
@@ -158,7 +178,7 @@ function submitRequest() {
           role="tab"
           :aria-selected="activeTab === tab"
           :class="['apps-tab', { active: activeTab === tab, wip: tab === 'wip' }]"
-          @click="activeTab = tab"
+          @click="setActiveTab(tab)"
         >{{ t.tabs[tab] }}</button>
       </div>
 

@@ -27,6 +27,7 @@ import sudokuLogo from '../assets/apps/sudoku.svg'
 import tunnelLogo from '../assets/apps/tunnel.svg'
 import terminalLogo from '../assets/apps/terminal.svg'
 import telegramBotLogo from '../assets/apps/telegram-bot.svg'
+import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
 import vaultLogo from '../assets/apps/vault.svg'
 
@@ -349,6 +350,18 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Chatea con un asistente de IA (Claude, DeepSeek u otro) desde Telegram, corriendo en <strong>tu</strong> máquina y con memoria de la conversación. Se expone sin abrir puertos ni tocar el router, gracias al túnel <code>@dotrino/tunnel</code>. Solo te responde a ti. Sin cuentas, sin rastreo.',
       en: 'Chat with an AI assistant (Claude, DeepSeek or another) from Telegram, running on <strong>your</strong> machine and remembering the conversation. Exposed with no open ports and no router setup, thanks to the <code>@dotrino/tunnel</code>. It only answers you. No accounts, no tracking.',
+    },
+  },
+  {
+    name: 'Content',
+    url: 'https://content.dotrino.com/',
+    logo: contentLogo,
+    repo: 'imdotrino/dotrino-content',
+    cat: 'developers',
+    wip: true,
+    desc: {
+      es: 'Guarda y comparte fotos, videos y archivos pesados desde <strong>tu propia computadora</strong>, sin subirlos a la nube de nadie. Entregas solo un enlace y el contenido viaja cifrado, directo de ti a quien lo abre. Sin anuncios, sin rastreo.',
+      en: 'Store and share photos, videos and large files from <strong>your own computer</strong>, without uploading them to anyone\'s cloud. You hand out only a link and the content travels encrypted, straight from you to whoever opens it. No ads, no tracking.',
     },
   },
 ]
