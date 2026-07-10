@@ -85,11 +85,16 @@ const ensureProvider = async () => {
   try { _profileProvider = createVaultProfileProvider({ identity: id, reputation }) } catch (_) { _profileProvider = null }
   return _profileProvider
 }
-const openMyProfile = async () => {
+// El modal de perfil es SOLO LECTURA por defecto (editar vive en profile.dotrino.com). El flag
+// `editable` (→ allow-edit del componente) se usa SOLO cuando hace falta poner el apodo inline
+// (ensureNick), para no romper ese onboarding.
+const profileEditable = ref(false)
+const openMyProfile = async (editable = false) => {
   const id = await ensureIdentity()
   const pk = id?.me?.publickey
   if (!pk) return
   myName.value = id?.me?.nickname || null
+  profileEditable.value = editable === true
   profilePk.value = pk
 }
 const bindProfile = (el: any) => { if (!el) return; ensureProvider().then((p: any) => { if (p) el.provider = p }) }
@@ -115,7 +120,7 @@ async function ensureNick (run: () => void) {
   const id = await ensureIdentity()
   if (id && !id.me?.nickname) {
     pendingAction.value = run
-    await openMyProfile()
+    await openMyProfile(true) // editable: el usuario necesita poner su apodo aquí mismo
     return
   }
   run()
@@ -222,6 +227,7 @@ const scrollToSection = (sectionId: string) => {
       :ref="bindProfile"
       modal
       mode="self"
+      :allow-edit="profileEditable ? '' : null"
       :pubkey="profilePk"
       :name="myName"
       :lang="locale"
