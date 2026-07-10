@@ -30,6 +30,7 @@ import telegramBotLogo from '../assets/apps/telegram-bot.svg'
 import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
 import vaultLogo from '../assets/apps/vault.svg'
+import profileLogo from '../assets/apps/profile.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -56,6 +57,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Tu bóveda personal: guarda toda tu información —archivos, contactos, contraseñas y lo que usan tus apps— en un solo lugar seguro, dentro de tu propia computadora. No en la nube de una empresa: en tu máquina, bajo tu control. Tus dispositivos acceden de forma segura y tú decides quién entra. Sin anuncios, sin rastreo.',
       en: 'Your personal vault: keep all your information —files, contacts, passwords and whatever your apps use— in one safe place, on your own computer. Not on a company’s cloud: on your machine, under your control. Your devices connect securely and you decide who gets in. No ads, no tracking.',
+    },
+  },
+  {
+    name: 'Perfil',
+    url: 'https://profile.dotrino.com/',
+    logo: profileLogo,
+    repo: 'imdotrino/dotrino_profile',
+    cat: 'apps',
+    desc: {
+      es: 'Tu identidad en Dotrino: administra tus perfiles, tu nombre, foto y datos, y protégelos con un PIN en este dispositivo. Conecta tu bóveda, revisa tus dispositivos y califica a las personas con las que interactúas (confianza entre usuarios). Sin anuncios, sin rastreo.',
+      en: 'Your Dotrino identity: manage your profiles, name, photo and details, and protect them with a PIN on this device. Connect your vault, review your devices and rate the people you interact with (trust between users). No ads, no tracking.',
     },
   },
   {
