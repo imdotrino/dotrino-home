@@ -1,17 +1,33 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watchEffect, onMounted, onUnmounted } from 'vue'
 import { messages, type Locale } from '../i18n'
-import { avatarDataUri } from '@dotrino/identity/capabilities'
-import '@dotrino/topbar' // barra superior estándar del ecosistema (marca + volver + idioma + perfil + support)
+import '@dotrino/topbar' // barra superior estándar del ecosistema (marca + volver + idioma + perfil + support + modal de perfil)
 import '@dotrino/install' // botón "Instalar app" (va en el slot end del topbar)
 
-const props = defineProps<{ hasBack: boolean; profilePk?: string | null }>()
-const avatarUrl = computed(() => (props.profilePk ? avatarDataUri(props.profilePk, { size: 64 }) : null))
+// El topbar es DUEÑO del modal "Mi perfil": le pasamos identity+reputation (props
+// JS) y él abre <dotrino-profile> solo, deriva el avatar y maneja el back. Así el
+// home NO fija la versión de @dotrino/profile (viaja dentro de @dotrino/topbar).
+const props = defineProps<{ hasBack: boolean; identity?: any; reputation?: any; profileTheme?: Record<string, string> | null }>()
 const locale = defineModel<Locale>('locale', { required: true })
 const menuOpen = defineModel<boolean>('open', { required: true })
-const emit = defineEmits<{ navigate: [sectionId: string]; profile: []; contact: [] }>()
+const emit = defineEmits<{
+  navigate: [sectionId: string]; contact: []
+  'profile-open': []; 'profile-name': [e: CustomEvent]; 'profile-close': []
+}>()
 
 const t = computed(() => messages[locale.value])
+
+// Ref al elemento del topbar → le seteamos identity/reputation/tema (propiedades
+// JS) y desde App.vue se llama openProfile(editable) para el onboarding del apodo.
+const topbarRef = ref<any>(null)
+watchEffect(() => {
+  const tb = topbarRef.value
+  if (!tb) return
+  tb.identity = props.identity ?? null
+  tb.reputation = props.reputation ?? null
+  tb.profileTheme = props.profileTheme ?? null
+})
+defineExpose({ openProfile: (editable = false) => topbarRef.value?.openMyProfile({ editable }) })
 
 // El idioma lo gobierna el toggle del <dotrino-topbar>; sincronizamos su evento
 // con nuestro modelo (que persiste en LANG_KEY vía el watcher de App.vue).
@@ -30,6 +46,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 <template>
   <div class="site-header">
     <dotrino-topbar
+      ref="topbarRef"
       class="site-topbar"
       :class="{ scrolled: isScrolled, 'has-back': hasBack }"
       brand="Dotrino"
@@ -37,13 +54,14 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       brand-href="/"
       :lang="locale"
       profile
-      :avatar="avatarUrl || undefined"
       support-href="https://ko-fi.com/dotrino"
       support-repo="imdotrino/dotrino-home"
       support-discord="https://discord.gg/D648uq7cth"
       support-contact
       @dotrino-lang="onLang"
-      @dotrino-profile="emit('profile')"
+      @dotrino-profile="emit('profile-open')"
+      @dotrino-profile-name="(e: Event) => emit('profile-name', e as CustomEvent)"
+      @dotrino-profile-close="emit('profile-close')"
       @cc-support-contact="emit('contact')"
     >
       <!-- Enlaces de sección (slot central) -->

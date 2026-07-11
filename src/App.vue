@@ -10,8 +10,6 @@ import InfoModal from './components/InfoModal.vue'
 import ContactModal from './components/ContactModal.vue'
 import { useBackLayer } from '@dotrino/nav/vue'
 import { Identity } from '@dotrino/identity'
-import { createVaultProfileProvider } from '@dotrino/profile'
-import '@dotrino/profile'
 import { createVaultReputation } from '@dotrino/reputation'
 
 /* App.vue es la cáscara: idioma, routing home↔/que-es, capas de "volver" y el
@@ -63,64 +61,42 @@ const contactOpen = ref(window.location.hash === '#contacto')
 const openContact = () => { contactOpen.value = true }
 window.addEventListener('hashchange', () => { if (window.location.hash === '#contacto') contactOpen.value = true })
 
-/* ---------------- Mi perfil (Web Component compartido) ----------------
-   Abre <dotrino-profile> en modo edición con mi identidad del vault
-   id.dotrino.com. Es el MISMO perfil que en el resto del ecosistema. */
-const profilePk = ref<string | null>(null)
-const myName = ref<string | null>(null)
-const myPk = ref<string | null>(null) // pubkey del perfil ACTIVO → avatar en el header
+/* ---------------- Mi perfil ----------------
+   El topbar (<dotrino-topbar>) es DUEÑO del modal "Mi perfil": le pasamos la
+   identidad + reputación del vault id.dotrino.com y él abre <dotrino-profile
+   mode="self"> solo (deriva el avatar del perfil activo y maneja el back). Así el
+   home NO fija la versión de @dotrino/profile: viaja dentro de @dotrino/topbar. */
+const identityInst = ref<any>(null)
+const reputationInst = ref<any>(null)
+const siteNavRef = ref<any>(null)
+const profileModalOpen = ref(false)
 let _identity: any = null
-let _profileProvider: any = null
 const ensureIdentity = async () => {
   if (_identity) return _identity
   try { _identity = await Identity.connect() } catch (_) { _identity = null }
   return _identity
 }
-const ensureProvider = async () => {
-  if (_profileProvider) return _profileProvider
-  const id = await ensureIdentity()
-  if (!id) return null
-  let reputation: any = null
-  try { reputation = createVaultReputation(id) } catch (_) { /* sin reputación: el perfil igual abre */ }
-  try { _profileProvider = createVaultProfileProvider({ identity: id, reputation }) } catch (_) { _profileProvider = null }
-  return _profileProvider
-}
-// El modal de perfil es SOLO LECTURA por defecto (editar vive en profile.dotrino.com). El flag
-// `editable` (→ allow-edit del componente) se usa SOLO cuando hace falta poner el apodo inline
-// (ensureNick), para no romper ese onboarding.
-const profileEditable = ref(false)
-const openMyProfile = async (editable = false) => {
-  const id = await ensureIdentity()
-  const pk = id?.me?.publickey
-  if (!pk) return
-  myName.value = id?.me?.nickname || null
-  profileEditable.value = editable === true
-  profilePk.value = pk
-}
-const bindProfile = (el: any) => { if (!el) return; ensureProvider().then((p: any) => { if (p) el.provider = p }) }
 
-/* Avatar del perfil ACTIVO en el header (multi-perfil): cada app muestra el avatar del
-   perfil que está usando. Se carga al montar; cambiar de perfil se hace desde profile.dotrino.com. */
+// Conecta identidad + reputación al montar → se las pasa al topbar (que deriva el
+// avatar del perfil activo y abre el modal). Cambiar de perfil se hace en profile.dotrino.com.
 onMounted(async () => {
   const id = await ensureIdentity()
   if (!id) return
-  try {
-    const p = id.currentProfile ? await id.currentProfile() : null
-    myPk.value = p?.pubkey || id?.me?.publickey || null
-    if (!myName.value) myName.value = p?.name || id?.me?.nickname || null
-  } catch { myPk.value = id?.me?.publickey || null }
+  identityInst.value = id
+  try { reputationInst.value = createVaultReputation(id) } catch (_) { reputationInst.value = null }
 })
 
 /* "Exigir apodo": acciones que se firman con la identidad (p. ej. enviar una
-   solicitud de app) requieren nickname. Si falta, se abre el perfil (mode="self")
-   para ponerlo y la acción pendiente se reanuda al guardarlo. Mismo patrón que
-   pronóstico y otras apps. Se expone a los hijos vía provide. */
+   solicitud de app) requieren nickname. Si falta, se abre el modal EDITABLE (el
+   topbar lo abre con allow-edit) y la acción pendiente se reanuda al guardar el
+   nombre. Mismo patrón que pronóstico y otras apps. Se expone a los hijos vía provide. */
 const pendingAction = ref<null | (() => void)>(null)
 async function ensureNick (run: () => void) {
   const id = await ensureIdentity()
   if (id && !id.me?.nickname) {
     pendingAction.value = run
-    await openMyProfile(true) // editable: el usuario necesita poner su apodo aquí mismo
+    profileModalOpen.value = true
+    await siteNavRef.value?.openProfile(true) // editable: poner el apodo aquí mismo
     return
   }
   run()
@@ -136,19 +112,20 @@ const getMyIdentity = async () => {
 provide('ensureNick', ensureNick)
 provide('getMyIdentity', getMyIdentity)
 
+// Eventos del modal (lo abre/cierra el topbar). Al guardar el nombre, reanuda la
+// acción pendiente (ensureNick). profileModalOpen alimenta el chevron de volver.
+const onProfileOpen = () => { profileModalOpen.value = true }
 const onProfileName = (e: any) => {
   const n = e?.detail?.name
-  if (n) myName.value = n
   if (n && pendingAction.value) {
     const run = pendingAction.value
     pendingAction.value = null
-    profilePk.value = null
     run()
   }
 }
-const onProfileClose = () => { profilePk.value = null; pendingAction.value = null }
+const onProfileClose = () => { profileModalOpen.value = false; pendingAction.value = null }
 
-// Tema del Web Component de perfil acorde al home (Cool & Cozy: claro + azul, fuentes propias).
+// Tema del modal de perfil acorde al home (Cool & Cozy: claro + azul, fuentes propias).
 const profileTheme = {
   '--ccp-bg': '#ffffff', '--ccp-bg-2': '#f4f7f9', '--ccp-bg-3': '#eaeff3', '--ccp-bg-4': '#e3e9ed',
   '--ccp-border': '#cfd8de', '--ccp-text': '#181c1e', '--ccp-muted': '#4a5560',
@@ -166,12 +143,13 @@ const profileTheme = {
 useBackLayer(infoApp, { onClose: () => { infoApp.value = null } })
 useBackLayer(menuOpen)
 useBackLayer(aboutOpen, { url: ABOUT_PATH })
-useBackLayer(profilePk, { onClose: () => { profilePk.value = null } })
+// El modal de perfil registra su PROPIA capa de "volver" dentro del topbar (dueño
+// del modal); aquí solo reflejamos su estado abierto en hasBack (chevron visible).
 useBackLayer(contactOpen, { onClose: () => { contactOpen.value = false } })
 
 // dotrino.com es el root del ecosistema: el chevron solo aparece cuando hay
 // algo "atrás" (vista /que-es o un modal/menú abierto).
-const hasBack = computed(() => !!(aboutOpen.value || infoApp.value || menuOpen.value || profilePk.value || contactOpen.value))
+const hasBack = computed(() => !!(aboutOpen.value || infoApp.value || menuOpen.value || profileModalOpen.value || contactOpen.value))
 
 /* ---------------- Navegación entre vistas ----------------
    El cambio de vista y la URL los gestiona la capa de back (aboutOpen + { url });
@@ -201,13 +179,18 @@ const scrollToSection = (sectionId: string) => {
 <template>
   <div class="app">
     <SiteNav
+      ref="siteNavRef"
       v-model:locale="locale"
       v-model:open="menuOpen"
       :has-back="hasBack"
-      :profile-pk="myPk"
+      :identity="identityInst"
+      :reputation="reputationInst"
+      :profile-theme="profileTheme"
       @navigate="scrollToSection"
-      @profile="openMyProfile"
       @contact="openContact"
+      @profile-open="onProfileOpen"
+      @profile-name="onProfileName"
+      @profile-close="onProfileClose"
     />
 
     <AboutSections v-if="!compact" :locale="locale" @navigate="scrollToSection" />
@@ -220,21 +203,6 @@ const scrollToSection = (sectionId: string) => {
     <InfoModal v-if="infoApp" :app="infoApp" :locale="locale" @close="infoApp = null" />
 
     <ContactModal v-if="contactOpen" :locale="locale" @close="contactOpen = false" />
-
-    <!-- Mi perfil del ecosistema (Web Component compartido, vault id.dotrino.com). -->
-    <dotrino-profile
-      v-if="profilePk"
-      :ref="bindProfile"
-      modal
-      mode="self"
-      :allow-edit="profileEditable ? '' : null"
-      :pubkey="profilePk"
-      :name="myName"
-      :lang="locale"
-      :style="profileTheme"
-      @cc-profile-name="onProfileName"
-      @cc-profile-close="onProfileClose"
-    ></dotrino-profile>
   </div>
 </template>
 
