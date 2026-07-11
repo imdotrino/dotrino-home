@@ -71,10 +71,11 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
         <a @click="emit('contact')" class="nav-link">{{ t.contact.link }}</a>
       </div>
 
-      <!-- Cluster derecho extra (slot end, antes de idioma/perfil/moneda) -->
+      <!-- Instalar: cluster derecho, antes de idioma/perfil/moneda -->
       <dotrino-install slot="end" class="cc-install" :lang="locale"></dotrino-install>
+      <!-- Hamburguesa: al FINAL (a la derecha de todos los iconos) -->
       <button
-        slot="end"
+        slot="trailing"
         class="hamburger"
         :class="{ open: menuOpen }"
         @click="menuOpen = !menuOpen"
