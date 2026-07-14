@@ -7,6 +7,7 @@ import messengerLogo from '../assets/apps/messenger.svg'
 import qrshareLogo from '../assets/apps/qrshare.svg'
 import qrreaderLogo from '../assets/apps/qrreader.svg'
 import qrgeneratorLogo from '../assets/apps/qrgenerator.svg'
+import base64Logo from '../assets/apps/base64.svg'
 import chessLogo from '../assets/apps/chess.svg'
 import cuarentaLogo from '../assets/apps/cuarenta.svg'
 import ecuavoleyLogo from '../assets/apps/ecuavoley.svg'
@@ -167,6 +168,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Generador de códigos QR: crea un QR de un enlace, texto, red Wi-Fi, contacto o ubicación y descárgalo en PNG o SVG. Todo en el navegador, sin subir nada a un servidor.',
       en: 'QR code generator: create a QR from a link, text, Wi-Fi network, contact or location and download it as PNG or SVG. All in the browser, nothing uploaded to a server.',
+    },
+  },
+  {
+    name: 'Base64',
+    url: 'https://base64.dotrino.com/',
+    logo: base64Logo,
+    repo: 'imdotrino/dotrino-base64',
+    cat: 'apps',
+    desc: {
+      es: 'Codifica y decodifica <strong>texto y archivos</strong> en Base64, con soporte para Unicode y una variante <strong>URL-safe</strong>. Codifica un archivo para incrustarlo o decodifica Base64 y descárgalo como archivo. Todo en el navegador, sin subir nada a un servidor.',
+      en: 'Encode and decode <strong>text and files</strong> to Base64, with Unicode support and a <strong>URL-safe</strong> variant. Encode a file to embed it, or decode Base64 and download it as a file. All in the browser, nothing uploaded to a server.',
     },
   },
   {
