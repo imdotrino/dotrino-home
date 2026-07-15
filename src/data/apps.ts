@@ -32,6 +32,7 @@ import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
 import vaultLogo from '../assets/apps/vault.svg'
 import profileLogo from '../assets/apps/profile.svg'
+import reputationLogo from '../assets/apps/reputation.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -80,6 +81,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Tu billetera digital: guarda eventos (<code>.ics</code>), contactos (<code>.vcf</code>) y pases (<code>.pkpass</code> — tarjetas de embarque, entradas, cupones) como tarjetas, organizadas en pestañas. Impórtalos o créalos, edítalos y compártelos por QR o enlace; exporta a su formato original o ábrelos en la app nativa. Todo en tu propio almacén, sin anuncios ni rastreo.',
       en: 'Your digital wallet: keep events (<code>.ics</code>), contacts (<code>.vcf</code>) and passes (<code>.pkpass</code> — boarding passes, tickets, coupons) as cards, organized in tabs. Import or create them, edit and share via QR or link; export to their original format or open them in the native app. All in your own vault, no ads, no tracking.',
+    },
+  },
+  {
+    name: 'Reputation',
+    url: 'https://reputation.dotrino.com/',
+    logo: reputationLogo,
+    repo: 'imdotrino/dotrino_reputation',
+    cat: 'social',
+    desc: {
+      es: 'Califica y pregunta sobre cualquier cosa —una persona, un sitio web, una cuenta— y mira lo que opina tu red de confianza. Lo que dicen las personas en las que confías pesa; el ruido de desconocidos, no (así nadie infla su fama con cuentas falsas). Haz preguntas y respóndelas; las más útiles según tu red suben. Sin anuncios, sin cookies, sin rastreo.',
+      en: 'Rate and ask about anything —a person, a website, an account— and see what your trusted network thinks. What people you trust say counts; noise from strangers doesn’t (so no one fakes their way to a good name). Ask questions and answer them; the ones your network finds useful rise to the top. No ads, no cookies, no tracking.',
     },
   },
   {
