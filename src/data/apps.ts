@@ -91,8 +91,8 @@ export const apps: AppEntry[] = [
     repo: 'imdotrino/dotrino_reputation',
     cat: 'social',
     desc: {
-      es: 'Califica y pregunta sobre cualquier cosa —una persona, un sitio web, una cuenta— y mira lo que opina tu red de confianza. Lo que dicen las personas en las que confías pesa; el ruido de desconocidos, no (así nadie infla su fama con cuentas falsas). Haz preguntas y respóndelas; las más útiles según tu red suben. Sin anuncios, sin cookies, sin rastreo.',
-      en: 'Rate and ask about anything —a person, a website, an account— and see what your trusted network thinks. What people you trust say counts; noise from strangers doesn’t (so no one fakes their way to a good name). Ask questions and answer them; the ones your network finds useful rise to the top. No ads, no cookies, no tracking.',
+      es: 'Calificador de perfiles y redes: deja tu calificación de una persona, un sitio web o una cuenta, y mira lo que opina tu red de confianza. Lo que dicen las personas en las que confías pesa; el ruido de desconocidos, no (así nadie infla su fama con cuentas falsas). También hay preguntas y respuestas; las más útiles según tu red suben. Sin anuncios, sin cookies, sin rastreo.',
+      en: 'Ratings for profiles and social accounts: leave your rating of a person, a website or an account, and see what your trusted network thinks. What people you trust say counts; noise from strangers doesn’t (so no one fakes their way to a good name). There are questions and answers too; the ones your network finds useful rise to the top. No ads, no cookies, no tracking.',
     },
   },
   {
