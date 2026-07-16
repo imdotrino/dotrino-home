@@ -8,6 +8,7 @@ import qrshareLogo from '../assets/apps/qrshare.svg'
 import qrreaderLogo from '../assets/apps/qrreader.svg'
 import qrgeneratorLogo from '../assets/apps/qrgenerator.svg'
 import base64Logo from '../assets/apps/base64.svg'
+import myipLogo from '../assets/apps/myip.svg'
 import chessLogo from '../assets/apps/chess.svg'
 import cuarentaLogo from '../assets/apps/cuarenta.svg'
 import ecuavoleyLogo from '../assets/apps/ecuavoley.svg'
@@ -191,6 +192,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Codifica y decodifica <strong>texto y archivos</strong> en Base64, con soporte para Unicode y una variante <strong>URL-safe</strong>. Codifica un archivo para incrustarlo o decodifica Base64 y descárgalo como archivo. Todo en el navegador, sin subir nada a un servidor.',
       en: 'Encode and decode <strong>text and files</strong> to Base64, with Unicode support and a <strong>URL-safe</strong> variant. Encode a file to embed it, or decode Base64 and download it as a file. All in the browser, nothing uploaded to a server.',
+    },
+  },
+  {
+    name: 'Mi IP',
+    url: 'https://myip.dotrino.com/',
+    logo: myipLogo,
+    repo: 'imdotrino/dotrino-myip',
+    cat: 'apps',
+    desc: {
+      es: 'Descubre tu <strong>IP pública</strong> al instante, junto con los datos de tu conexión: país, punto de entrada a la red, cifrado, si usas VPN, tipo de conexión y latencia. También detecta la IP de tu equipo en la red local. Todo se calcula contra la propia infraestructura de Dotrino, sin anuncios ni rastreo.',
+      en: 'Find your <strong>public IP</strong> instantly, along with your connection details: country, network entry point, encryption, whether you use a VPN, connection type and latency. It also detects your device’s address on the local network. Everything is computed against Dotrino’s own infrastructure, no ads, no tracking.',
     },
   },
   {
