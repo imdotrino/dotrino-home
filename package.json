@@ -10,13 +10,13 @@
     "lint:fix": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix"
   },
   "dependencies": {
-    "@dotrino/identity": "0.17.0",
+    "@dotrino/identity": "0.21.0",
     "@dotrino/install": "0.1.1",
     "@dotrino/nav": "0.2.1",
     "@dotrino/reputation": "0.6.0",
     "@dotrino/store": "0.4.0",
     "@dotrino/support": "0.7.0",
-    "@dotrino/topbar": "0.2.3",
+    "@dotrino/topbar": "0.4.0",
     "vue": "^3.5.22"
   },
   "devDependencies": {
