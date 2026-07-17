@@ -79,14 +79,12 @@ const service = computed(() => serviceItems[props.locale])
 }
 .cta-button:hover { background: var(--accent-press); transform: translateY(-2px); box-shadow: 0 12px 38px rgba(var(--accent-rgb), 0.28); }
 
-/* ───────────────────────── Servicio / API ───────────────────────── */
-.service-features, .api-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 3rem; text-align: left; }
-.service-item, .api-item { background: var(--surface-2); padding: 1.6rem; border-radius: 14px; border: 1px solid var(--line); transition: border-color 0.2s ease, transform 0.2s ease; }
-.service-item:hover, .api-item:hover { border-color: var(--line-2); transform: translateY(-3px); }
-.service-item h3, .api-item h3 { font-family: var(--font-display); font-weight: 700; color: var(--text); margin-bottom: 0.7rem; font-size: 1.18rem; }
-.service-item h3 { color: var(--mint); }
-.api-item h3 { color: var(--accent); }
-.service-item p, .api-item p { line-height: 1.6; color: var(--text-dim); font-size: 0.95rem; }
+/* ───────────────────────── Cómo funciona ───────────────────────── */
+.service-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 3rem; text-align: left; }
+.service-item { background: var(--surface-2); padding: 1.6rem; border-radius: 14px; border: 1px solid var(--line); transition: border-color 0.2s ease, transform 0.2s ease; }
+.service-item:hover { border-color: var(--line-2); transform: translateY(-3px); }
+.service-item h3 { font-family: var(--font-display); font-weight: 700; color: var(--mint); margin-bottom: 0.7rem; font-size: 1.18rem; }
+.service-item p { line-height: 1.6; color: var(--text-dim); font-size: 0.95rem; }
 
 /* ───────────────────────── Animación de entrada ───────────────────────── */
 @keyframes cc-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
@@ -101,6 +99,6 @@ const service = computed(() => serviceItems[props.locale])
 }
 
 @media (max-width: 768px) {
-  .service-features, .api-features { grid-template-columns: 1fr; }
+  .service-features { grid-template-columns: 1fr; }
 }
 </style>

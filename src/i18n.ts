@@ -13,7 +13,7 @@ export const detectLocale = (): Locale => {
 export const messages = {
   es: {
     htmlLang: 'es',
-    nav: { apps: 'Aplicaciones', service: 'Servicio', api: 'API', install: 'Instalar App', profile: 'Mi perfil' },
+    nav: { apps: 'Aplicaciones', service: 'Cómo funciona', install: 'Instalar App', profile: 'Mi perfil' },
     tabs: { recientes: 'Recientes', social: 'Social', apps: 'Herramientas', deportes: 'Deportes', juegos: 'Juegos', android: 'Android', wip: 'En Desarrollo', developers: 'Developers' },
     subtabs: { solo: 'Un jugador', multi: 'Multijugador', config: 'Configurables' },
     install: {
@@ -59,12 +59,8 @@ export const messages = {
       error: 'No se pudo enviar. Inténtalo de nuevo.',
     },
     service: {
-      title: 'Servicio',
-      text: 'Comunicación por WebSocket ligero que enruta mensajes entre clientes mediante tokens cortos, sin almacenar conversaciones ni requerir cuentas.',
-    },
-    api: {
-      title: 'API',
-      text: 'Una sola conexión WebSocket. Mensajes JSON. Sin endpoints HTTP, sin SDK obligatorio.',
+      title: 'Cómo funciona',
+      text: 'Esto es lo que las apps de Dotrino hacen por ti mientras las usas.',
     },
     footer: {
       title: 'La filosofía Dotrino',
@@ -77,7 +73,7 @@ export const messages = {
   },
   en: {
     htmlLang: 'en',
-    nav: { apps: 'Applications', service: 'Service', api: 'API', install: 'Install App', profile: 'My profile' },
+    nav: { apps: 'Applications', service: 'How it works', install: 'Install App', profile: 'My profile' },
     tabs: { recientes: 'Recent', social: 'Social', apps: 'Tools', deportes: 'Sports', juegos: 'Games', android: 'Android', wip: 'In Development', developers: 'Developers' },
     subtabs: { solo: 'Single player', multi: 'Multiplayer', config: 'Configurable' },
     install: {
@@ -123,12 +119,8 @@ export const messages = {
       error: "Couldn't send. Please try again.",
     },
     service: {
-      title: 'Service',
-      text: 'Lightweight WebSocket communication that routes messages between clients via short tokens, without storing conversations or requiring accounts.',
-    },
-    api: {
-      title: 'API',
-      text: 'A single WebSocket connection. JSON messages. No HTTP endpoints, no mandatory SDK.',
+      title: 'How it works',
+      text: 'This is what Dotrino’s apps do for you while you use them.',
     },
     footer: {
       title: 'The Dotrino philosophy',
