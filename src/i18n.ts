@@ -32,7 +32,7 @@ export const messages = {
     },
     apps: {
       title: 'Aplicaciones',
-      text: 'Aplicaciones que usan el proxy de Dotrino.',
+      text: 'Las aplicaciones del ecosistema. Todas hablan el mismo idioma, así que lo tuyo viaja de una a otra.',
       open: 'Abrir aplicación',
       download: 'Descargar APK',
       fullHome: '¿Qué es Dotrino?',
@@ -96,7 +96,7 @@ export const messages = {
     },
     apps: {
       title: 'Applications',
-      text: 'Applications that use the Dotrino proxy.',
+      text: 'The apps of the ecosystem. They all speak the same language, so what’s yours travels from one to the next.',
       open: 'Open app',
       download: 'Download APK',
       fullHome: 'What is Dotrino?',
