@@ -24,7 +24,7 @@ export const messages = {
     langLabel: 'Cambiar idioma a inglés',
     hero: {
       subtitle:
-        'Desarrollamos aplicaciones y juegos a medida: utilidades, juegos casuales y juegos de marketing/BTL. Con la privacidad por delante: sin anuncios, sin cookies, sin rastreo.',
+        '{n} aplicaciones para el día a día —mensajes, mapas, juegos, herramientas— con una sola cuenta para todas. Ninguna te llena de anuncios ni sigue tus pasos: no porque lo prometamos, sino porque están hechas para que no puedan.',
       manifestoStrong: 'Tu información, en tu servidor, bajo tus reglas.',
       manifestoRest:
         ' Lo que es tuyo, se queda contigo: tú decides qué compartes, cómo lo compartes y cuándo lo compartes. Sin intermediarios, sin nubes ajenas, sin letra pequeña.',
@@ -88,7 +88,7 @@ export const messages = {
     langLabel: 'Switch language to Spanish',
     hero: {
       subtitle:
-        'We build custom apps and games: utilities, casual games and marketing/BTL games. Privacy first: no ads, no cookies, no tracking.',
+        '{n} everyday apps — messaging, maps, games, tools — and one account for all of them. None of them show you ads or follow you around: not because we promise, but because they’re built so they can’t.',
       manifestoStrong: 'Your data, on your server, under your rules.',
       manifestoRest:
         ' What is yours stays with you: you decide what you share, how you share it and when you share it. No middlemen, no third-party clouds, no fine print.',
