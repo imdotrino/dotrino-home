@@ -72,7 +72,7 @@ export const messages = {
       how: { h: 'Cómo lo comparto', p: 'Con el formato, el acceso y las condiciones que yo defino.' },
       when: { h: 'Cuándo lo comparto', p: 'En el momento que quiero, y lo retiro cuando quiero.' },
       tagline: 'Aplicaciones útiles, sin anuncios y sin cookies, que no llevan cuenta de lo que haces. Funcionan en el equipo que tú eliges y lo tuyo se queda contigo. Eso es Dotrino.',
-      copy: '© 2024 Team Dotrino. Todos los derechos reservados.',
+      copy: '© 2026 Team Dotrino. Todos los derechos reservados.',
     },
   },
   en: {
@@ -136,7 +136,7 @@ export const messages = {
       how: { h: 'How I share it', p: 'With the format, access and conditions that I define.' },
       when: { h: 'When I share it', p: 'The moment I want, and I take it back whenever I want.' },
       tagline: 'Useful apps, with no ads and no cookies, that keep no record of what you do. They run on the machine you choose, and what’s yours stays with you. That is Dotrino.',
-      copy: '© 2024 Team Dotrino. All rights reserved.',
+      copy: '© 2026 Team Dotrino. All rights reserved.',
     },
   },
 } as const
