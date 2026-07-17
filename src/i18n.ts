@@ -24,7 +24,7 @@ export const messages = {
     langLabel: 'Cambiar idioma a inglés',
     hero: {
       subtitle:
-        '{n} aplicaciones para el día a día —mensajes, mapas, juegos, herramientas— con una sola cuenta para todas. Ninguna te llena de anuncios ni sigue tus pasos: no porque lo prometamos, sino porque están hechas para que no puedan.',
+        'Dotrino es un ecosistema de aplicaciones centradas en la privacidad de tus datos: lo tuyo es tuyo, y tú decides qué compartes, con quién y cuándo.',
       manifestoStrong: 'Tu información, en tu servidor, bajo tus reglas.',
       manifestoRest:
         ' Lo que es tuyo, se queda contigo: tú decides qué compartes, cómo lo compartes y cuándo lo compartes. Sin intermediarios, sin nubes ajenas, sin letra pequeña.',
@@ -88,7 +88,7 @@ export const messages = {
     langLabel: 'Switch language to Spanish',
     hero: {
       subtitle:
-        '{n} everyday apps — messaging, maps, games, tools — and one account for all of them. None of them show you ads or follow you around: not because we promise, but because they’re built so they can’t.',
+        'Dotrino is an ecosystem of apps built around one idea: what’s yours is yours, and you decide what you share, with whom, and when.',
       manifestoStrong: 'Your data, on your server, under your rules.',
       manifestoRest:
         ' What is yours stays with you: you decide what you share, how you share it and when you share it. No middlemen, no third-party clouds, no fine print.',

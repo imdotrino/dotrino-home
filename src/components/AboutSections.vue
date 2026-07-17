@@ -2,16 +2,11 @@
 import { computed } from 'vue'
 import { messages, type Locale } from '../i18n'
 import { serviceItems } from '../data/content'
-import { apps } from '../data/apps'
 
 const props = defineProps<{ locale: Locale }>()
 defineEmits<{ navigate: [sectionId: string] }>()
 const t = computed(() => messages[props.locale])
 const service = computed(() => serviceItems[props.locale])
-
-// El hero dice cuántas apps hay: se cuenta del catálogo para que no caduque al publicar la siguiente.
-const liveApps = computed(() => apps.filter((a) => !a.wip).length)
-const heroSubtitle = computed(() => t.value.hero.subtitle.replace('{n}', String(liveApps.value)))
 </script>
 
 <template>
@@ -19,7 +14,7 @@ const heroSubtitle = computed(() => t.value.hero.subtitle.replace('{n}', String(
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
       <h1 class="hero-title">Dotrino</h1>
-      <p class="hero-subtitle">{{ heroSubtitle }}</p>
+      <p class="hero-subtitle">{{ t.hero.subtitle }}</p>
       <p class="hero-manifesto">
         <strong>{{ t.hero.manifestoStrong }}</strong>{{ t.hero.manifestoRest }}
       </p>
