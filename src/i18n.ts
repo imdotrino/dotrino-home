@@ -27,7 +27,7 @@ export const messages = {
         'Dotrino es un ecosistema de aplicaciones centradas en la privacidad de tus datos: lo tuyo es tuyo, y tú decides qué compartes, con quién y cuándo.',
       manifestoStrong: 'Tu información, en tu servidor, bajo tus reglas.',
       manifestoRest:
-        ' Lo que es tuyo, se queda contigo: tú decides qué compartes, cómo lo compartes y cuándo lo compartes. Sin intermediarios, sin nubes ajenas, sin letra pequeña.',
+        ' Tus fotos, tus mensajes, tus archivos viven donde tú los pones, y puedes llevártelos, copiarlos o borrarlos el día que quieras. Y lo que no compartes no se mueve de ahí.',
       cta: 'Descubre Más',
     },
     apps: {
@@ -71,7 +71,7 @@ export const messages = {
       what: { h: 'Qué comparto', p: 'Solo la información que decido exponer, nada más.' },
       how: { h: 'Cómo lo comparto', p: 'Con el formato, el acceso y las condiciones que yo defino.' },
       when: { h: 'Cuándo lo comparto', p: 'En el momento que quiero, y lo retiro cuando quiero.' },
-      tagline: 'Aplicaciones útiles que no te espían: sin anuncios, sin cookies, sin rastreo, sin vender tu identidad. Sobre infraestructura que tú controlas. Eso es Dotrino.',
+      tagline: 'Aplicaciones útiles, sin anuncios y sin cookies, que no llevan cuenta de lo que haces. Funcionan en el equipo que tú eliges y lo tuyo se queda contigo. Eso es Dotrino.',
       copy: '© 2024 Team Dotrino. Todos los derechos reservados.',
     },
   },
@@ -91,7 +91,7 @@ export const messages = {
         'Dotrino is an ecosystem of apps built around one idea: what’s yours is yours, and you decide what you share, with whom, and when.',
       manifestoStrong: 'Your data, on your server, under your rules.',
       manifestoRest:
-        ' What is yours stays with you: you decide what you share, how you share it and when you share it. No middlemen, no third-party clouds, no fine print.',
+        ' Your photos, your messages, your files live where you put them, and you can take them with you, copy them or delete them any day you want. And what you don’t share never leaves.',
       cta: 'Learn More',
     },
     apps: {
@@ -135,7 +135,7 @@ export const messages = {
       what: { h: 'What I share', p: 'Only the information I choose to expose, nothing more.' },
       how: { h: 'How I share it', p: 'With the format, access and conditions that I define.' },
       when: { h: 'When I share it', p: 'The moment I want, and I take it back whenever I want.' },
-      tagline: 'Useful apps that do not spy on you: no ads, no cookies, no tracking, no selling your identity. On infrastructure you control. That is Dotrino.',
+      tagline: 'Useful apps, with no ads and no cookies, that keep no record of what you do. They run on the machine you choose, and what’s yours stays with you. That is Dotrino.',
       copy: '© 2024 Team Dotrino. All rights reserved.',
     },
   },
