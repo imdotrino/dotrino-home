@@ -28,6 +28,7 @@ import ecoLogo from '../assets/apps/eco.svg'
 import sudokuLogo from '../assets/apps/sudoku.svg'
 import tunnelLogo from '../assets/apps/tunnel.svg'
 import terminalLogo from '../assets/apps/terminal.svg'
+import iaLogo from '../assets/apps/ia.svg'
 import telegramBotLogo from '../assets/apps/telegram-bot.svg'
 import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
@@ -387,6 +388,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Abre una consola en tu propia máquina —la que corre tu vault— desde el navegador de otro dispositivo. Solo un dispositivo que enlaces con tu vault puede entrar, y todo viaja cifrado de punta a punta. Requiere el vault. Sin cuentas, sin rastreo.',
       en: 'Open a console on your own machine —the one running your vault— from the browser of another device. Only a device you link to your vault can get in, and everything is end-to-end encrypted. Requires the vault. No accounts, no tracking.',
+    },
+  },
+  {
+    name: 'Dotrino IA',
+    url: 'https://ia.dotrino.com/',
+    logo: iaLogo,
+    repo: 'imdotrino/dotrino-ia',
+    cat: 'developers',
+    desc: {
+      es: 'Habla desde tu teléfono con los asistentes de IA (como Claude) que corren en <strong>tu</strong> propia computadora: con memoria de la conversación y cifrado de punta a punta. Solo tú entras, con un dispositivo que enlaces a tu vault. Sin cuentas, sin rastreo.',
+      en: 'Talk from your phone to the AI assistants (like Claude) running on <strong>your</strong> own computer: with conversation memory and end-to-end encryption. Only you get in, with a device you link to your vault. No accounts, no tracking.',
     },
   },
   {
