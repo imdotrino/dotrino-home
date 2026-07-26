@@ -67,7 +67,7 @@ export const apps: AppEntry[] = [
     name: 'Perfil',
     url: 'https://profile.dotrino.com/',
     logo: profileLogo,
-    repo: 'imdotrino/dotrino_profile',
+    repo: 'imdotrino/dotrino-profile-app',
     cat: 'apps',
     desc: {
       es: 'Tu identidad en Dotrino: administra tus perfiles, tu nombre, foto y datos, y protégelos con un PIN en este dispositivo. Conecta tu bóveda, revisa tus dispositivos y califica a las personas con las que interactúas (confianza entre usuarios). Sin anuncios, sin rastreo.',
@@ -89,7 +89,7 @@ export const apps: AppEntry[] = [
     name: 'Reputation',
     url: 'https://reputation.dotrino.com/',
     logo: reputationLogo,
-    repo: 'imdotrino/dotrino_reputation',
+    repo: 'imdotrino/dotrino-reputation-app',
     cat: 'social',
     desc: {
       es: 'Calificador de perfiles y redes: deja tu calificación de una persona, un sitio web o una cuenta, y mira lo que opina tu red de confianza. Lo que dicen las personas en las que confías pesa; el ruido de desconocidos, no (así nadie infla su fama con cuentas falsas). También hay preguntas y respuestas; las más útiles según tu red suben. Sin anuncios, sin cookies, sin rastreo.',
