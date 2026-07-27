@@ -59,8 +59,8 @@ export const apps: AppEntry[] = [
     repo: 'imdotrino/dotrino-vault',
     cat: 'apps',
     desc: {
-      es: 'Tu bóveda personal: guarda toda tu información —archivos, contactos, contraseñas y lo que usan tus apps— en un solo lugar seguro, dentro de tu propia computadora. No en la nube de una empresa: en tu máquina, bajo tu control. Tus dispositivos acceden de forma segura y tú decides quién entra. Sin anuncios, sin rastreo.',
-      en: 'Your personal vault: keep all your information —files, contacts, passwords and whatever your apps use— in one safe place, on your own computer. Not on a company’s cloud: on your machine, under your control. Your devices connect securely and you decide who gets in. No ads, no tracking.',
+      es: 'Tu bóveda personal: guarda toda tu información —archivos, contactos, contraseñas y lo que usan tus apps— en un solo lugar seguro, dentro de tu propia computadora. No en la nube de una empresa: en tu máquina, bajo tu control. Tus dispositivos acceden de forma segura y tú decides quién entra. Es un programa que instalas en tu computadora: hay instalador para Linux y, en Windows y macOS, se pone a andar con un comando o con Docker. Sin anuncios, sin rastreo.',
+      en: 'Your personal vault: keep all your information —files, contacts, passwords and whatever your apps use— in one safe place, on your own computer. Not on a company’s cloud: on your machine, under your control. Your devices connect securely and you decide who gets in. It is a program you install on your computer: there is an installer for Linux and, on Windows and macOS, one command or Docker gets it running. No ads, no tracking.',
     },
   },
   {
