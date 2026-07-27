@@ -32,6 +32,7 @@ import iaLogo from '../assets/apps/ia.svg'
 import telegramBotLogo from '../assets/apps/telegram-bot.svg'
 import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
+import installLogo from '../assets/apps/install.svg'
 import vaultLogo from '../assets/apps/vault.svg'
 import profileLogo from '../assets/apps/profile.svg'
 import reputationLogo from '../assets/apps/reputation.svg'
@@ -52,6 +53,17 @@ export type AppEntry = {
 }
 
 export const apps: AppEntry[] = [
+  {
+    name: 'Instalar',
+    url: 'https://install.dotrino.com/',
+    logo: installLogo,
+    repo: 'imdotrino/dotrino-install',
+    cat: 'developers',
+    desc: {
+      es: 'Un comando que deja funcionando en tu computadora cualquier herramienta de Dotrino —la bóveda, la terminal, el túnel—. Si te falta algo, lo baja él, sin pedirte permisos de administrador y sin tocar tu sistema. Linux, macOS y Windows.',
+      en: 'One command that gets any Dotrino tool running on your computer —the vault, the terminal, the tunnel—. If something is missing it downloads it, without asking for admin rights and without touching your system. Linux, macOS and Windows.',
+    },
+  },
   {
     name: 'Dotrino Vault',
     url: 'https://vault.dotrino.com/',
