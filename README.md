@@ -80,7 +80,6 @@ Landing page para el ecosistema **Dotrino**: lista de las apps que usan el proxy
 - [QRShare](https://dotrino.github.io/qrshare/)
 - [Dotrino Chess](https://dotrino.github.io/simple-websocket-chess/)
 - [Contador Ecuavóley](https://dotrino.github.io/ecuavoley-contador/)
-- [Pronóstico Mundialista](https://mundial.dotrino.com/)
 
 ## Build
 

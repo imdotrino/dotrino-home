@@ -12,7 +12,7 @@ const t = computed(() => messages[props.locale])
    primero. El conteo es CROSS-APP y vive en el store compartido (lo escribe
    <dotrino-support> en cada app; ver ../recents.ts), así cuenta incluso el
    acceso directo a cada subdominio. Sin historial todavía, destaca una selección
-   inicial (Mundial, contadores, juegos) desde defaultRecentApps(). */
+   inicial (contadores, juegos) desde defaultRecentApps(). */
 type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers'
 const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers']
 
