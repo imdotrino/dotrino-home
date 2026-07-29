@@ -1,10 +1,27 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
+import { execSync } from 'node:child_process'
+
+// <meta name="commit"> con el hash del commit del build: permite ver a simple
+// vista (Ver código fuente / document.querySelector) qué versión sirve el
+// dominio — clave para diagnosticar cachés viejas. Normado en CONVENCIONES-APPS.
+// El meta viaja también a las páginas de rutas (que-es.html), que scripts/
+// gen-routes.mjs deriva del index.html ya construido.
+function commitMeta (): Plugin {
+  let hash = 'dev'
+  try { hash = execSync('git rev-parse --short HEAD').toString().trim() } catch { /* sin git */ }
+  return {
+    name: 'commit-meta',
+    transformIndexHtml: (html) =>
+      html.replace('</head>', `    <meta name="commit" content="${hash}" />\n</head>`),
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    commitMeta(),
     vue({
       template: {
         compilerOptions: {
