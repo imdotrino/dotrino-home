@@ -15,6 +15,7 @@ export const messages = {
     htmlLang: 'es',
     nav: { apps: 'Aplicaciones', service: 'Cómo funciona', install: 'Instalar App', profile: 'Mi perfil' },
     tabs: { recientes: 'Recientes', social: 'Social', apps: 'Herramientas', deportes: 'Deportes', juegos: 'Juegos', android: 'Android', wip: 'En Desarrollo', developers: 'Developers' },
+    lines: { label: 'Personal o empresa', personal: 'Personal', enterprise: 'Empresa' },
     subtabs: { solo: 'Un jugador', multi: 'Multijugador', config: 'Configurables' },
     install: {
       ios: 'Para instalar: pulsa el botón Compartir y luego "Añadir a pantalla de inicio".',
@@ -95,6 +96,7 @@ export const messages = {
     htmlLang: 'en',
     nav: { apps: 'Applications', service: 'How it works', install: 'Install App', profile: 'My profile' },
     tabs: { recientes: 'Recent', social: 'Social', apps: 'Tools', deportes: 'Sports', juegos: 'Games', android: 'Android', wip: 'In Development', developers: 'Developers' },
+    lines: { label: 'Personal or business', personal: 'Personal', enterprise: 'Business' },
     subtabs: { solo: 'Single player', multi: 'Multiplayer', config: 'Configurable' },
     install: {
       ios: 'To install: tap the Share button and then "Add to Home Screen".',

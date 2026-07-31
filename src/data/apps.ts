@@ -39,6 +39,12 @@ import reputationLogo from '../assets/apps/reputation.svg'
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
 
+/* Líneas del ecosistema (CLAUDE.md, "Dotrino Enterprise"): la MISMA arquitectura
+   presentada para una persona o para una empresa. No son dos catálogos: la
+   mayoría de las apps sirve a las dos líneas; la separación existe sobre todo
+   para que la vista de empresa no muestre juegos ni contadores deportivos. */
+export type Line = 'personal' | 'enterprise'
+
 export type AppEntry = {
   name: string
   repo: string
@@ -46,10 +52,23 @@ export type AppEntry = {
   logo: string
   cat: 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'developers'
   sub?: SubKey
+  /* Líneas en las que aparece. Si no se declara, se deduce de `cat`: juegos,
+     deportes y Android son solo personales; el resto va en ambas. Declararlo a
+     mano solo cuando la deducción no aplique. */
+  lines?: Line[]
   desc: { es: string; en: string }
   wip?: boolean
   apk?: string
 }
+
+/* Cats que NO tienen lectura de empresa: entretenimiento y el launcher del
+   teléfono personal. */
+const PERSONAL_ONLY_CATS = ['juegos', 'deportes', 'android']
+
+export const linesOf = (a: AppEntry): Line[] =>
+  a.lines ?? (PERSONAL_ONLY_CATS.includes(a.cat) ? ['personal'] : ['personal', 'enterprise'])
+
+export const inLine = (a: AppEntry, line: Line): boolean => linesOf(a).includes(line)
 
 export const apps: AppEntry[] = [
   {

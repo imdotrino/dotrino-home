@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, inject } from 'vue'
 import { messages, type Locale } from '../i18n'
-import { apps, defaultRecentApps, type AppEntry, type SubKey } from '../data/apps'
+import { apps, defaultRecentApps, inLine, type AppEntry, type Line, type SubKey } from '../data/apps'
 import { recents, loadRecents } from '../recents'
 
 const props = defineProps<{ locale: Locale }>()
@@ -32,6 +32,25 @@ function setActiveTab(tab: TabKey) {
   try { sessionStorage.setItem(TAB_STORE_KEY, tab) } catch { /* modo privado */ }
 }
 
+/* Línea del ecosistema (personal / empresa). Filtra TODOS los tabs, incluido
+   "Recientes". Como el tab, se recuerda solo dentro de la sesión de la pestaña:
+   entrar de cero vuelve a la línea personal. */
+const LINE_STORE_KEY = 'dotrino-home:line'
+const storedLine = (() => {
+  try {
+    const v = sessionStorage.getItem(LINE_STORE_KEY)
+    return v === 'enterprise' ? 'enterprise' : 'personal'
+  } catch { return 'personal' as Line }
+})()
+const activeLine = ref<Line>(storedLine)
+
+function setActiveLine(line: Line) {
+  activeLine.value = line
+  try { sessionStorage.setItem(LINE_STORE_KEY, line) } catch { /* modo privado */ }
+  // La línea nueva puede no tener el tab activo (p. ej. Juegos en empresa).
+  if (!visibleTabs.value.includes(activeTab.value)) setActiveTab(visibleTabs.value[0] ?? 'recientes')
+}
+
 // El store cuenta por id de app = hostname; mapeamos cada app.url a su hostname.
 const hostOf = (url: string): string => { try { return new URL(url).hostname } catch { return url } }
 
@@ -51,12 +70,15 @@ const recentApps = computed<AppEntry[]>(() => {
   return opened.length ? opened : defaultRecentApps()
 })
 
-const tabApps = (tab: TabKey): AppEntry[] =>
-  tab === 'recientes'
-    ? recentApps.value
-    : tab === 'wip'
-      ? apps.filter((a) => a.wip)
-      : apps.filter((a) => !a.wip && a.cat === tab)
+const tabApps = (tab: TabKey): AppEntry[] => {
+  const list =
+    tab === 'recientes'
+      ? recentApps.value
+      : tab === 'wip'
+        ? apps.filter((a) => a.wip)
+        : apps.filter((a) => !a.wip && a.cat === tab)
+  return list.filter((a) => inLine(a, activeLine.value))
+}
 
 const visibleTabs = computed(() => TAB_ORDER.filter((tab) => tabApps(tab).length > 0))
 
@@ -175,7 +197,19 @@ function submitRequest() {
         <p v-else-if="reqState === 'error'" class="app-request-msg err">{{ t.apps.requestError }}</p>
       </form>
 
-      <div class="apps-tabs" role="tablist">
+      <div class="apps-lines" role="tablist" :aria-label="t.lines.label">
+        <button
+          v-for="line in (['personal', 'enterprise'] as const)"
+          :key="line"
+          type="button"
+          role="tab"
+          :aria-selected="activeLine === line"
+          :class="['apps-line', line, { active: activeLine === line }]"
+          @click="setActiveLine(line)"
+        >{{ t.lines[line] }}</button>
+      </div>
+
+      <div class="apps-tabs" :class="{ ent: activeLine === 'enterprise' }" role="tablist">
         <button
           v-for="tab in visibleTabs"
           :key="tab"
@@ -253,6 +287,20 @@ function submitRequest() {
 .full-home-button.enterprise { background: rgba(0, 137, 123, 0.10); color: var(--mint); }
 .full-home-button.enterprise:hover { background: var(--mint); border-color: var(--mint); color: #ffffff; box-shadow: 0 12px 28px rgba(0, 137, 123, 0.22); }
 
+/* ─────────── Línea del ecosistema (personal / empresa) ─────────── */
+.apps-lines {
+  display: inline-flex; gap: 0.25rem; margin: 2.2rem auto 0; padding: 0.3rem;
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-pill);
+}
+.apps-line {
+  background: transparent; color: var(--text-dim); border: none; border-radius: var(--radius-pill);
+  padding: 0.42rem 1.3rem; font-family: var(--font-body); font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap; transition: color 0.2s ease, background 0.2s ease;
+}
+.apps-line:hover { color: var(--text); }
+.apps-line.personal.active { background: var(--accent); color: var(--accent-ink); }
+.apps-line.enterprise.active { background: var(--mint); color: #ffffff; }
+
 /* ───────────────────────── Tabs ───────────────────────── */
 .apps-tabs {
   display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem;
@@ -268,6 +316,8 @@ function submitRequest() {
 .apps-tab:hover { color: var(--text); background: var(--surface-2); }
 .apps-tab.active { color: var(--accent-ink); background: var(--accent); }
 .apps-tab.wip.active { background: var(--mint); color: #ffffff; }
+/* En la línea de empresa, el tab activo toma el acento menta de esa línea. */
+.apps-tabs.ent .apps-tab.active { background: var(--mint); color: #ffffff; }
 
 .apps-subtabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 1.2rem; }
 .apps-subtab {
