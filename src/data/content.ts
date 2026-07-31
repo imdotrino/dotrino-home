@@ -86,6 +86,7 @@ export const enterpriseItems: Record<Locale, Feature[]> = {
     { h: 'Cada servicio, solo su cajón', p: 'Cada aplicación recibe únicamente las claves de su propio cajón, y no abre el de otra aunque compartan máquina. En un mismo equipo caben cuentas separadas que no se cruzan.' },
     { h: 'Quien entra y quien sale', p: 'Autorizar un equipo nuevo toma un minuto y exige que una persona teclee un código en ese mismo equipo: un código reenviado por correo no alcanza. Retirarle el permiso corta su acceso en el acto, y el permiso caduca por sí solo a los 30 días si nadie lo renueva.' },
     { h: 'El código está a la vista', p: 'Todo es código abierto con licencia MIT: tu gente puede leerlo, compilarlo y correr las pruebas. Cada firma, cada permiso y cada intento rechazado quedan anotados con su fecha en tu propia máquina.' },
+    { h: 'Lo que le preguntas a la IA (en construcción)', p: 'Middlebot revisa cada pregunta que tu gente le hace a una inteligencia artificial antes de que salga de la empresa: tacha lo que tus reglas marcan como sensible, pregunta cuando hay dudas y anota qué salió y cuándo. Todavía se está construyendo; su especificación completa ya es pública en middlebot.dotrino.com.' },
   ],
   en: [
     { h: 'Keys in a single place', p: 'Your servers’ passwords and credentials stop being copied into a config file on every machine. They travel encrypted to the service that asks for them and live only in memory there, never written to disk.' },
@@ -94,5 +95,6 @@ export const enterpriseItems: Record<Locale, Feature[]> = {
     { h: 'Each service, only its drawer', p: 'Each application receives only the keys in its own drawer, and cannot open another’s even when they share a machine. A single machine can hold separate accounts that never mix.' },
     { h: 'Who comes in and who leaves', p: 'Authorising a new machine takes a minute and requires a person to type a code on that very machine: a code forwarded by email is not enough. Withdrawing its permission cuts access on the spot, and the permission expires on its own after 30 days if nobody renews it.' },
     { h: 'The code is in plain sight', p: 'Everything is open source under the MIT licence: your people can read it, build it and run the tests. Every signature, every permission and every rejected attempt is recorded with its date on your own machine.' },
+    { h: 'What you ask the AI (under construction)', p: 'Middlebot reviews every question your people ask an artificial intelligence before it leaves the company: it blanks out whatever your rules mark as sensitive, asks when in doubt, and records what left and when. It is still being built; its full specification is already public at middlebot.dotrino.com.' },
   ],
 }

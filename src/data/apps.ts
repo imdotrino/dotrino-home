@@ -28,6 +28,7 @@ import tunnelLogo from '../assets/apps/tunnel.svg'
 import terminalLogo from '../assets/apps/terminal.svg'
 import iaLogo from '../assets/apps/ia.svg'
 import telegramBotLogo from '../assets/apps/telegram-bot.svg'
+import middlebotLogo from '../assets/apps/middlebot.svg'
 import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
 import installLogo from '../assets/apps/install.svg'
@@ -405,6 +406,18 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Chatea con un asistente de IA (Claude, DeepSeek u otro) desde Telegram, corriendo en <strong>tu</strong> máquina y con memoria de la conversación. Se expone sin abrir puertos ni tocar el router, gracias al túnel <code>@dotrino/tunnel</code>. Solo te responde a ti. Sin cuentas, sin rastreo.',
       en: 'Chat with an AI assistant (Claude, DeepSeek or another) from Telegram, running on <strong>your</strong> machine and remembering the conversation. Exposed with no open ports and no router setup, thanks to the <code>@dotrino/tunnel</code>. It only answers you. No accounts, no tracking.',
+    },
+  },
+  {
+    name: 'Middlebot',
+    url: 'https://middlebot.dotrino.com/',
+    logo: middlebotLogo,
+    repo: 'imdotrino/dotrino-middlebot',
+    cat: 'developers',
+    wip: true,
+    desc: {
+      es: 'Controla que <strong>no salga información sensible de tu empresa</strong> dentro de una pregunta a una inteligencia artificial. El asistente trabaja en tu computadora y no le habla directo a ninguna IA: lo que preguntas pasa antes por una máquina que tú designas, que tacha lo sensible, pregunta cuando hay dudas y deja constancia. Sin cuentas, sin rastreo.',
+      en: 'Keeps <strong>your company\'s sensitive information from leaving</strong> inside a question to an artificial intelligence. The assistant works on your computer and never talks straight to an AI: what you ask goes first through a machine you designate, which blanks out the sensitive parts, asks when in doubt and keeps a record. No accounts, no tracking.',
     },
   },
   {
