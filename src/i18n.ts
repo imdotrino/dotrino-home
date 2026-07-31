@@ -81,10 +81,6 @@ export const messages = {
       sectionTitle: 'Qué incluye',
       sectionText: 'Las piezas del ecosistema, puestas a trabajar para una empresa.',
       response: 'Con Dotrino Enterprise',
-      limit: {
-        title: 'El límite, dicho en voz alta',
-        text: 'La llave que manda vive en un equipo tuyo y no hay una copia nuestra: no existe frase de recuperación ni respaldo en nuestras manos, así que si se pierde ese equipo, esa cuenta no vuelve. Preferimos decirlo antes que prometer un rescate que no existe; cómo resguardarlo es parte de la conversación.',
-      },
     },
     footer: {
       title: 'La filosofía Dotrino',
@@ -165,10 +161,6 @@ export const messages = {
       sectionTitle: 'What’s included',
       sectionText: 'The pieces of the ecosystem, put to work for a company.',
       response: 'With Dotrino Enterprise',
-      limit: {
-        title: 'The limit, said out loud',
-        text: 'The key that rules lives on a machine of yours and we hold no copy of it: there is no recovery phrase and no backup in our hands, so if that machine is lost, that account does not come back. We would rather say so than promise a rescue that does not exist; how to safeguard it is part of the conversation.',
-      },
     },
     footer: {
       title: 'The Dotrino philosophy',

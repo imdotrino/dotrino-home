@@ -56,14 +56,6 @@ const items = computed(() => enterpriseItems[props.locale])
         </div>
       </div>
 
-      <!-- El límite honesto, dicho en voz alta (misma norma que "ninguna app
-           cuida lo que su dueño decide mostrar"): perder el equipo que sella =
-           perder la cuenta. No hay recuperación, y no se esconde. -->
-      <aside class="ent-limit">
-        <h3>{{ e.limit.title }}</h3>
-        <p>{{ e.limit.text }}</p>
-      </aside>
-
       <div class="ent-close">
         <button @click="$emit('contact')" class="cta-button">{{ e.cta }}</button>
         <button @click="$emit('about')" class="ent-link">{{ t.apps.fullHome }}</button>
@@ -142,15 +134,6 @@ const items = computed(() => enterpriseItems[props.locale])
 .ent-item:hover { border-color: var(--line-2); transform: translateY(-3px); }
 .ent-item h3 { font-family: var(--font-display); font-weight: 700; color: var(--mint); margin-bottom: 0.7rem; font-size: 1.18rem; }
 .ent-item p { line-height: 1.6; color: var(--text-dim); font-size: 0.95rem; }
-
-/* El límite honesto: sobrio, no una alarma. Filete menta a la izquierda. */
-.ent-limit {
-  margin: 2.6rem auto 0; max-width: 780px; text-align: left;
-  padding: 1.4rem 1.6rem; background: var(--surface);
-  border: 1px solid var(--line); border-left: 3px solid var(--mint); border-radius: 14px;
-}
-.ent-limit h3 { font-family: var(--font-display); font-weight: 700; color: var(--text); font-size: 1.05rem; margin-bottom: 0.5rem; }
-.ent-limit p { line-height: 1.65; color: var(--text-dim); font-size: 0.93rem; }
 
 /* Cierre: el CTA de contacto y la puerta a la vista personal (/que-es). */
 .ent-close { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem; margin-top: 3rem; }
