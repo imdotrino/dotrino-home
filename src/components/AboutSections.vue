@@ -4,7 +4,7 @@ import { messages, type Locale } from '../i18n'
 import { serviceItems } from '../data/content'
 
 const props = defineProps<{ locale: Locale }>()
-defineEmits<{ navigate: [sectionId: string] }>()
+defineEmits<{ navigate: [sectionId: string]; enterprise: [] }>()
 const t = computed(() => messages[props.locale])
 const service = computed(() => serviceItems[props.locale])
 </script>
@@ -34,6 +34,10 @@ const service = computed(() => serviceItems[props.locale])
           <p v-html="item.p"></p>
         </div>
       </div>
+
+      <!-- Puerta a la línea de empresa (simétrica al enlace de vuelta que trae
+           EnterpriseSections). -->
+      <button @click="$emit('enterprise')" class="ent-link">{{ t.apps.fullHomeEnterprise }}</button>
     </div>
   </section>
 
@@ -85,6 +89,15 @@ const service = computed(() => serviceItems[props.locale])
 .service-item:hover { border-color: var(--line-2); transform: translateY(-3px); }
 .service-item h3 { font-family: var(--font-display); font-weight: 700; color: var(--mint); margin-bottom: 0.7rem; font-size: 1.18rem; }
 .service-item p { line-height: 1.6; color: var(--text-dim); font-size: 0.95rem; }
+
+/* Enlace a /enterprise: pastilla menta discreta (el hue de la línea de empresa). */
+.ent-link {
+  margin-top: 2.6rem; background: rgba(0, 137, 123, 0.10); color: var(--mint);
+  border: 1px solid transparent; padding: 0.7rem 1.8rem; font-family: var(--font-body);
+  font-size: 0.95rem; font-weight: 700; border-radius: var(--radius-pill); cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.ent-link:hover { background: var(--mint); border-color: var(--mint); color: #ffffff; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0, 137, 123, 0.22); }
 
 /* ───────────────────────── Animación de entrada ───────────────────────── */
 @keyframes cc-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }

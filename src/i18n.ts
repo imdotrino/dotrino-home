@@ -36,6 +36,7 @@ export const messages = {
       open: 'Abrir aplicación',
       download: 'Descargar APK',
       fullHome: '¿Qué es Dotrino?',
+      fullHomeEnterprise: '¿Qué es Dotrino Enterprise?',
       info: 'Ver descripción',
       close: 'Cerrar',
       requestTitle: 'Solicita o recomienda una aplicación',
@@ -61,6 +62,29 @@ export const messages = {
     service: {
       title: 'Cómo funciona',
       text: 'Esto es lo que las apps de Dotrino hacen por ti mientras las usas.',
+    },
+    /* Vista /enterprise ("¿Qué es Dotrino Enterprise?"): el mismo ecosistema
+       puesto al servicio de la privacidad de una empresa. Los bloques de la
+       página (por qué ahora + qué incluye) viven en ./data/content.ts. */
+    enterprise: {
+      eyebrow: '// tus claves · tus servidores · tus reglas',
+      subtitle:
+        'Dotrino Enterprise es el ecosistema puesto al servicio de la privacidad de una empresa: las claves y la información sensible dejan de andar repartidas, cambiar una clave toma minutos y todo funciona en los servidores de la empresa.',
+      manifestoStrong: 'Nada que no deba salir sale.',
+      manifestoRest:
+        ' Las claves de tu empresa viven en un equipo que tú eliges y se abren solo donde autorizaste. Cada permiso lo das tú, queda anotado con su fecha y lo retiras desde un solo lugar. La arquitectura existe para que eso sea literal y no una promesa.',
+      cta: 'Habla con nosotros',
+      whyNow: {
+        title: 'Por qué ahora',
+        intro: 'Las herramientas de inteligencia artificial cambiaron dos cosas del entorno en el que trabaja cualquier empresa.',
+      },
+      sectionTitle: 'Qué incluye',
+      sectionText: 'Las piezas del ecosistema, puestas a trabajar para una empresa.',
+      response: 'Con Dotrino Enterprise',
+      limit: {
+        title: 'El límite, dicho en voz alta',
+        text: 'La llave que manda vive en un equipo tuyo y no hay una copia nuestra: no existe frase de recuperación ni respaldo en nuestras manos, así que si se pierde ese equipo, esa cuenta no vuelve. Preferimos decirlo antes que prometer un rescate que no existe; cómo resguardarlo es parte de la conversación.',
+      },
     },
     footer: {
       title: 'La filosofía Dotrino',
@@ -96,6 +120,7 @@ export const messages = {
       open: 'Open app',
       download: 'Download APK',
       fullHome: 'What is Dotrino?',
+      fullHomeEnterprise: 'What is Dotrino Enterprise?',
       info: 'View description',
       close: 'Close',
       requestTitle: 'Request or recommend an app',
@@ -121,6 +146,29 @@ export const messages = {
     service: {
       title: 'How it works',
       text: 'This is what Dotrino’s apps do for you while you use them.',
+    },
+    /* /enterprise view ("What is Dotrino Enterprise?"): the same ecosystem, put
+       to work for a company's privacy. The page blocks (why now + what's
+       included) live in ./data/content.ts. */
+    enterprise: {
+      eyebrow: '// your keys · your servers · your rules',
+      subtitle:
+        'Dotrino Enterprise is the ecosystem put to work for a company’s privacy: keys and sensitive information stop being scattered around, changing a key takes minutes, and everything runs on the company’s own servers.',
+      manifestoStrong: 'Nothing that should stay in, gets out.',
+      manifestoRest:
+        ' Your company’s keys live on a machine you choose and open only where you authorised them. Every permission is granted by you, is recorded with its date, and is withdrawn from a single place. The architecture exists so that this is literal, not a promise.',
+      cta: 'Talk to us',
+      whyNow: {
+        title: 'Why now',
+        intro: 'AI tools changed two things about the environment every company works in.',
+      },
+      sectionTitle: 'What’s included',
+      sectionText: 'The pieces of the ecosystem, put to work for a company.',
+      response: 'With Dotrino Enterprise',
+      limit: {
+        title: 'The limit, said out loud',
+        text: 'The key that rules lives on a machine of yours and we hold no copy of it: there is no recovery phrase and no backup in our hands, so if that machine is lost, that account does not come back. We would rather say so than promise a rescue that does not exist; how to safeguard it is part of the conversation.',
+      },
     },
     footer: {
       title: 'The Dotrino philosophy',

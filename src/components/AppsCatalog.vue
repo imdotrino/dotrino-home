@@ -5,7 +5,7 @@ import { apps, defaultRecentApps, type AppEntry, type SubKey } from '../data/app
 import { recents, loadRecents } from '../recents'
 
 const props = defineProps<{ locale: Locale }>()
-defineEmits<{ info: [app: AppEntry]; about: [] }>()
+defineEmits<{ info: [app: AppEntry]; about: []; enterprise: [] }>()
 const t = computed(() => messages[props.locale])
 
 /* "Recientes" reemplaza a "Todas": lista las apps abiertas, más recientes
@@ -141,7 +141,12 @@ function submitRequest() {
       <h2 class="section-title">{{ t.apps.title }}</h2>
       <p class="section-text">{{ t.apps.text }}</p>
 
-      <button @click="$emit('about')" class="full-home-button">{{ t.apps.fullHome }}</button>
+      <!-- Las dos puertas de entrada a la info completa: el ecosistema personal
+           (/que-es) y el de empresa (/enterprise). -->
+      <div class="home-buttons">
+        <button @click="$emit('about')" class="full-home-button">{{ t.apps.fullHome }}</button>
+        <button @click="$emit('enterprise')" class="full-home-button enterprise">{{ t.apps.fullHomeEnterprise }}</button>
+      </div>
 
       <form class="app-request" @submit.prevent="submitRequest">
         <label class="app-request-label" for="app-request-input">{{ t.apps.requestTitle }}</label>
@@ -234,13 +239,19 @@ function submitRequest() {
 .aplicaciones-section.apps-only .app-card { padding: 1.6rem 1rem; gap: 0.85rem; }
 .aplicaciones-section.apps-only .apps-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.1rem; }
 
+/* Las dos puertas a la info completa, en una fila que se parte en móvil. */
+.home-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; margin: 0 auto 1.6rem; }
 .full-home-button {
-  display: flex; align-items: center; width: fit-content; margin: 0 auto 1.6rem; background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; width: fit-content; background: var(--accent-soft); color: var(--accent);
   border: 1px solid transparent; padding: 0.7rem 1.8rem; font-family: var(--font-body);
   font-size: 0.95rem; font-weight: 700; border-radius: var(--radius-pill); cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 .full-home-button:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(var(--accent-rgb), 0.22); }
+/* Variante Enterprise: misma pastilla, hue menta, para que se lea como la otra
+   línea del ecosistema (empresa) y no como el mismo destino. */
+.full-home-button.enterprise { background: rgba(0, 137, 123, 0.10); color: var(--mint); }
+.full-home-button.enterprise:hover { background: var(--mint); border-color: var(--mint); color: #ffffff; box-shadow: 0 12px 28px rgba(0, 137, 123, 0.22); }
 
 /* ───────────────────────── Tabs ───────────────────────── */
 .apps-tabs {

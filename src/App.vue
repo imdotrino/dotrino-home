@@ -4,6 +4,7 @@ import { detectLocale, LANG_KEY, type Locale } from './i18n'
 import type { AppEntry } from './data/apps'
 import SiteNav from './components/SiteNav.vue'
 import AboutSections from './components/AboutSections.vue'
+import EnterpriseSections from './components/EnterpriseSections.vue'
 import AppsCatalog from './components/AppsCatalog.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import InfoModal from './components/InfoModal.vue'
@@ -12,10 +13,10 @@ import { useBackLayer } from '@dotrino/nav/vue'
 import { Identity } from '@dotrino/identity'
 import { createVaultReputation } from '@dotrino/reputation'
 
-/* App.vue es la cáscara: idioma, routing home↔/que-es, capas de "volver" y el
-   perfil del ecosistema. El contenido vive en componentes (SiteNav,
-   AboutSections, AppsCatalog, SiteFooter, InfoModal) y los datos/i18n en
-   módulos (./i18n, ./data/*, ./recents). */
+/* App.vue es la cáscara: idioma, routing home↔/que-es↔/enterprise, capas de
+   "volver" y el perfil del ecosistema. El contenido vive en componentes (SiteNav,
+   AboutSections, EnterpriseSections, AppsCatalog, SiteFooter, InfoModal) y los
+   datos/i18n en módulos (./i18n, ./data/*, ./recents). */
 
 /* ---------------- Idioma (ES / EN) ---------------- */
 const locale = ref<Locale>(detectLocale())
@@ -30,25 +31,35 @@ watch(
 
 const menuOpen = ref(false)
 
-/* ---------------- Vistas: home (apps) ↔ "¿Qué es Dotrino?" ----------------
-   home = página simplificada (root oficial '/', solo apps); about = '/que-es',
-   toda la info del home sin la sección de apps. La vista about tiene URL propia
-   enlazable e indexable; `aboutOpen` se registra como capa de dotrino-nav
-   con { url } para reflejar la ruta (ver useBackLayer abajo). */
-const ABOUT_PATH = '/que-es'
-// Vista inicial derivada de la URL (deep-link directo a /que-es, p. ej. desde la
-// versión estática que-es.html que sirve GitHub Pages con 200; acepta también
-// /que-es.html y barra final).
-const aboutOpen = ref(/\/que-es(\.html)?\/?$/.test(window.location.pathname))
-const compact = computed(() => !aboutOpen.value)
+/* ---------------- Vistas: home (apps) ↔ "¿Qué es Dotrino?" / Enterprise -------
+   home = página simplificada (root oficial '/', solo apps); las dos SUBVISTAS
+   ('about' = /que-es y 'enterprise' = /enterprise) son la info completa sin el
+   catálogo. Cada subvista tiene URL propia enlazable e indexable: se registra UNA
+   capa de dotrino-nav mientras haya subvista abierta, con { url } derivada de la
+   subvista activa (ver useBackLayer abajo). */
+type SubView = 'about' | 'enterprise'
+const VIEW_PATH: Record<SubView, string> = { about: '/que-es', enterprise: '/enterprise' }
+const VIEW_TITLE: Record<SubView, string> = {
+  about: '¿Qué es Dotrino? — Filosofía y arquitectura',
+  enterprise: '¿Qué es Dotrino Enterprise? — La privacidad de tu empresa',
+}
+const HOME_TITLE = 'Dotrino - Ecosistema de Aplicaciones'
+
+// Vista inicial derivada de la URL (deep-link directo a /que-es o /enterprise,
+// p. ej. desde las versiones estáticas que-es.html / enterprise.html que sirve
+// GitHub Pages con 200; acepta también la extensión y la barra final).
+const viewFromPath = (path: string): SubView | null =>
+  /\/que-es(\.html)?\/?$/.test(path) ? 'about'
+    : /\/enterprise(\.html)?\/?$/.test(path) ? 'enterprise'
+      : null
+
+const subview = ref<SubView | null>(viewFromPath(window.location.pathname))
+const compact = computed(() => subview.value === null)
 
 // Mantén el <title> acorde a la vista en navegación cliente (los títulos de la
-// carga inicial los ponen index.html / que-es.html, ya correctos para crawlers).
-watch(aboutOpen, (open) => {
-  document.title = open
-    ? '¿Qué es Dotrino? — Filosofía y arquitectura'
-    : 'Dotrino - Ecosistema de Aplicaciones'
-})
+// carga inicial los ponen index.html / que-es.html / enterprise.html, ya
+// correctos para crawlers).
+watch(subview, (v) => { document.title = v ? VIEW_TITLE[v] : HOME_TITLE })
 
 /* ---------------- Modal de info de cada app ---------------- */
 const infoApp = ref<AppEntry | null>(null)
@@ -138,29 +149,41 @@ const profileTheme = {
 
 /* ---------------- Volver unificado (@dotrino/nav) ----------------
    El botón físico / chevron cierra el modal de info o el menú móvil, luego la
-   vista "¿Qué es Dotrino?" (vuelve a la página de apps), y solo después
-   abandona el sitio. */
+   subvista abierta ("¿Qué es Dotrino?" / Enterprise → vuelve a la página de
+   apps), y solo después abandona el sitio.
+   La subvista es UNA sola capa (no una por vista): pasar de una a la otra deja la
+   capa abierta y solo cambia su URL (ver navTo), así el volver siempre aterriza en
+   el catálogo y no encadena entradas de history. */
 useBackLayer(infoApp, { onClose: () => { infoApp.value = null } })
 useBackLayer(menuOpen)
-useBackLayer(aboutOpen, { url: ABOUT_PATH })
+useBackLayer(subview, {
+  url: () => VIEW_PATH[subview.value as SubView],
+  onClose: () => { subview.value = null },
+})
 // El modal de perfil registra su PROPIA capa de "volver" dentro del topbar (dueño
 // del modal); aquí solo reflejamos su estado abierto en hasBack (chevron visible).
 useBackLayer(contactOpen, { onClose: () => { contactOpen.value = false } })
 
 // dotrino.com es el root del ecosistema: el chevron solo aparece cuando hay
-// algo "atrás" (vista /que-es o un modal/menú abierto).
-const hasBack = computed(() => !!(aboutOpen.value || infoApp.value || menuOpen.value || profileModalOpen.value || contactOpen.value))
+// algo "atrás" (una subvista /que-es · /enterprise o un modal/menú abierto).
+const hasBack = computed(() => !!(subview.value || infoApp.value || menuOpen.value || profileModalOpen.value || contactOpen.value))
 
 /* ---------------- Navegación entre vistas ----------------
-   El cambio de vista y la URL los gestiona la capa de back (aboutOpen + { url });
+   El cambio de vista y la URL los gestiona la capa de back (subview + { url });
    al volver a home con una capa abierta, dotrino-nav restaura la URL solo.
-   El replaceState es la red de seguridad del deep-link directo a /que-es (donde
-   no hay capa que cerrar) para que la barra vuelva a '/'. */
-const navTo = (target: 'home' | 'about', sectionId?: string) => {
+   Dos casos que la capa NO cubre y resuelve el replaceState:
+   · subvista → subvista: la capa sigue abierta (no se reabre), así que su URL se
+     corrige en el sitio, sin encadenar otra entrada de history.
+   · deep-link directo a /que-es · /enterprise → home: no hay capa que cerrar
+     (nació abierta), así que la barra vuelve a '/' a mano. */
+const navTo = (target: 'home' | SubView, sectionId?: string) => {
   menuOpen.value = false
-  const wasAbout = aboutOpen.value
-  aboutOpen.value = target === 'about'
-  if (target === 'home' && wasAbout && window.location.pathname !== '/') {
+  const prev = subview.value
+  const next = target === 'home' ? null : target
+  subview.value = next
+  if (next && prev) {
+    window.history.replaceState(window.history.state, '', VIEW_PATH[next])
+  } else if (!next && prev && window.location.pathname !== '/') {
     window.history.replaceState(window.history.state, '', '/')
   }
   requestAnimationFrame(() => {
@@ -170,6 +193,7 @@ const navTo = (target: 'home' | 'about', sectionId?: string) => {
   })
 }
 const showFullHome = () => navTo('about')
+const showEnterprise = () => navTo('enterprise')
 const scrollToSection = (sectionId: string) => {
   if (sectionId === 'aplicaciones') navTo('home', 'aplicaciones')
   else navTo('about', sectionId)
@@ -193,10 +217,28 @@ const scrollToSection = (sectionId: string) => {
       @profile-close="onProfileClose"
     />
 
-    <AboutSections v-if="!compact" :locale="locale" @navigate="scrollToSection" />
+    <AboutSections
+      v-if="subview === 'about'"
+      :locale="locale"
+      @navigate="scrollToSection"
+      @enterprise="showEnterprise"
+    />
+
+    <EnterpriseSections
+      v-else-if="subview === 'enterprise'"
+      :locale="locale"
+      @contact="openContact"
+      @about="showFullHome"
+    />
 
     <div v-if="compact" class="compact-spacer"></div>
-    <AppsCatalog v-if="compact" :locale="locale" @info="openInfo" @about="showFullHome" />
+    <AppsCatalog
+      v-if="compact"
+      :locale="locale"
+      @info="openInfo"
+      @about="showFullHome"
+      @enterprise="showEnterprise"
+    />
 
     <SiteFooter :locale="locale" />
 

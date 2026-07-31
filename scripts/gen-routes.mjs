@@ -23,6 +23,14 @@ const routes = [
     description:
       'Qué es Dotrino: un ecosistema de apps autohosteadas que comparten identidad, transporte y almacenamiento. Tu información, en tu servidor, bajo tus reglas.',
   },
+  {
+    file: 'enterprise.html',
+    canonical: `${ORIGIN}/enterprise`,
+    title: '¿Qué es Dotrino Enterprise? — La privacidad de tu empresa',
+    ogTitle: 'Dotrino Enterprise',
+    description:
+      'Dotrino Enterprise: las claves de tu empresa en un solo sitio, cambiarlas toma minutos y todo funciona en tus propios servidores. Nada que no deba salir sale.',
+  },
 ]
 
 const indexHtml = await readFile(resolve(dist, 'index.html'), 'utf8')
@@ -55,9 +63,10 @@ for (const r of routes) {
     `$1${r.canonical}$2`,
   )
   html = setMeta(html, 'property', 'og:url', r.canonical)
-  // JSON-LD url (la primera ocurrencia del WebApplication.url)
+  // JSON-LD url (la primera ocurrencia = WebApplication.url; la segunda es la
+  // del publisher Organization y debe seguir apuntando al home).
   html = html.replace(
-    /("url":\s*")https:\/\/closer\.click\/(")/,
+    /("url":\s*")https:\/\/dotrino\.com\/(")/,
     `$1${r.canonical}$2`,
   )
 
