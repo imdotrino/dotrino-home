@@ -288,8 +288,10 @@ function submitRequest() {
 .full-home-button.enterprise:hover { background: var(--mint); border-color: var(--mint); color: #ffffff; box-shadow: 0 12px 28px rgba(0, 137, 123, 0.22); }
 
 /* ─────────── Línea del ecosistema (personal / empresa) ─────────── */
+/* `flex` + `width: fit-content` (no `inline-flex`): así ocupa su propia fila y
+   el bloque de tabs cae DEBAJO, no al lado. */
 .apps-lines {
-  display: inline-flex; gap: 0.25rem; margin: 2.2rem auto 0; padding: 0.3rem;
+  display: flex; width: fit-content; gap: 0.25rem; margin: 2.2rem auto 0; padding: 0.3rem;
   background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-pill);
 }
 .apps-line {
@@ -303,8 +305,8 @@ function submitRequest() {
 
 /* ───────────────────────── Tabs ───────────────────────── */
 .apps-tabs {
-  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem;
-  margin: 2.2rem auto 0; padding: 0.35rem;
+  display: flex; width: fit-content; max-width: 100%; flex-wrap: wrap; justify-content: center; gap: 0.25rem;
+  margin: 1rem auto 0; padding: 0.35rem;
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
   box-shadow: 0 10px 30px rgba(74, 85, 96, 0.05);
 }
