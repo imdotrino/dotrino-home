@@ -414,7 +414,6 @@ export const apps: AppEntry[] = [
     logo: middlebotLogo,
     repo: 'imdotrino/dotrino-middlebot',
     cat: 'developers',
-    wip: true,
     desc: {
       es: 'Controla que <strong>no salga información sensible de tu empresa</strong> dentro de una pregunta a una inteligencia artificial. El asistente trabaja en tu computadora y no le habla directo a ninguna IA: lo que preguntas pasa antes por una máquina que tú designas, que tacha lo sensible, pregunta cuando hay dudas y deja constancia. Sin cuentas, sin rastreo.',
       en: 'Keeps <strong>your company\'s sensitive information from leaving</strong> inside a question to an artificial intelligence. The assistant works on your computer and never talks straight to an AI: what you ask goes first through a machine you designate, which blanks out the sensitive parts, asks when in doubt and keeps a record. No accounts, no tracking.',
