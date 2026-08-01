@@ -110,8 +110,8 @@ const FEEDBACK_URL = import.meta.env.VITE_FEEDBACK_URL || 'https://feedback.dotr
 const reqText = ref('')
 const reqState = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
-// Provistos por App.vue: exigir apodo (abre el perfil si falta) + leer mi identidad.
-const ensureNick = inject<((run: () => void) => void) | null>('ensureNick', null)
+/* Identidad OPCIONAL: si hay apodo, la solicitud viaja firmada; si no, anónima.
+   NO se exige apodo (mandaba al visitante a profile.dotrino.com sin enviar). */
 type MyId = { pubkey: string; nickname: string; signData?: (d: unknown) => Promise<unknown> }
 const getMyIdentity = inject<(() => Promise<MyId>) | null>('getMyIdentity', null)
 
@@ -151,9 +151,7 @@ async function doSendRequest() {
 function submitRequest() {
   const text = reqText.value.trim()
   if (!text || reqState.value === 'sending' || reqState.value === 'sent') return
-  // Enviar firma con tu identidad → exige apodo; si falta, abre el perfil (popup).
-  if (ensureNick) ensureNick(() => { doSendRequest() })
-  else doSendRequest()
+  doSendRequest()
 }
 </script>
 

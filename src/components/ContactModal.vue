@@ -25,8 +25,9 @@ const phone = ref('')
 const message = ref('')
 const state = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
-// Provistos por App.vue (igual que AppsCatalog): exigir apodo + leer identidad.
-const ensureNick = inject<((run: () => void) => void) | null>('ensureNick', null)
+/* Identidad OPCIONAL (provista por App.vue): si hay apodo, el mensaje viaja
+   firmado; si no, se envía anónimo. NO se exige apodo: este es un formulario
+   público y pedirlo mandaba al visitante a profile.dotrino.com sin enviar nada. */
 type MyId = { pubkey: string; nickname: string; signData?: (d: unknown) => Promise<unknown> }
 const getMyIdentity = inject<(() => Promise<MyId>) | null>('getMyIdentity', null)
 
@@ -79,8 +80,7 @@ async function doSend() {
 
 function submit() {
   if (!canSend.value) return
-  if (ensureNick) ensureNick(() => { doSend() })
-  else doSend()
+  doSend()
 }
 </script>
 
