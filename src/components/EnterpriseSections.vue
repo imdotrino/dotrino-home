@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { messages, type Locale } from '../i18n'
-import { enterpriseWhyNow, enterpriseItems } from '../data/content'
+import { enterpriseWhyNow, enterpriseItems, enterpriseWhyNowWiki, enterpriseWiki } from '../data/content'
+import { wikiUrl, wikiTitles } from '../wiki'
 
 /* Vista /enterprise ("¿Qué es Dotrino Enterprise?"): la hermana de
    AboutSections para el ecosistema puesto al servicio de una empresa. Misma
@@ -15,6 +16,9 @@ const t = computed(() => messages[props.locale])
 const e = computed(() => messages[props.locale].enterprise)
 const shifts = computed(() => enterpriseWhyNow[props.locale])
 const items = computed(() => enterpriseItems[props.locale])
+// El home no documenta: cada bloque enlaza a SU página del wiki (§9.2).
+const titles = computed(() => wikiTitles[props.locale])
+const wiki = (slug: string) => wikiUrl(slug, props.locale)
 </script>
 
 <template>
@@ -28,6 +32,9 @@ const items = computed(() => enterpriseItems[props.locale])
         <strong>{{ e.manifestoStrong }}</strong>{{ e.manifestoRest }}
       </p>
       <button @click="$emit('contact')" class="cta-button">{{ e.cta }}</button>
+      <p class="wiki-link hero-wiki">
+        <a :href="wiki('empresa/que-es')" rel="noopener">{{ titles['empresa/que-es'] }} →</a>
+      </p>
     </div>
   </section>
 
@@ -40,6 +47,9 @@ const items = computed(() => enterpriseItems[props.locale])
           <h3>{{ s.h }}</h3>
           <p>{{ s.p }}</p>
           <p class="shift-response"><span>{{ e.response }}</span>{{ s.response }}</p>
+          <p v-if="enterpriseWhyNowWiki[i]" class="wiki-link">
+            <a :href="wiki(enterpriseWhyNowWiki[i])" rel="noopener">{{ titles[enterpriseWhyNowWiki[i]] }} →</a>
+          </p>
         </div>
       </div>
     </div>
@@ -53,8 +63,16 @@ const items = computed(() => enterpriseItems[props.locale])
         <div class="ent-item" v-for="(item, i) in items" :key="i">
           <h3>{{ item.h }}</h3>
           <p>{{ item.p }}</p>
+          <p v-if="enterpriseWiki[i]" class="wiki-link">
+            <a :href="wiki(enterpriseWiki[i])" rel="noopener">{{ titles[enterpriseWiki[i]] }} →</a>
+          </p>
         </div>
       </div>
+
+      <p class="wiki-link section-wiki">
+        <a :href="wiki('empresa/como-empezar')" rel="noopener">{{ titles['empresa/como-empezar'] }} →</a>
+        <a :href="wiki('vault/instalacion')" rel="noopener">{{ titles['vault/instalacion'] }} →</a>
+      </p>
 
       <div class="ent-close">
         <button @click="$emit('contact')" class="cta-button">{{ e.cta }}</button>
@@ -65,6 +83,13 @@ const items = computed(() => enterpriseItems[props.locale])
 </template>
 
 <style scoped>
+/* Enlaces al wiki: uno por bloque, en el acento menta de la línea de empresa (§9.2). */
+.wiki-link { margin-top: 0.9rem; font-size: 0.88rem; }
+.wiki-link a { color: var(--mint); text-decoration: none; font-weight: 600; }
+.wiki-link a:hover { text-decoration: underline; }
+.hero-wiki { margin-top: 1.6rem; }
+.section-wiki { margin-top: 2rem; display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; }
+
 /* ───────────────────────── Hero (vista /enterprise) ─────────────────────────
    Mismo hero que /que-es (ver AboutSections.vue) con dos diferencias: el
    eyebrow es un elemento real (no ::before) porque su texto es bilingüe, y el

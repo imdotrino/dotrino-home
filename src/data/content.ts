@@ -33,6 +33,18 @@ export const serviceItems: Record<Locale, Feature[]> = {
   ],
 }
 
+/* Página del wiki que amplía cada punto de "Cómo funciona" (mismo índice que
+   serviceItems, en los dos idiomas). El home no documenta: enlaza — la etiqueta
+   del enlace es el título real de la página (ver ../wiki.ts, CONVENCIONES §9.2). */
+export const serviceWiki: string[] = [
+  'empezar/instalar-apps',
+  'empezar/como-viaja',
+  'empezar/como-viaja',
+  'empezar/identidad',
+  'empezar/identidad',
+  'empezar/privacidad',
+]
+
 /* ── Vista /enterprise ─────────────────────────────────────────────────────
    "Por qué ahora": el cambio del entorno que motiva Dotrino Enterprise. Se
    describe el FENÓMENO y su velocidad, nunca a un actor (regla de villanos,
@@ -98,3 +110,21 @@ export const enterpriseItems: Record<Locale, Feature[]> = {
     { h: 'What you ask the AI', p: 'Every question your people ask an artificial intelligence goes first through a machine of yours, which blanks out whatever your rules mark as sensitive, asks when in doubt, and records what left and when. The key to the service stays in one place, not spread across the team’s computers.' },
   ],
 }
+
+/* Páginas del wiki para /enterprise: una por bloque de "Por qué ahora" y una por
+   punto de "Qué incluye" (mismo índice). Cadena vacía = ese punto todavía no
+   tiene página en el wiki, y entonces no se pinta enlace. */
+export const enterpriseWhyNowWiki: string[] = [
+  'empresa/que-es',
+  'vault/aprobacion',
+]
+
+export const enterpriseWiki: string[] = [
+  'vault/secretos',
+  'vault/secretos',
+  'vault/instalacion',
+  'vault/seguridad',
+  'vault/emparejar',
+  'desarrollo/contribuir',
+  '',
+]

@@ -3,10 +3,14 @@ import { ref, computed, onMounted, inject } from 'vue'
 import { messages, type Locale } from '../i18n'
 import { apps, defaultRecentApps, inLine, type AppEntry, type Line, type SubKey } from '../data/apps'
 import { recents, loadRecents } from '../recents'
+import { wikiUrl, wikiTitles } from '../wiki'
 
 const props = defineProps<{ locale: Locale }>()
 defineEmits<{ info: [app: AppEntry]; about: []; enterprise: [] }>()
 const t = computed(() => messages[props.locale])
+// El home no documenta: enlaza a la página del wiki que explica cómo instalarlas (§9.2).
+const titles = computed(() => wikiTitles[props.locale])
+const wiki = (slug: string) => wikiUrl(slug, props.locale)
 
 /* "Recientes" reemplaza a "Todas": lista las apps abiertas, más recientes
    primero. El conteo es CROSS-APP y vive en el store compartido (lo escribe
@@ -160,6 +164,9 @@ function submitRequest() {
     <div class="section-content">
       <h2 class="section-title">{{ t.apps.title }}</h2>
       <p class="section-text">{{ t.apps.text }}</p>
+      <p class="wiki-link">
+        <a :href="wiki('empezar/instalar-apps')" rel="noopener">{{ titles['empezar/instalar-apps'] }} →</a>
+      </p>
 
       <!-- Las dos puertas de entrada a la info completa: el ecosistema personal
            (/que-es) y el de empresa (/enterprise). -->
@@ -261,6 +268,11 @@ function submitRequest() {
 </template>
 
 <style scoped>
+/* Enlace al wiki (§9.2): el catálogo presenta; el cómo se instala se cuenta allá. */
+.wiki-link { margin-top: 0.6rem; font-size: 0.88rem; text-align: center; }
+.wiki-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.wiki-link a:hover { text-decoration: underline; }
+
 .aplicaciones-section { padding-top: 7rem; }
 
 /* Modo compacto (home /): solo logo + nombre. */

@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { messages, type Locale } from '../i18n'
-import { serviceItems } from '../data/content'
+import { serviceItems, serviceWiki } from '../data/content'
+import { wikiUrl, wikiTitles } from '../wiki'
 
 const props = defineProps<{ locale: Locale }>()
 defineEmits<{ navigate: [sectionId: string]; enterprise: [] }>()
 const t = computed(() => messages[props.locale])
 const service = computed(() => serviceItems[props.locale])
+// El home no documenta: cada punto enlaza a SU página del wiki, con el título real.
+const titles = computed(() => wikiTitles[props.locale])
+const wiki = (slug: string) => wikiUrl(slug, props.locale)
 </script>
 
 <template>
@@ -21,6 +25,9 @@ const service = computed(() => serviceItems[props.locale])
       <button @click="$emit('navigate', 'aplicaciones')" class="cta-button">
         {{ t.hero.cta }}
       </button>
+      <p class="wiki-link hero-wiki">
+        <a :href="wiki('empezar/privacidad')" rel="noopener">{{ titles['empezar/privacidad'] }} →</a>
+      </p>
     </div>
   </section>
 
@@ -32,8 +39,17 @@ const service = computed(() => serviceItems[props.locale])
         <div class="service-item" v-for="(item, i) in service" :key="i">
           <h3>{{ item.h }}</h3>
           <p v-html="item.p"></p>
+          <p v-if="serviceWiki[i]" class="wiki-link">
+            <a :href="wiki(serviceWiki[i])" rel="noopener">{{ titles[serviceWiki[i]] }} →</a>
+          </p>
         </div>
       </div>
+
+      <!-- El detalle vive en el wiki (§9.2): el home enlaza, no documenta. -->
+      <p class="wiki-link section-wiki">
+        <a :href="wiki('empezar/instalar-apps')" rel="noopener">{{ titles['empezar/instalar-apps'] }} →</a>
+        <a :href="wiki('empezar/identidad')" rel="noopener">{{ titles['empezar/identidad'] }} →</a>
+      </p>
 
       <!-- Puerta a la línea de empresa (simétrica al enlace de vuelta que trae
            EnterpriseSections). -->
@@ -89,6 +105,13 @@ const service = computed(() => serviceItems[props.locale])
 .service-item:hover { border-color: var(--line-2); transform: translateY(-3px); }
 .service-item h3 { font-family: var(--font-display); font-weight: 700; color: var(--mint); margin-bottom: 0.7rem; font-size: 1.18rem; }
 .service-item p { line-height: 1.6; color: var(--text-dim); font-size: 0.95rem; }
+
+/* Enlaces al wiki: discretos, en el acento del sitio, uno por bloque (§9.2). */
+.wiki-link { margin-top: 0.9rem; font-size: 0.88rem; }
+.wiki-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.wiki-link a:hover { text-decoration: underline; }
+.hero-wiki { margin-top: 1.6rem; }
+.section-wiki { margin-top: 2rem; display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; }
 
 /* Enlace a /enterprise: pastilla menta discreta (el hue de la línea de empresa). */
 .ent-link {

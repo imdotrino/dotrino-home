@@ -16,6 +16,8 @@ const emit = defineEmits<{
 }>()
 
 const t = computed(() => messages[locale.value])
+// Wiki del ecosistema (wiki.dotrino.com), en el idioma activo.
+const wikiHome = computed(() => (locale.value === 'en' ? 'https://wiki.dotrino.com/en/' : 'https://wiki.dotrino.com/'))
 
 // Ref al elemento del topbar → le seteamos identity/reputation/tema (propiedades
 // JS) y desde App.vue se llama openProfile(editable) para el onboarding del apodo.
@@ -68,6 +70,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       <div class="nav-links desktop-links">
         <a @click="emit('navigate', 'aplicaciones')" class="nav-link">{{ t.nav.apps }}</a>
         <a @click="emit('navigate', 'servicio')" class="nav-link">{{ t.nav.service }}</a>
+        <!-- La documentación del ecosistema vive en el wiki, no en el home (§9.2). -->
+        <a :href="wikiHome" rel="noopener" class="nav-link">{{ t.nav.wiki }}</a>
         <a @click="emit('contact')" class="nav-link">{{ t.contact.link }}</a>
       </div>
 

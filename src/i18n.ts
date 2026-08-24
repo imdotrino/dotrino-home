@@ -13,7 +13,7 @@ export const detectLocale = (): Locale => {
 export const messages = {
   es: {
     htmlLang: 'es',
-    nav: { apps: 'Aplicaciones', service: 'Cómo funciona', install: 'Instalar App', profile: 'Mi perfil' },
+    nav: { apps: 'Aplicaciones', service: 'Cómo funciona', wiki: 'Wiki', install: 'Instalar App', profile: 'Mi perfil' },
     tabs: { recientes: 'Recientes', social: 'Social', apps: 'Herramientas', deportes: 'Deportes', juegos: 'Juegos', android: 'Android', wip: 'En Desarrollo', developers: 'Developers' },
     lines: { label: 'Personal o empresa', personal: 'Personal', enterprise: 'Empresa' },
     subtabs: { solo: 'Un jugador', multi: 'Multijugador', config: 'Configurables' },
@@ -94,7 +94,7 @@ export const messages = {
   },
   en: {
     htmlLang: 'en',
-    nav: { apps: 'Applications', service: 'How it works', install: 'Install App', profile: 'My profile' },
+    nav: { apps: 'Applications', service: 'How it works', wiki: 'Wiki', install: 'Install App', profile: 'My profile' },
     tabs: { recientes: 'Recent', social: 'Social', apps: 'Tools', deportes: 'Sports', juegos: 'Games', android: 'Android', wip: 'In Development', developers: 'Developers' },
     lines: { label: 'Personal or business', personal: 'Personal', enterprise: 'Business' },
     subtabs: { solo: 'Single player', multi: 'Multiplayer', config: 'Configurable' },
