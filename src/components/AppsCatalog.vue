@@ -20,16 +20,25 @@ const wiki = (slug: string) => wikiUrl(slug, props.locale)
 type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers'
 const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers']
 
+/* Tab de entrada cuando NO hay historial: "Herramientas" (Tools), que es donde
+   está la bóveda. Quien llega de cero no tiene recientes de verdad —lo que vería
+   es una selección de muestra—, así que la primera pantalla se dedica a lo que
+   sostiene el ecosistema en vez de a un listado inventado. Con historial real
+   manda "Recientes", como siempre. */
+const TAB_SIN_HISTORIAL: TabKey = 'apps'
+
 // Recuerda el tab elegido SOLO dentro de la sesión de la pestaña (sessionStorage):
-// sobrevive al refresco, pero al cerrar la pestaña vuelve a "recientes".
+// sobrevive al refresco, pero al cerrar la pestaña vuelve al de entrada.
 const TAB_STORE_KEY = 'dotrino-home:tab'
 const storedTab = (() => {
   try {
     const v = sessionStorage.getItem(TAB_STORE_KEY)
-    return v && (TAB_ORDER as string[]).includes(v) ? (v as TabKey) : 'recientes'
-  } catch { return 'recientes' as TabKey }
+    return v && (TAB_ORDER as string[]).includes(v) ? (v as TabKey) : null
+  } catch { return null }
 })()
-const activeTab = ref<TabKey>(storedTab)
+// Sin tab elegido en esta sesión se entra por Herramientas; si al leer el store
+// aparece historial de verdad, se salta a "Recientes" (abajo, en onMounted).
+const activeTab = ref<TabKey>(storedTab ?? TAB_SIN_HISTORIAL)
 
 function setActiveTab(tab: TabKey) {
   activeTab.value = tab
@@ -58,20 +67,35 @@ function setActiveLine(line: Line) {
 // El store cuenta por id de app = hostname; mapeamos cada app.url a su hostname.
 const hostOf = (url: string): string => { try { return new URL(url).hostname } catch { return url } }
 
-onMounted(loadRecents)
-
-// Si el tab recordado ya no tiene apps (p. ej. se vació "wip"), cae a "recientes".
-onMounted(() => {
-  if (!visibleTabs.value.includes(activeTab.value)) activeTab.value = 'recientes'
+/* El store es asíncrono: se entra por Herramientas y, si resulta que el usuario
+   YA tiene apps abiertas, se pasa a "Recientes". Solo si no eligió tab en esta
+   sesión: una elección suya nunca se pisa. */
+onMounted(async () => {
+  await loadRecents()
+  if (!storedTab && hasRealRecents.value) activeTab.value = 'recientes'
 })
 
-const recentApps = computed<AppEntry[]>(() => {
+// Si el tab recordado ya no tiene apps (p. ej. se vació "wip"), cae al de entrada.
+onMounted(() => {
+  if (!visibleTabs.value.includes(activeTab.value)) activeTab.value = TAB_SIN_HISTORIAL
+})
+
+// Apps que el usuario abrió de verdad (las que el store recuerda y siguen en el
+// catálogo), más recientes primero. Vacío = no hay historial.
+const openedApps = computed<AppEntry[]>(() => {
   const map = recents.value
-  const opened = apps
+  return apps
     .filter((a) => map[hostOf(a.url)])
     .sort((a, b) => (map[hostOf(b.url)]?.ts ?? 0) - (map[hostOf(a.url)]?.ts ?? 0))
+})
+
+// Historial de verdad, ya filtrado por la línea activa: es lo que decide si la
+// entrada es "Recientes" o "Herramientas".
+const hasRealRecents = computed(() => openedApps.value.some((a) => inLine(a, activeLine.value)))
+
+const recentApps = computed<AppEntry[]>(() => {
   // Sin historial útil (vacío o solo apps que ya no existen) → selección inicial.
-  return opened.length ? opened : defaultRecentApps()
+  return openedApps.value.length ? openedApps.value : defaultRecentApps()
 })
 
 const tabApps = (tab: TabKey): AppEntry[] => {
