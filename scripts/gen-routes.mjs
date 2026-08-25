@@ -26,7 +26,7 @@ const routes = [
   {
     file: 'enterprise.html',
     canonical: `${ORIGIN}/enterprise`,
-    title: '¿Qué es Dotrino Enterprise? — La privacidad de tu empresa',
+    title: 'Dotrino Enterprise, Seguridad y Privacidad de tu Empresa',
     ogTitle: 'Dotrino Enterprise',
     description:
       'Dotrino Enterprise: las claves de tu empresa en un solo sitio, cambiarlas toma minutos y todo funciona en tus propios servidores. Nada que no deba salir sale.',
