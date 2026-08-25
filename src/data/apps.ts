@@ -36,6 +36,7 @@ import inspectorLogo from '../assets/apps/inspector.svg'
 import vaultLogo from '../assets/apps/vault.svg'
 import profileLogo from '../assets/apps/profile.svg'
 import reputationLogo from '../assets/apps/reputation.svg'
+import passmanagerLogo from '../assets/apps/passmanager.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -460,6 +461,18 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Guarda y comparte fotos, videos y archivos pesados desde <strong>tu propia computadora</strong>, sin subirlos a la nube de nadie. Entregas solo un enlace y el contenido viaja cifrado, directo de ti a quien lo abre. Sin anuncios, sin rastreo.',
       en: 'Store and share photos, videos and large files from <strong>your own computer</strong>, without uploading them to anyone\'s cloud. You hand out only a link and the content travels encrypted, straight from you to whoever opens it. No ads, no tracking.',
+    },
+  },
+  {
+    name: 'Contraseñas',
+    url: 'https://pass.dotrino.com/',
+    logo: passmanagerLogo,
+    repo: 'imdotrino/dotrino-passmanager',
+    cat: 'apps',
+    wip: true,
+    desc: {
+      es: 'Guarda tus contraseñas y tus códigos de dos pasos <strong>en tu propia bóveda</strong>, no en un servidor ajeno. Cuando entras a un sitio, el navegador recibe la contraseña de ese sitio y nada más — no una copia de todas. Trae lo que ya tienes desde otros gestores, y te la llevas cuando quieras.',
+      en: 'Keeps your passwords and two-step codes <strong>in your own vault</strong>, not on someone else\'s server. When you open a site, the browser gets that site\'s password and nothing else — not a copy of them all. Bring what you already have from other managers, and take it with you whenever you want.',
     },
   },
 ]
