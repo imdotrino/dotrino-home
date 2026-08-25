@@ -1,5 +1,8 @@
 /* i18n del home de Dotrino (ES / EN). Extraído de App.vue: la cáscara y
-   los componentes importan `messages` y derivan `t` desde el `locale` activo. */
+   los componentes importan `messages` y derivan `t` desde el `locale` activo.
+
+   El home es SOLO el catálogo: la copy de "¿Qué es Dotrino?" y de Enterprise se
+   mudó al wiki (CONVENCIONES §9.2) y aquí quedaron los enlaces. */
 
 export type Locale = 'es' | 'en'
 export const LANG_KEY = 'dotrino.lang'
@@ -13,7 +16,7 @@ export const detectLocale = (): Locale => {
 export const messages = {
   es: {
     htmlLang: 'es',
-    nav: { apps: 'Aplicaciones', service: 'Cómo funciona', wiki: 'Wiki', install: 'Instalar App', profile: 'Mi perfil' },
+    nav: { apps: 'Aplicaciones', wiki: 'Wiki', install: 'Instalar App', profile: 'Mi perfil' },
     tabs: { recientes: 'Recientes', social: 'Social', apps: 'Herramientas', deportes: 'Deportes', juegos: 'Juegos', android: 'Android', wip: 'En Desarrollo', developers: 'Developers' },
     lines: { label: 'Personal o empresa', personal: 'Personal', enterprise: 'Empresa' },
     subtabs: { solo: 'Un jugador', multi: 'Multijugador', config: 'Configurables' },
@@ -23,21 +26,11 @@ export const messages = {
     },
     langToggle: 'EN',
     langLabel: 'Cambiar idioma a inglés',
-    hero: {
-      subtitle:
-        'Dotrino es un ecosistema de aplicaciones centradas en la privacidad de tus datos: lo tuyo es tuyo, y tú decides qué compartes, con quién y cuándo.',
-      manifestoStrong: 'Tu información, en tu servidor, bajo tus reglas.',
-      manifestoRest:
-        ' Tus fotos, tus mensajes, tus archivos viven donde tú los pones, y puedes llevártelos, copiarlos o borrarlos el día que quieras. Y lo que no compartes no se mueve de ahí.',
-      cta: 'Descubre Más',
-    },
     apps: {
       title: 'Aplicaciones',
       text: 'Las aplicaciones del ecosistema. Todas hablan el mismo idioma, así que lo tuyo viaja de una a otra.',
       open: 'Abrir aplicación',
       download: 'Descargar APK',
-      fullHome: '¿Qué es Dotrino?',
-      fullHomeEnterprise: '¿Qué es Dotrino Enterprise?',
       info: 'Ver descripción',
       close: 'Cerrar',
       requestTitle: 'Solicita o recomienda una aplicación',
@@ -60,29 +53,6 @@ export const messages = {
       thanks: '¡Gracias! Recibimos tu mensaje.',
       error: 'No se pudo enviar. Inténtalo de nuevo.',
     },
-    service: {
-      title: 'Cómo funciona',
-      text: 'Esto es lo que las apps de Dotrino hacen por ti mientras las usas.',
-    },
-    /* Vista /enterprise ("¿Qué es Dotrino Enterprise?"): el mismo ecosistema
-       puesto al servicio de la privacidad de una empresa. Los bloques de la
-       página (por qué ahora + qué incluye) viven en ./data/content.ts. */
-    enterprise: {
-      eyebrow: '// tus claves · tus servidores · tus reglas',
-      subtitle:
-        'Dotrino Enterprise es el ecosistema puesto al servicio de la privacidad de una empresa: las claves y la información sensible dejan de andar repartidas, cambiar una clave toma minutos y todo funciona en los servidores de la empresa.',
-      manifestoStrong: 'Nada que no deba salir sale.',
-      manifestoRest:
-        ' Las claves de tu empresa viven en un equipo que tú eliges y se abren solo donde autorizaste. Cada permiso lo das tú, queda anotado con su fecha y lo retiras desde un solo lugar. La arquitectura existe para que eso sea literal y no una promesa.',
-      cta: 'Habla con nosotros',
-      whyNow: {
-        title: 'Por qué ahora',
-        intro: 'Las herramientas de inteligencia artificial cambiaron dos cosas del entorno en el que trabaja cualquier empresa.',
-      },
-      sectionTitle: 'Qué incluye',
-      sectionText: 'Las piezas del ecosistema, puestas a trabajar para una empresa.',
-      response: 'Con Dotrino Enterprise',
-    },
     footer: {
       title: 'La filosofía Dotrino',
       what: { h: 'Qué comparto', p: 'Solo la información que decido exponer, nada más.' },
@@ -94,7 +64,7 @@ export const messages = {
   },
   en: {
     htmlLang: 'en',
-    nav: { apps: 'Applications', service: 'How it works', wiki: 'Wiki', install: 'Install App', profile: 'My profile' },
+    nav: { apps: 'Applications', wiki: 'Wiki', install: 'Install App', profile: 'My profile' },
     tabs: { recientes: 'Recent', social: 'Social', apps: 'Tools', deportes: 'Sports', juegos: 'Games', android: 'Android', wip: 'In Development', developers: 'Developers' },
     lines: { label: 'Personal or business', personal: 'Personal', enterprise: 'Business' },
     subtabs: { solo: 'Single player', multi: 'Multiplayer', config: 'Configurable' },
@@ -104,21 +74,11 @@ export const messages = {
     },
     langToggle: 'ES',
     langLabel: 'Switch language to Spanish',
-    hero: {
-      subtitle:
-        'Dotrino is an ecosystem of apps built around one idea: what’s yours is yours, and you decide what you share, with whom, and when.',
-      manifestoStrong: 'Your data, on your server, under your rules.',
-      manifestoRest:
-        ' Your photos, your messages, your files live where you put them, and you can take them with you, copy them or delete them any day you want. And what you don’t share never leaves.',
-      cta: 'Learn More',
-    },
     apps: {
       title: 'Applications',
       text: 'The apps of the ecosystem. They all speak the same language, so what’s yours travels from one to the next.',
       open: 'Open app',
       download: 'Download APK',
-      fullHome: 'What is Dotrino?',
-      fullHomeEnterprise: 'What is Dotrino Enterprise?',
       info: 'View description',
       close: 'Close',
       requestTitle: 'Request or recommend an app',
@@ -140,29 +100,6 @@ export const messages = {
       send: 'Send',
       thanks: 'Thanks! We got your message.',
       error: "Couldn't send. Please try again.",
-    },
-    service: {
-      title: 'How it works',
-      text: 'This is what Dotrino’s apps do for you while you use them.',
-    },
-    /* /enterprise view ("What is Dotrino Enterprise?"): the same ecosystem, put
-       to work for a company's privacy. The page blocks (why now + what's
-       included) live in ./data/content.ts. */
-    enterprise: {
-      eyebrow: '// your keys · your servers · your rules',
-      subtitle:
-        'Dotrino Enterprise is the ecosystem put to work for a company’s privacy: keys and sensitive information stop being scattered around, changing a key takes minutes, and everything runs on the company’s own servers.',
-      manifestoStrong: 'Nothing that should stay in, gets out.',
-      manifestoRest:
-        ' Your company’s keys live on a machine you choose and open only where you authorised them. Every permission is granted by you, is recorded with its date, and is withdrawn from a single place. The architecture exists so that this is literal, not a promise.',
-      cta: 'Talk to us',
-      whyNow: {
-        title: 'Why now',
-        intro: 'AI tools changed two things about the environment every company works in.',
-      },
-      sectionTitle: 'What’s included',
-      sectionText: 'The pieces of the ecosystem, put to work for a company.',
-      response: 'With Dotrino Enterprise',
     },
     footer: {
       title: 'The Dotrino philosophy',

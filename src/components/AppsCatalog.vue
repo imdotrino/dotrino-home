@@ -6,9 +6,9 @@ import { recents, loadRecents } from '../recents'
 import { wikiUrl, wikiTitles } from '../wiki'
 
 const props = defineProps<{ locale: Locale }>()
-defineEmits<{ info: [app: AppEntry]; about: []; enterprise: [] }>()
+defineEmits<{ info: [app: AppEntry] }>()
 const t = computed(() => messages[props.locale])
-// El home no documenta: enlaza a la página del wiki que explica cómo instalarlas (§9.2).
+// El home no documenta: enlaza a las páginas del wiki (§9.2).
 const titles = computed(() => wikiTitles[props.locale])
 const wiki = (slug: string) => wikiUrl(slug, props.locale)
 
@@ -188,15 +188,14 @@ function submitRequest() {
     <div class="section-content">
       <h2 class="section-title">{{ t.apps.title }}</h2>
       <p class="section-text">{{ t.apps.text }}</p>
-      <p class="wiki-link">
-        <a :href="wiki('empezar/instalar-apps')" rel="noopener">{{ titles['empezar/instalar-apps'] }} →</a>
-      </p>
-
-      <!-- Las dos puertas de entrada a la info completa: el ecosistema personal
-           (/que-es) y el de empresa (/enterprise). -->
+      <!-- El home no documenta (§9.2): las cuatro puertas de entrada llevan a su
+           página del wiki, con el título real como etiqueta. Instalar la app NO
+           va aquí: ya está en el topbar (<dotrino-install>). -->
       <div class="home-buttons">
-        <button @click="$emit('about')" class="full-home-button">{{ t.apps.fullHome }}</button>
-        <button @click="$emit('enterprise')" class="full-home-button enterprise">{{ t.apps.fullHomeEnterprise }}</button>
+        <a :href="wiki('empezar/que-es')" rel="noopener" class="full-home-button">{{ titles['empezar/que-es'] }} →</a>
+        <a :href="wiki('empezar/crear-cuenta')" rel="noopener" class="full-home-button">{{ titles['empezar/crear-cuenta'] }} →</a>
+        <a :href="wiki('empezar/otros-dispositivos')" rel="noopener" class="full-home-button">{{ titles['empezar/otros-dispositivos'] }} →</a>
+        <a :href="wiki('empresa/que-es')" rel="noopener" class="full-home-button enterprise">{{ titles['empresa/que-es'] }} →</a>
       </div>
 
       <form class="app-request" @submit.prevent="submitRequest">
@@ -307,10 +306,10 @@ function submitRequest() {
 .aplicaciones-section.apps-only .app-card { padding: 1.6rem 1rem; gap: 0.85rem; }
 .aplicaciones-section.apps-only .apps-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.1rem; }
 
-/* Las dos puertas a la info completa, en una fila que se parte en móvil. */
+/* Las cuatro puertas al wiki, en una fila que se parte en móvil. */
 .home-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; margin: 0 auto 1.6rem; }
 .full-home-button {
-  display: flex; align-items: center; width: fit-content; background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; text-decoration: none; width: fit-content; background: var(--accent-soft); color: var(--accent);
   border: 1px solid transparent; padding: 0.7rem 1.8rem; font-family: var(--font-body);
   font-size: 0.95rem; font-weight: 700; border-radius: var(--radius-pill); cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;

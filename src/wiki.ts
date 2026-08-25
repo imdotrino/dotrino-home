@@ -17,6 +17,8 @@ export const wikiUrl = (slug: string, locale: Locale): string =>
 export const wikiTitles: Record<Locale, Record<string, string>> = {
   es: {
     'empezar/que-es': 'Qué es Dotrino',
+    'empezar/crear-cuenta': 'Cómo crear una cuenta',
+    'empezar/otros-dispositivos': 'Cómo usar tu cuenta en otros dispositivos',
     'empezar/instalar-apps': 'Instalar una app en tu teléfono',
     'empezar/identidad': 'Tu identidad y tus perfiles',
     'empezar/como-viaja': 'Cómo viaja lo que compartes',
@@ -34,6 +36,8 @@ export const wikiTitles: Record<Locale, Record<string, string>> = {
   },
   en: {
     'empezar/que-es': 'What is Dotrino',
+    'empezar/crear-cuenta': 'How to create an account',
+    'empezar/otros-dispositivos': 'How to use your account on other devices',
     'empezar/instalar-apps': 'Install an app on your phone',
     'empezar/identidad': 'Your identity and your profiles',
     'empezar/como-viaja': 'How what you share travels',

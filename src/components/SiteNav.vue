@@ -69,7 +69,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       <!-- Enlaces de sección (slot central) -->
       <div class="nav-links desktop-links">
         <a @click="emit('navigate', 'aplicaciones')" class="nav-link">{{ t.nav.apps }}</a>
-        <a @click="emit('navigate', 'servicio')" class="nav-link">{{ t.nav.service }}</a>
         <!-- La documentación del ecosistema vive en el wiki, no en el home (§9.2). -->
         <a :href="wikiHome" rel="noopener" class="nav-link">{{ t.nav.wiki }}</a>
         <a @click="emit('contact')" class="nav-link">{{ t.contact.link }}</a>
@@ -94,7 +93,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     <!-- Menú desplegable en móvil -->
     <div class="mobile-menu" :class="{ open: menuOpen }">
       <a @click="emit('navigate', 'aplicaciones')" class="nav-link">{{ t.nav.apps }}</a>
-      <a @click="emit('navigate', 'servicio')" class="nav-link">{{ t.nav.service }}</a>
+      <a :href="wikiHome" rel="noopener" class="nav-link">{{ t.nav.wiki }}</a>
       <a @click="menuOpen = false; emit('contact')" class="nav-link">{{ t.contact.link }}</a>
     </div>
   </div>
