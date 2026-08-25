@@ -32,6 +32,7 @@ import middlebotLogo from '../assets/apps/middlebot.svg'
 import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
 import installLogo from '../assets/apps/install.svg'
+import inspectorLogo from '../assets/apps/inspector.svg'
 import vaultLogo from '../assets/apps/vault.svg'
 import profileLogo from '../assets/apps/profile.svg'
 import reputationLogo from '../assets/apps/reputation.svg'
@@ -80,6 +81,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Un comando que deja funcionando en tu computadora cualquier herramienta de Dotrino —la bóveda, la terminal, el túnel—. Si te falta algo, lo baja él, sin pedirte permisos de administrador y sin tocar tu sistema. Linux, macOS y Windows.',
       en: 'One command that gets any Dotrino tool running on your computer —the vault, the terminal, the tunnel—. If something is missing it downloads it, without asking for admin rights and without touching your system. Linux, macOS and Windows.',
+    },
+  },
+  {
+    name: 'Inspector',
+    url: 'https://inspector.dotrino.com/',
+    logo: inspectorLogo,
+    repo: 'imdotrino/dotrino-inspector',
+    cat: 'developers',
+    desc: {
+      es: 'Te enseña qué contraseñas y llaves tienes guardadas <strong>a la vista</strong> en tu computadora —en la configuración de tus proyectos, en el historial de la terminal, en archivos que puede leer cualquiera— ordenadas por lo grave que es tenerlas así, y con los pasos para protegerlas. Solo mira: no edita, no borra y nada de lo que encuentra sale de tu máquina.',
+      en: 'It shows you which passwords and keys are sitting <strong>in plain sight</strong> on your computer —in your projects’ settings, in your terminal history, in files anyone can read— sorted by how bad it is to keep them that way, with the steps to protect them. It only looks: no edits, no deletions, and nothing it finds leaves your machine.',
     },
   },
   {
