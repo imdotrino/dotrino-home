@@ -35,6 +35,8 @@ const wiki = (slug: string) => wikiUrl(slug, props.locale)
       <p class="footer-wiki">
         <a :href="wiki('empezar/apoyar')" rel="noopener">{{ titles['empezar/apoyar'] }} →</a>
         <a :href="wiki('desarrollo/contribuir')" rel="noopener">{{ titles['desarrollo/contribuir'] }} →</a>
+        <!-- La política va en el pie porque es donde se la busca, y con su título real. -->
+        <a :href="wiki('empezar/politica-de-privacidad')" rel="noopener">{{ titles['empezar/politica-de-privacidad'] }} →</a>
       </p>
       <p class="footer-copy">{{ t.footer.copy }}</p>
     </div>
