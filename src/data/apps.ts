@@ -2,6 +2,7 @@
    App.vue. Cada entrada se registra también en el tab "Recientes" cuando el
    usuario la abre (ver ../recents.ts). */
 
+import ssoLogo from '../assets/apps/sso.svg'
 import chatLogo from '../assets/apps/chat.svg'
 import messengerLogo from '../assets/apps/messenger.svg'
 import qrshareLogo from '../assets/apps/qrshare.svg'
@@ -82,6 +83,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Un comando que deja funcionando en tu computadora cualquier herramienta de Dotrino —la bóveda, la terminal, el túnel—. Si te falta algo, lo baja él, sin pedirte permisos de administrador y sin tocar tu sistema. Linux, macOS y Windows.',
       en: 'One command that gets any Dotrino tool running on your computer —the vault, the terminal, the tunnel—. If something is missing it downloads it, without asking for admin rights and without touching your system. Linux, macOS and Windows.',
+    },
+  },
+  {
+    name: 'Entrar con Dotrino',
+    url: 'https://sso.dotrino.com/',
+    logo: ssoLogo,
+    repo: 'imdotrino/dotrino-sso',
+    cat: 'developers',
+    desc: {
+      es: 'Deja que la gente entre en tu aplicación con la identidad que ya tiene, <strong>sin contraseñas</strong>: pulsa un botón, aprueba en su bóveda y listo. Su llave nunca sale de su dispositivo, y tú no guardas ninguna contraseña que te puedan robar. Se conecta con la librería que ya uses; y si prefieres que no haya nadie en medio, puedes comprobarlo en tu propio servidor o levantar este servicio en tu casa.',
+      en: 'Let people into your app with the identity they already have, <strong>with no passwords</strong>: one button, they approve it in their vault, done. Their key never leaves their device, and you keep no password anyone can steal from you. It plugs into whatever library you already use; and if you would rather have nobody in the middle, you can check it on your own server or run this service at home.',
     },
   },
   {
