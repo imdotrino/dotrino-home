@@ -310,8 +310,8 @@ export const apps: AppEntry[] = [
     repo: 'imdotrino/dotrino-padel-contador',
     cat: 'deportes',
     desc: {
-      es: 'Marcador para partidos de pádel con puntuación de tenis (0/15/30/40, juegos y sets): dos paneles táctiles, indicador de saque, tie-break, punto de oro opcional, deshacer y reinicio.',
-      en: 'Scoreboard for padel matches with tennis scoring (0/15/30/40, games and sets): two touch panels, serve indicator, tie-break, optional golden point, undo and reset.',
+      es: 'Marcador para partidos de pádel con puntuación de tenis (0/15/30/40, juegos y sets), saque, tie-break y punto de oro. Y torneos todos contra todos: parejas que rotan o fijas, al azar o por puntaje, descansos por turnos cuando no hay cancha para todos y tabla en vivo.',
+      en: 'Scoreboard for padel matches with tennis scoring (0/15/30/40, games and sets), serve, tie-break and golden point. Plus round-robin tournaments: rotating or fixed partners, random or by score, rests in turns when there are not enough courts, and a live table.',
     },
   },
   {
