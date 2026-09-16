@@ -32,6 +32,7 @@ import telegramBotLogo from '../assets/apps/telegram-bot.svg'
 import middlebotLogo from '../assets/apps/middlebot.svg'
 import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
+import factureroLogo from '../assets/apps/facturero.svg'
 import installLogo from '../assets/apps/install.svg'
 import inspectorLogo from '../assets/apps/inspector.svg'
 import vaultLogo from '../assets/apps/vault.svg'
@@ -138,6 +139,18 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Tu billetera digital: guarda eventos (<code>.ics</code>), contactos (<code>.vcf</code>) y pases (<code>.pkpass</code> — tarjetas de embarque, entradas, cupones) como tarjetas, organizadas en pestañas. Impórtalos o créalos, edítalos y compártelos por QR o enlace; exporta a su formato original o ábrelos en la app nativa. Todo en tu propio almacén, sin anuncios ni rastreo.',
       en: 'Your digital wallet: keep events (<code>.ics</code>), contacts (<code>.vcf</code>) and passes (<code>.pkpass</code> — boarding passes, tickets, coupons) as cards, organized in tabs. Import or create them, edit and share via QR or link; export to their original format or open them in the native app. All in your own vault, no ads, no tracking.',
+    },
+  },
+  {
+    name: 'Facturero',
+    url: 'https://facturero.dotrino.com/',
+    logo: factureroLogo,
+    repo: 'imdotrino/dotrino-facturero',
+    cat: 'apps',
+    wip: true,
+    desc: {
+      es: 'Facturación electrónica del SRI de Ecuador: carga tu firma electrónica, emite la factura y recibe la autorización del SRI. La factura se firma en tu aparato, va directo al SRI y queda guardada en tu almacén; la contraseña de tu firma no se guarda. Imprime el RIDE o descarga los XML del mes. Sin anuncios, sin rastreo.',
+      en: 'Electronic invoicing for Ecuador’s SRI: load your electronic signature, issue the invoice and get the SRI’s authorization. The invoice is signed on your device, goes straight to the SRI and is kept in your storage; your signature’s password is never stored. Print the RIDE or download the month’s XML files. No ads, no tracking.',
     },
   },
   {
