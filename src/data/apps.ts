@@ -92,6 +92,9 @@ export const apps: AppEntry[] = [
     logo: ssoLogo,
     repo: 'imdotrino/dotrino-sso',
     cat: 'developers',
+    // En desarrollo (dueño, 2026-09-17): el correo sin verificar todavía sale y ninguna app
+    // real lo usa. Va al tab «En Desarrollo» hasta que eso esté hecho.
+    wip: true,
     desc: {
       es: 'Deja que la gente entre en tu aplicación con la identidad que ya tiene, <strong>sin contraseñas</strong>: pulsa un botón, aprueba en su bóveda y listo. Su llave nunca sale de su dispositivo, y tú no guardas ninguna contraseña que te puedan robar. Se conecta con la librería que ya uses; y si prefieres que no haya nadie en medio, puedes comprobarlo en tu propio servidor o levantar este servicio en tu casa.',
       en: 'Let people into your app with the identity they already have, <strong>with no passwords</strong>: one button, they approve it in their vault, done. Their key never leaves their device, and you keep no password anyone can steal from you. It plugs into whatever library you already use; and if you would rather have nobody in the middle, you can check it on your own server or run this service at home.',
