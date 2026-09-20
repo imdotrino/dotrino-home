@@ -196,8 +196,8 @@ export const apps: AppEntry[] = [
     repo: 'imdotrino/dotrino-messenger',
     cat: 'social',
     desc: {
-      es: 'Mensajería privada 1-a-1 con cifrado de extremo a extremo; recibe mensajes aunque estés desconectado. PWA instalable y extensión de Chrome.',
-      en: 'Private one-to-one messaging with end-to-end encryption; receive messages even while you are offline. Installable PWA and Chrome extension.',
+      es: 'Mensajería privada 1-a-1 con cifrado de extremo a extremo; recibe mensajes aunque estés desconectado. PWA instalable.',
+      en: 'Private one-to-one messaging with end-to-end encryption; receive messages even while you are offline. Installable PWA.',
     },
   },
   {
