@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sendSignedRequest, type MyId } from '../lib/signedRequest'
 import { ref, computed, inject } from 'vue'
 import { messages, type Locale } from '../i18n'
 
@@ -18,7 +19,6 @@ const props = defineProps<{ locale: Locale }>()
 defineEmits<{ close: [] }>()
 const t = computed(() => messages[props.locale])
 
-const FEEDBACK_URL = import.meta.env.VITE_FEEDBACK_URL || 'https://feedback.dotrino.com'
 
 const email = ref('')
 const phone = ref('')
@@ -28,7 +28,6 @@ const state = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 /* Identidad OPCIONAL (provista por App.vue): si hay apodo, el mensaje viaja
    firmado; si no, se envía anónimo. NO se exige apodo: este es un formulario
    público y pedirlo mandaba al visitante a profile.dotrino.com sin enviar nada. */
-type MyId = { pubkey: string; nickname: string; signData?: (d: unknown) => Promise<unknown> }
 const getMyIdentity = inject<(() => Promise<MyId>) | null>('getMyIdentity', null)
 
 const emailOk = computed(() => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim()))
@@ -48,35 +47,17 @@ async function doSend() {
   const text = buildText()
   if (!text) return
   state.value = 'sending'
-  let pubkey = '', nickname = '', signature = ''
-  const ts = Date.now()
+  unsigned.value = false
   try {
-    if (getMyIdentity) {
-      const me = await getMyIdentity()
-      pubkey = me.pubkey; nickname = me.nickname
-      if (me.signData && pubkey) {
-        try {
-          const sig = (await me.signData({ op: 'app-request', text, ts })) as string | { signature?: string }
-          signature = (typeof sig === 'string' ? sig : sig?.signature) || ''
-        } catch { /* firma opcional */ }
-      }
-    }
-  } catch { /* sin identidad: envío anónimo */ }
-  try {
-    const res = await fetch(FEEDBACK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        text, app: 'contact', locale: props.locale,
-        contact: email.value.trim(), pubkey, nickname, ts, signature,
-      }),
-    })
-    if (!res.ok) throw new Error('bad')
+    await sendSignedRequest(getMyIdentity, { text, app: 'contact', locale: props.locale, contact: email.value.trim() })
     state.value = 'sent'
-  } catch {
+  } catch (e: any) {
+    console.error('[contact]', e?.code || '', e?.message || e)
+    unsigned.value = e?.code === 'unsigned' || e?.code === 'unsigned_request' || e?.code === 'bad_signature'
     state.value = 'error'
   }
 }
+const unsigned = ref(false)
 
 function submit() {
   if (!canSend.value) return
@@ -116,7 +97,7 @@ function submit() {
         <button type="submit" class="contact-send" :disabled="!canSend">{{ t.contact.send }}</button>
 
         <p v-if="state === 'sent'" class="contact-msg ok">{{ t.contact.thanks }}</p>
-        <p v-else-if="state === 'error'" class="contact-msg err">{{ t.contact.error }}</p>
+        <p v-else-if="state === 'error'" class="contact-msg err">{{ unsigned ? t.apps.requestUnsigned : t.contact.error }}</p>
       </form>
     </div>
   </div>

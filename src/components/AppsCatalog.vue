@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sendSignedRequest, type MyId } from '../lib/signedRequest'
 import { ref, computed, onMounted, inject } from 'vue'
 import { messages, type Locale } from '../i18n'
 import { apps, defaultRecentApps, inLine, type AppEntry, type Line, type SubKey } from '../data/apps'
@@ -134,44 +135,26 @@ const displayItems = computed<DisplayItem[]>(() => {
 /* "Solicita/Recomienda una app" → relay compartido @dotrino/feedback (Cloudflare
    Worker) que reenvía a GitHub issue + Discord + email. URL configurable por env
    (VITE_FEEDBACK_URL); default al subdominio del worker. */
-const FEEDBACK_URL = import.meta.env.VITE_FEEDBACK_URL || 'https://feedback.dotrino.com'
 const reqText = ref('')
 const reqState = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
-/* Identidad OPCIONAL: si hay apodo, la solicitud viaja firmada; si no, anónima.
-   NO se exige apodo (mandaba al visitante a profile.dotrino.com sin enviar). */
-type MyId = { pubkey: string; nickname: string; signData?: (d: unknown) => Promise<unknown> }
+/* Identidad OBLIGATORIA: la solicitud viaja firmada con tu identidad de Dotrino
+   (`sendSignedRequest`). Sin firma no se envía, y se dice. No hace falta apodo. */
 const getMyIdentity = inject<(() => Promise<MyId>) | null>('getMyIdentity', null)
+const reqUnsigned = ref(false)
 
 async function doSendRequest() {
   const text = reqText.value.trim()
   if (!text) return
   reqState.value = 'sending'
-  let pubkey = '', nickname = '', signature = ''
-  const ts = Date.now()
+  reqUnsigned.value = false
   try {
-    if (getMyIdentity) {
-      const me = await getMyIdentity()
-      pubkey = me.pubkey; nickname = me.nickname
-      // Firma del contenido con tu identidad → el destinatario puede validar.
-      if (me.signData && pubkey) {
-        try {
-          const sig = (await me.signData({ op: 'app-request', text, ts })) as string | { signature?: string }
-          signature = (typeof sig === 'string' ? sig : sig?.signature) || ''
-        } catch { /* firma opcional */ }
-      }
-    }
-  } catch { /* sin identidad: envío anónimo */ }
-  try {
-    const res = await fetch(FEEDBACK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, app: 'home', locale: props.locale, pubkey, nickname, ts, signature }),
-    })
-    if (!res.ok) throw new Error('bad')
+    await sendSignedRequest(getMyIdentity, { text, app: 'home', locale: props.locale })
     reqState.value = 'sent'
     reqText.value = ''
-  } catch {
+  } catch (e: any) {
+    console.error('[app-request]', e?.code || '', e?.message || e)
+    reqUnsigned.value = e?.code === 'unsigned' || e?.code === 'unsigned_request' || e?.code === 'bad_signature'
     reqState.value = 'error'
   }
 }
@@ -222,7 +205,7 @@ function submitRequest() {
           </button>
         </div>
         <p v-if="reqState === 'sent'" class="app-request-msg ok">{{ t.apps.requestThanks }}</p>
-        <p v-else-if="reqState === 'error'" class="app-request-msg err">{{ t.apps.requestError }}</p>
+        <p v-else-if="reqState === 'error'" class="app-request-msg err">{{ reqUnsigned ? t.apps.requestUnsigned : t.apps.requestError }}</p>
       </form>
 
       <div class="apps-lines" role="tablist" :aria-label="t.lines.label">

@@ -38,6 +38,7 @@ export const messages = {
       requestSend: 'Enviar',
       requestThanks: '¡Gracias! Recibimos tu sugerencia.',
       requestError: 'No se pudo enviar. Inténtalo de nuevo.',
+      requestUnsigned: 'No se pudo firmar con tu perfil de Dotrino, así que no se envió. Inténtalo de nuevo.',
     },
     contact: {
       link: 'Contacto',
@@ -86,6 +87,7 @@ export const messages = {
       requestSend: 'Send',
       requestThanks: 'Thanks! We got your suggestion.',
       requestError: "Couldn't send. Please try again.",
+      requestUnsigned: "It could not be signed with your Dotrino profile, so it was not sent. Please try again.",
     },
     contact: {
       link: 'Contact',
