@@ -442,8 +442,8 @@ export const apps: AppEntry[] = [
     repo: 'imdotrino/dotrino-terminal',
     cat: 'developers',
     desc: {
-      es: 'Abre una consola en tu propia máquina —la que corre tu vault— desde el navegador de otro dispositivo. Solo un dispositivo que enlaces con tu vault puede entrar, y todo viaja cifrado de punta a punta. Requiere el vault. Sin cuentas, sin rastreo.',
-      en: 'Open a console on your own machine —the one running your vault— from the browser of another device. Only a device you link to your vault can get in, and everything is end-to-end encrypted. Requires the vault. No accounts, no tracking.',
+      es: 'Una terminal para tu computadora (Linux y macOS) cuyas ventanas también puedes abrir desde el navegador de tu teléfono o de otro aparato, y retomarlas tal como las dejaste. Solo entran los aparatos que enlaces con tu bóveda, y todo viaja cifrado de punta a punta. Sin cuentas, sin rastreo.',
+      en: 'A terminal for your computer (Linux and macOS) whose windows you can also open from the browser on your phone or another device, and pick up right where you left them. Only devices you link to your vault get in, and everything is end-to-end encrypted. No accounts, no tracking.',
     },
   },
   {
