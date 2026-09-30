@@ -63,7 +63,13 @@ export type AppEntry = {
   desc: { es: string; en: string }
   wip?: boolean
   apk?: string
+  /* La BETA para Android en Google Play (prueba abierta a quien tenga el enlace). Con
+     `identity`, la app necesita Identidad Dotrino y se enlaza también. */
+  androidBeta?: { url: string; identity?: boolean }
 }
+
+/** Identidad Dotrino (Android): guarda las llaves y los perfiles del teléfono para las demás. */
+export const IDENTITY_ANDROID_BETA = 'https://play.google.com/apps/internaltest/4699800053552003281'
 
 /* Cats que NO tienen lectura de empresa: entretenimiento y el launcher del
    teléfono personal. */
@@ -117,6 +123,8 @@ export const apps: AppEntry[] = [
     logo: vaultLogo,
     repo: 'imdotrino/dotrino-vault',
     cat: 'apps',
+    // La app de Dotrino para Android: aprobar desde el teléfono (Pedidos) y tus perfiles.
+    androidBeta: { url: 'https://play.google.com/apps/internaltest/4701203131776122603', identity: true },
     desc: {
       es: 'Tu bóveda personal: guarda toda tu información —archivos, contactos, contraseñas y lo que usan tus apps— en un solo lugar seguro, dentro de tu propia computadora. No en la nube de una empresa: en tu máquina, bajo tu control. Tus dispositivos acceden de forma segura y tú decides quién entra. Es un programa que instalas en tu computadora: hay instalador para Linux y, en Windows y macOS, se pone a andar con un comando o con Docker. Sin anuncios, sin rastreo.',
       en: 'Your personal vault: keep all your information —files, contacts, passwords and whatever your apps use— in one safe place, on your own computer. Not on a company’s cloud: on your machine, under your control. Your devices connect securely and you decide who gets in. It is a program you install on your computer: there is an installer for Linux and, on Windows and macOS, one command or Docker gets it running. No ads, no tracking.',
@@ -195,9 +203,10 @@ export const apps: AppEntry[] = [
     logo: messengerLogo,
     repo: 'imdotrino/dotrino-messenger',
     cat: 'social',
+    androidBeta: { url: 'https://play.google.com/apps/internaltest/4701700199204289743', identity: true },
     desc: {
-      es: 'Mensajería privada 1-a-1 con cifrado de extremo a extremo; recibe mensajes aunque estés desconectado. PWA instalable.',
-      en: 'Private one-to-one messaging with end-to-end encryption; receive messages even while you are offline. Installable PWA.',
+      es: 'Mensajería privada 1-a-1 con cifrado de extremo a extremo; recibe mensajes aunque estés desconectado. Agrega a alguien con un código o un QR, y te avisa con un trino. En la web y, en beta, como app para Android.',
+      en: 'Private one-to-one messaging with end-to-end encryption; receive messages even while you are offline. Add someone with a code or a QR, and it alerts you with a bird trill. On the web and, in beta, as an Android app.',
     },
   },
   {

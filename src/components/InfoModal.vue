@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { messages, type Locale } from '../i18n'
-import type { AppEntry } from '../data/apps'
+import { IDENTITY_ANDROID_BETA, type AppEntry } from '../data/apps'
 
 const props = defineProps<{ app: AppEntry; locale: Locale }>()
 defineEmits<{ close: [] }>()
@@ -27,6 +27,10 @@ const t = computed(() => messages[props.locale])
           rel="noopener"
           class="app-button"
         >{{ app.apk ? t.apps.download : t.apps.open }}</a>
+        <template v-if="app.androidBeta">
+          <a :href="app.androidBeta.url" target="_blank" rel="noopener" class="app-beta">{{ t.apps.androidBeta }}</a>
+          <a v-if="app.androidBeta.identity" :href="IDENTITY_ANDROID_BETA" target="_blank" rel="noopener" class="app-beta">{{ t.apps.identityBeta }}</a>
+        </template>
         <button type="button" class="info-modal-close" @click="$emit('close')">{{ t.apps.close }}</button>
       </div>
     </div>
@@ -53,4 +57,6 @@ const t = computed(() => messages[props.locale])
 }
 .app-button:hover { background: var(--accent-press); transform: translateY(-2px); }
 .info-modal-actions .app-button { margin-top: 0; }
+.app-beta { color: var(--accent); border: 1px solid var(--accent); padding: 0.6rem 1.2rem; border-radius: 9px; font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+.app-beta:hover { background: var(--surface-2); }
 </style>

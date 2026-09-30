@@ -261,6 +261,13 @@ function submitRequest() {
             <h3>{{ item.app.name }}</h3>
             <p v-html="item.app.desc[locale]"></p>
             <a
+              v-if="item.app.androidBeta"
+              :href="item.app.androidBeta.url"
+              target="_blank"
+              rel="noopener"
+              class="app-beta-link"
+            >{{ t.apps.androidBeta }}</a>
+            <a
               :href="'https://github.com/' + item.app.repo"
               target="_blank"
               rel="noopener"
@@ -438,4 +445,6 @@ function submitRequest() {
 @media (max-width: 480px) {
   .aplicaciones-section.apps-only .apps-grid { grid-template-columns: repeat(2, 1fr); }
 }
+.app-beta-link { display: inline-block; margin: 0.2rem 0 0.4rem; color: var(--accent); font-weight: 600; font-size: 0.85rem; text-decoration: none; }
+.app-beta-link:hover { text-decoration: underline; }
 </style>
