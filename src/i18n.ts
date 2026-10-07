@@ -17,7 +17,7 @@ export const messages = {
   es: {
     htmlLang: 'es',
     nav: { apps: 'Aplicaciones', wiki: 'Wiki', install: 'Instalar App', profile: 'Mi perfil' },
-    tabs: { recientes: 'Recientes', social: 'Social', apps: 'Herramientas', deportes: 'Deportes', juegos: 'Juegos', android: 'Android', wip: 'En Desarrollo', developers: 'Developers' },
+    tabs: { recientes: 'Recientes', social: 'Social', apps: 'Herramientas', deportes: 'Deportes', juegos: 'Juegos', android: 'Android', wip: 'En Desarrollo', developers: 'Developers', deprecated: 'Retiradas' },
     lines: { label: 'Personal o empresa', personal: 'Personal', enterprise: 'Empresa' },
     subtabs: { solo: 'Un jugador', multi: 'Multijugador', config: 'Configurables' },
     install: {
@@ -68,7 +68,7 @@ export const messages = {
   en: {
     htmlLang: 'en',
     nav: { apps: 'Applications', wiki: 'Wiki', install: 'Install App', profile: 'My profile' },
-    tabs: { recientes: 'Recent', social: 'Social', apps: 'Tools', deportes: 'Sports', juegos: 'Games', android: 'Android', wip: 'In Development', developers: 'Developers' },
+    tabs: { recientes: 'Recent', social: 'Social', apps: 'Tools', deportes: 'Sports', juegos: 'Games', android: 'Android', wip: 'In Development', developers: 'Developers', deprecated: 'Retired' },
     lines: { label: 'Personal or business', personal: 'Personal', enterprise: 'Business' },
     subtabs: { solo: 'Single player', multi: 'Multiplayer', config: 'Configurable' },
     install: {

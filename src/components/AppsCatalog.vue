@@ -18,8 +18,8 @@ const wiki = (slug: string) => wikiUrl(slug, props.locale)
    <dotrino-support> en cada app; ver ../recents.ts), así cuenta incluso el
    acceso directo a cada subdominio. Sin historial todavía, destaca una selección
    inicial (contadores, juegos) desde defaultRecentApps(). */
-type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers'
-const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers']
+type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers' | 'deprecated'
+const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers', 'deprecated']
 
 /* Tab de entrada cuando NO hay historial: "Herramientas" (Tools), que es donde
    está la bóveda. Quien llega de cero no tiene recientes de verdad —lo que vería
@@ -86,7 +86,7 @@ onMounted(() => {
 const openedApps = computed<AppEntry[]>(() => {
   const map = recents.value
   return apps
-    .filter((a) => map[hostOf(a.url)])
+    .filter((a) => !a.deprecated && map[hostOf(a.url)])
     .sort((a, b) => (map[hostOf(b.url)]?.ts ?? 0) - (map[hostOf(a.url)]?.ts ?? 0))
 })
 
@@ -103,9 +103,11 @@ const tabApps = (tab: TabKey): AppEntry[] => {
   const list =
     tab === 'recientes'
       ? recentApps.value
-      : tab === 'wip'
-        ? apps.filter((a) => a.wip)
-        : apps.filter((a) => !a.wip && a.cat === tab)
+      : tab === 'deprecated'
+        ? apps.filter((a) => a.deprecated)
+        : tab === 'wip'
+          ? apps.filter((a) => a.wip && !a.deprecated)
+          : apps.filter((a) => !a.wip && !a.deprecated && a.cat === tab)
   return list.filter((a) => inLine(a, activeLine.value))
 }
 
@@ -227,7 +229,7 @@ function submitRequest() {
           type="button"
           role="tab"
           :aria-selected="activeTab === tab"
-          :class="['apps-tab', { active: activeTab === tab, wip: tab === 'wip' }]"
+          :class="['apps-tab', { active: activeTab === tab, wip: tab === 'wip', deprecated: tab === 'deprecated' }]"
           @click="setActiveTab(tab)"
         >{{ t.tabs[tab] }}</button>
       </div>
@@ -241,7 +243,7 @@ function submitRequest() {
           <div
             v-else
             class="app-card"
-            :class="{ wip: item.app.wip }"
+            :class="{ wip: item.app.wip, deprecated: !!item.app.deprecated }"
           >
             <button
               type="button"
@@ -260,6 +262,7 @@ function submitRequest() {
             </a>
             <h3>{{ item.app.name }}</h3>
             <p v-html="item.app.desc[locale]"></p>
+            <p v-if="item.app.deprecated" class="app-deprecated" v-html="item.app.deprecated[locale]"></p>
             <a
               v-if="item.app.androidBeta"
               :href="item.app.androidBeta.url"
@@ -385,6 +388,14 @@ function submitRequest() {
 .app-card:hover::before { opacity: 1; }
 .app-card.wip { border-color: rgba(110, 231, 200, 0.4); }
 .app-card.wip h3 { color: var(--mint); }
+/* Retiradas: apagadas, con el aviso de por qué y qué las reemplaza. */
+.apps-tab.deprecated.active { background: var(--text-faint); color: #ffffff; }
+.app-card.deprecated { opacity: 0.72; border-style: dashed; }
+.app-card.deprecated:hover { transform: none; opacity: 1; }
+.app-card.deprecated .app-logo { filter: grayscale(1); }
+.app-deprecated { margin: -0.6rem 0 1.2rem; padding: 0.6rem 0.9rem; border-radius: 12px; font-size: 0.88rem; line-height: 1.5;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--line); }
+.app-deprecated a { color: var(--accent); }
 .app-logo-link { display: inline-block; line-height: 0; cursor: pointer; border-radius: 18px; outline: none; -webkit-tap-highlight-color: transparent; }
 .app-logo-link:focus, .app-logo-link:active, .app-logo-link:focus-visible { outline: none; }
 .app-logo { width: 80px; height: 80px; margin-bottom: 1.2rem; border-radius: 18px; box-shadow: 0 10px 26px rgba(74, 85, 96, 0.16); transition: transform 0.3s ease, box-shadow 0.3s ease; }

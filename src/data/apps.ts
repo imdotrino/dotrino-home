@@ -62,6 +62,9 @@ export type AppEntry = {
   lines?: Line[]
   desc: { es: string; en: string }
   wip?: boolean
+  /* Retirada: ya no se mantiene. Va al tab «Retiradas», fuera de las demás listas
+     (recientes, selección inicial). El texto dice por qué y qué la reemplaza. */
+  deprecated?: { es: string; en: string }
   apk?: string
   /* La BETA para Android en Google Play (prueba abierta a quien tenga el enlace). Con
      `identity`, la app necesita Identidad Dotrino y se enlaza también. */
@@ -461,6 +464,10 @@ export const apps: AppEntry[] = [
     logo: iaLogo,
     repo: 'imdotrino/dotrino-ia',
     cat: 'developers',
+    deprecated: {
+      es: 'Retirada el 2026-10-07: <a href="https://terminal.dotrino.com/">Terminal</a> ya hace lo mismo y más (consolas, agentes de IA y la versión nativa). Esta app no se mantiene.',
+      en: 'Retired on 2026-10-07: <a href="https://terminal.dotrino.com/">Terminal</a> already does the same and more (consoles, AI agents and the native version). This app is no longer maintained.',
+    },
     desc: {
       es: 'Habla desde tu teléfono con los asistentes de IA (como Claude) que corren en <strong>tu</strong> propia computadora: con memoria de la conversación y cifrado de punta a punta. Solo tú entras, con un dispositivo que enlaces a tu vault. Sin cuentas, sin rastreo.',
       en: 'Talk from your phone to the AI assistants (like Claude) running on <strong>your</strong> own computer: with conversation memory and end-to-end encryption. Only you get in, with a device you link to your vault. No accounts, no tracking.',
@@ -518,8 +525,8 @@ export const apps: AppEntry[] = [
    (ver ../recents.ts). Destaca, en orden: los contadores deportivos
    (Ecuavóley / Pádel) y el resto de los juegos. */
 export const defaultRecentApps = (): AppEntry[] => {
-  const counters = apps.filter((a) => a.cat === 'deportes' && /contador/i.test(a.name))
-  const games = apps.filter((a) => a.cat === 'juegos' && !a.wip)
+  const counters = apps.filter((a) => a.cat === 'deportes' && !a.deprecated && /contador/i.test(a.name))
+  const games = apps.filter((a) => a.cat === 'juegos' && !a.wip && !a.deprecated)
   const seen = new Set<string>()
   return [...counters, ...games].filter(
     (a) => !seen.has(a.url) && seen.add(a.url),
