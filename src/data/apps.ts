@@ -25,6 +25,7 @@ import triviaLogo from '../assets/apps/trivia.svg'
 import truequeLogo from '../assets/apps/trueque.svg'
 import ecoLogo from '../assets/apps/eco.svg'
 import sudokuLogo from '../assets/apps/sudoku.svg'
+import offroadLogo from '../assets/apps/offroad.svg'
 import tunnelLogo from '../assets/apps/tunnel.svg'
 import terminalLogo from '../assets/apps/terminal.svg'
 import iaLogo from '../assets/apps/ia.svg'
@@ -375,6 +376,18 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Sudoku con <strong>aventura de niveles</strong>: un mapa con <strong>caminos que se bifurcan</strong> y <strong>jefes</strong> que desbloqueas con <strong>estrellas</strong> (1–3 por nivel según tu rendimiento). Generador propio determinista con <strong>solución única</strong>, cuatro dificultades y <strong>reto diario</strong>. <strong>Comparte un nivel y ganas pistas</strong> consumibles para resolver. Notas a lápiz, detección de errores, deshacer y cronómetro. PWA instalable; tus partidas, tiempos y estrellas viven en tu navegador.',
       en: 'Sudoku with a <strong>level adventure</strong>: a map with <strong>branching paths</strong> and <strong>bosses</strong> you unlock with <strong>stars</strong> (1–3 per level based on your performance). Deterministic generator with a guaranteed <strong>unique solution</strong>, four difficulties and a <strong>daily challenge</strong>. <strong>Share a level to earn</strong> consumable hints to solve. Pencil notes, error detection, undo and a timer. Installable PWA; your games, times and stars live in your browser.',
+    },
+  },
+  {
+    name: 'Offroad',
+    url: 'https://offroad.dotrino.com/',
+    logo: offroadLogo,
+    repo: 'imdotrino/dotrino-offroad',
+    cat: 'juegos',
+    sub: 'solo',
+    desc: {
+      es: 'Carreras de <strong>camionetas todoterreno</strong> en pixel art, con la <strong>pista entera en pantalla</strong> como en las máquinas de antes: lomas, charcos, nitro y tres rivales. Con los premios mejoras tu camioneta en el <strong>taller</strong> y avanzas por un <strong>mapa de 24 carreras</strong> con caminos que se bifurcan y <strong>jefes</strong> que abres con estrellas. <strong>Reta a un amigo</strong> con un enlace y ganas nitros. Teclado o táctil; PWA instalable que funciona sin conexión.',
+      en: '<strong>Off-road truck</strong> racing in pixel art, with the <strong>whole track on screen</strong> like the old arcade machines: jumps, mud, nitro and three rivals. Prize money upgrades your truck in the <strong>garage</strong> as you move through a <strong>24-race map</strong> with branching paths and <strong>bosses</strong> you open with stars. <strong>Challenge a friend</strong> with a link and earn nitros. Keyboard or touch; installable PWA that works offline.',
     },
   },
   {
