@@ -460,10 +460,6 @@ export const apps: AppEntry[] = [
     logo: tunnelLogo,
     repo: 'imdotrino/dotrino-tunnel',
     cat: 'developers',
-    outdated: {
-      es: 'En revisión: la versión publicada del comando todavía no te avisa cuando sale una nueva. El arreglo ya está hecho y falta publicarlo. Mientras tanto funciona con normalidad.',
-      en: 'Under review: the published version of the command does not yet tell you when a new one is out. The fix is done and waiting to be published. It works normally in the meantime.',
-    },
     desc: {
       es: 'Túnel reverso autohospedado: expón un puerto o servicio local en una URL pública e inspecciona las requests en vivo. Incluye librería + CLI <code>@dotrino/tunnel</code>. Sin cuentas, sin rastreo.',
       en: 'Self-hosted reverse tunnel: expose a local port or service at a public URL and inspect requests live. Includes the <code>@dotrino/tunnel</code> library + CLI. No accounts, no tracking.',
