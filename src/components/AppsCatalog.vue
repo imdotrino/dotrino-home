@@ -18,8 +18,8 @@ const wiki = (slug: string) => wikiUrl(slug, props.locale)
    <dotrino-support> en cada app; ver ../recents.ts), así cuenta incluso el
    acceso directo a cada subdominio. Sin historial todavía, destaca una selección
    inicial (contadores, juegos) desde defaultRecentApps(). */
-type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers' | 'deprecated'
-const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers', 'deprecated']
+type TabKey = 'recientes' | 'social' | 'apps' | 'deportes' | 'juegos' | 'android' | 'wip' | 'developers' | 'review' | 'deprecated'
+const TAB_ORDER: TabKey[] = ['recientes', 'social', 'apps', 'deportes', 'juegos', 'android', 'wip', 'developers', 'review', 'deprecated']
 
 /* Tab de entrada cuando NO hay historial: "Herramientas" (Tools), que es donde
    está la bóveda. Quien llega de cero no tiene recientes de verdad —lo que vería
@@ -105,9 +105,11 @@ const tabApps = (tab: TabKey): AppEntry[] => {
       ? recentApps.value
       : tab === 'deprecated'
         ? apps.filter((a) => a.deprecated)
-        : tab === 'wip'
-          ? apps.filter((a) => a.wip && !a.deprecated)
-          : apps.filter((a) => !a.wip && !a.deprecated && a.cat === tab)
+        : tab === 'review'
+          ? apps.filter((a) => a.outdated && !a.deprecated)
+          : tab === 'wip'
+            ? apps.filter((a) => a.wip && !a.deprecated && !a.outdated)
+            : apps.filter((a) => !a.wip && !a.deprecated && !a.outdated && a.cat === tab)
   return list.filter((a) => inLine(a, activeLine.value))
 }
 
@@ -229,7 +231,7 @@ function submitRequest() {
           type="button"
           role="tab"
           :aria-selected="activeTab === tab"
-          :class="['apps-tab', { active: activeTab === tab, wip: tab === 'wip', deprecated: tab === 'deprecated' }]"
+          :class="['apps-tab', { active: activeTab === tab, wip: tab === 'wip', review: tab === 'review', deprecated: tab === 'deprecated' }]"
           @click="setActiveTab(tab)"
         >{{ t.tabs[tab] }}</button>
       </div>
@@ -243,7 +245,8 @@ function submitRequest() {
           <div
             v-else
             class="app-card"
-            :class="{ wip: item.app.wip, deprecated: !!item.app.deprecated }"
+            :class="{ wip: item.app.wip, outdated: !!item.app.outdated && !item.app.deprecated, deprecated: !!item.app.deprecated }"
+            :data-testid="item.app.outdated ? 'app-outdated' : undefined"
           >
             <button
               type="button"
@@ -263,6 +266,7 @@ function submitRequest() {
             <h3>{{ item.app.name }}</h3>
             <p v-html="item.app.desc[locale]"></p>
             <p v-if="item.app.deprecated" class="app-deprecated" v-html="item.app.deprecated[locale]"></p>
+            <p v-else-if="item.app.outdated" class="app-outdated" v-html="item.app.outdated[locale]"></p>
             <a
               v-if="item.app.androidBeta"
               :href="item.app.androidBeta.url"
@@ -388,6 +392,12 @@ function submitRequest() {
 .app-card:hover::before { opacity: 1; }
 .app-card.wip { border-color: rgba(110, 231, 200, 0.4); }
 .app-card.wip h3 { color: var(--mint); }
+/* En revisión: sigue funcionando, así que no se apaga; solo lleva el aviso de qué le falta. */
+.apps-tab.review.active { background: var(--amber, #b7791f); color: #ffffff; }
+.app-card.outdated { border-style: dashed; }
+.app-outdated { margin: -0.6rem 0 1.2rem; padding: 0.6rem 0.9rem; border-radius: 12px; font-size: 0.88rem; line-height: 1.5;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--line); }
+.app-outdated a { color: var(--accent); }
 /* Retiradas: apagadas, con el aviso de por qué y qué las reemplaza. */
 .apps-tab.deprecated.active { background: var(--text-faint); color: #ffffff; }
 .app-card.deprecated { opacity: 0.72; border-style: dashed; }

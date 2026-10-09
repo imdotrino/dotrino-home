@@ -66,6 +66,11 @@ export type AppEntry = {
   /* Retirada: ya no se mantiene. Va al tab «Retiradas», fuera de las demás listas
      (recientes, selección inicial). El texto dice por qué y qué la reemplaza. */
   deprecated?: { es: string; en: string }
+  /* Desactualizada: sigue funcionando, pero hay algo en lo que todavía no cumple las
+     convenciones del ecosistema (dueño, 2026-10-08: no se declaran excepciones; se marca y
+     se corrige). Sale de su categoría y va al tab «En revisión» hasta que se arregle. El
+     texto dice qué le falta, en lenguaje llano. Lo que le falta lo lista `dotrino-index`. */
+  outdated?: { es: string; en: string }
   apk?: string
   /* La BETA para Android en Google Play (prueba abierta a quien tenga el enlace). Con
      `identity`, la app necesita Identidad Dotrino y se enlaza también. */
@@ -455,6 +460,10 @@ export const apps: AppEntry[] = [
     logo: tunnelLogo,
     repo: 'imdotrino/dotrino-tunnel',
     cat: 'developers',
+    outdated: {
+      es: 'En revisión: la versión publicada del comando todavía no te avisa cuando sale una nueva. El arreglo ya está hecho y falta publicarlo. Mientras tanto funciona con normalidad.',
+      en: 'Under review: the published version of the command does not yet tell you when a new one is out. The fix is done and waiting to be published. It works normally in the meantime.',
+    },
     desc: {
       es: 'Túnel reverso autohospedado: expón un puerto o servicio local en una URL pública e inspecciona las requests en vivo. Incluye librería + CLI <code>@dotrino/tunnel</code>. Sin cuentas, sin rastreo.',
       en: 'Self-hosted reverse tunnel: expose a local port or service at a public URL and inspect requests live. Includes the <code>@dotrino/tunnel</code> library + CLI. No accounts, no tracking.',
@@ -538,8 +547,8 @@ export const apps: AppEntry[] = [
    (ver ../recents.ts). Destaca, en orden: los contadores deportivos
    (Ecuavóley / Pádel) y el resto de los juegos. */
 export const defaultRecentApps = (): AppEntry[] => {
-  const counters = apps.filter((a) => a.cat === 'deportes' && !a.deprecated && /contador/i.test(a.name))
-  const games = apps.filter((a) => a.cat === 'juegos' && !a.wip && !a.deprecated)
+  const counters = apps.filter((a) => a.cat === 'deportes' && !a.deprecated && !a.outdated && /contador/i.test(a.name))
+  const games = apps.filter((a) => a.cat === 'juegos' && !a.wip && !a.deprecated && !a.outdated)
   const seen = new Set<string>()
   return [...counters, ...games].filter(
     (a) => !seen.has(a.url) && seen.add(a.url),
