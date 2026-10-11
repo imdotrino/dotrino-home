@@ -42,6 +42,7 @@ const storedTab = (() => {
 const activeTab = ref<TabKey>(storedTab ?? TAB_SIN_HISTORIAL)
 
 function setActiveTab(tab: TabKey) {
+  query.value = ''
   activeTab.value = tab
   try { sessionStorage.setItem(TAB_STORE_KEY, tab) } catch { /* modo privado */ }
 }
@@ -59,6 +60,7 @@ const storedLine = (() => {
 const activeLine = ref<Line>(storedLine)
 
 function setActiveLine(line: Line) {
+  query.value = ''
   activeLine.value = line
   try { sessionStorage.setItem(LINE_STORE_KEY, line) } catch { /* modo privado */ }
   // La línea nueva puede no tener el tab activo (p. ej. Juegos en empresa).
@@ -67,6 +69,33 @@ function setActiveLine(line: Line) {
 
 // El store cuenta por id de app = hostname; mapeamos cada app.url a su hostname.
 const hostOf = (url: string): string => { try { return new URL(url).hostname } catch { return url } }
+
+/* Buscador: mientras hay texto, la lista es TODO el catálogo que coincide, sin
+   mirar el tab ni la línea (quien busca una app no sabe en cuál está). Elegir un
+   tab o una línea lo vacía. No se recuerda entre visitas. */
+const query = ref('')
+// Sin tildes ni mayúsculas: «facturacion» encuentra «facturación».
+const fold = (s: string): string => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+const plain = (html: string): string => html.replace(/<[^>]+>/g, ' ')
+const searchIndex = apps.map((app) => ({
+  app,
+  name: fold(app.name),
+  text: fold([app.name, hostOf(app.url), app.repo, plain(app.desc.es), plain(app.desc.en)].join(' ')),
+}))
+const searchWords = computed(() => fold(query.value).split(/\s+/).filter(Boolean))
+const searching = computed(() => searchWords.value.length > 0)
+// Primero las que coinciden por nombre; las retiradas, al final.
+const searchResults = computed<AppEntry[]>(() => {
+  const words = searchWords.value
+  const rank = (e: (typeof searchIndex)[number]) =>
+    (e.app.deprecated ? 2 : 0) + (words.every((w) => e.name.includes(w)) ? 0 : 1)
+  return searchIndex
+    .filter((e) => words.every((w) => e.text.includes(w)))
+    .sort((a, b) => rank(a) - rank(b))
+    .map((e) => e.app)
+})
+
+// El store cuenta por id de app = hostname; mapeamos cada app.url a su hostname.
 
 /* El store es asíncrono: se entra por Herramientas y, si resulta que el usuario
    YA tiene apps abiertas, se pasa a "Recientes". Solo si no eligió tab en esta
@@ -125,6 +154,7 @@ const visibleSubs = computed(() => SUB_ORDER.filter((sub) => subApps(sub).length
 // en el resto de tabs, solo las apps. Un solo grid, con los encabezados a ancho completo.
 type DisplayItem = { header: SubKey } | { app: AppEntry }
 const displayItems = computed<DisplayItem[]>(() => {
+  if (searching.value) return searchResults.value.map((a) => ({ app: a }))
   if (activeTab.value === 'juegos') {
     const out: DisplayItem[] = []
     for (const sub of visibleSubs.value) {
@@ -212,14 +242,40 @@ function submitRequest() {
         <p v-else-if="reqState === 'error'" class="app-request-msg err">{{ reqUnsigned ? t.apps.requestUnsigned : t.apps.requestError }}</p>
       </form>
 
+      <div class="apps-search" role="search">
+        <svg class="apps-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="m20 20-3.6-3.6" />
+        </svg>
+        <input
+          v-model="query"
+          type="search"
+          class="apps-search-input"
+          data-testid="apps-search"
+          autocomplete="off"
+          spellcheck="false"
+          :placeholder="t.apps.search"
+          :aria-label="t.apps.search"
+          @keydown.esc="query = ''"
+        />
+        <button
+          type="button"
+          class="apps-search-clear"
+          data-testid="apps-search-clear"
+          :disabled="!query"
+          :aria-label="t.apps.searchClear"
+          :title="t.apps.searchClear"
+          @click="query = ''"
+        >×</button>
+      </div>
+
       <div class="apps-lines" role="tablist" :aria-label="t.lines.label">
         <button
           v-for="line in (['personal', 'enterprise'] as const)"
           :key="line"
           type="button"
           role="tab"
-          :aria-selected="activeLine === line"
-          :class="['apps-line', line, { active: activeLine === line }]"
+          :aria-selected="!searching && activeLine === line"
+          :class="['apps-line', line, { active: !searching && activeLine === line }]"
           @click="setActiveLine(line)"
         >{{ t.lines[line] }}</button>
       </div>
@@ -230,13 +286,15 @@ function submitRequest() {
           :key="tab"
           type="button"
           role="tab"
-          :aria-selected="activeTab === tab"
-          :class="['apps-tab', { active: activeTab === tab, wip: tab === 'wip', review: tab === 'review', deprecated: tab === 'deprecated' }]"
+          :aria-selected="!searching && activeTab === tab"
+          :class="['apps-tab', { active: !searching && activeTab === tab, wip: tab === 'wip', review: tab === 'review', deprecated: tab === 'deprecated' }]"
           @click="setActiveTab(tab)"
         >{{ t.tabs[tab] }}</button>
       </div>
 
-      <div class="apps-grid" :class="{ 'wip-grid': activeTab === 'wip' }">
+      <p v-if="searching && !searchResults.length" class="apps-search-empty" data-testid="apps-search-empty">{{ t.apps.searchEmpty }}</p>
+
+      <div class="apps-grid" :class="{ 'wip-grid': searching || activeTab === 'wip' }">
         <template
           v-for="item in displayItems"
           :key="'header' in item ? 'h-' + item.header : item.app.url"
@@ -321,6 +379,27 @@ function submitRequest() {
 .full-home-button.enterprise { background: rgba(0, 137, 123, 0.10); color: var(--mint); }
 .full-home-button.enterprise:hover { background: var(--mint); border-color: var(--mint); color: #ffffff; box-shadow: 0 12px 28px rgba(0, 137, 123, 0.22); }
 @media (max-width: 640px) { .home-buttons { grid-template-columns: 1fr; } }
+
+/* ───────────────────────── Buscador ───────────────────────── */
+.apps-search { position: relative; display: flex; align-items: center; max-width: 560px; margin: 0 auto; }
+.apps-search-icon { position: absolute; left: 1.1rem; width: 18px; height: 18px; color: var(--text-faint); pointer-events: none; }
+.apps-search-input {
+  flex: 1; width: 100%; padding: 0.85rem 3rem 0.85rem 2.9rem;
+  font-family: var(--font-body); font-size: 0.95rem; color: var(--text);
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--radius-pill);
+  outline: none; appearance: none; transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.apps-search-input::placeholder { color: var(--text-faint); }
+.apps-search-input::-webkit-search-cancel-button { display: none; }
+.apps-search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.apps-search-clear {
+  position: absolute; right: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  padding: 0; background: transparent; color: var(--text-dim); border: none; border-radius: 50%;
+  font-size: 1.3rem; line-height: 1; cursor: pointer; transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+.apps-search-clear:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+.apps-search-clear:disabled { opacity: 0.3; cursor: default; }
+.apps-search-empty { margin: 2.4rem 0 0; text-align: center; color: var(--text-dim); font-size: 0.96rem; }
 
 /* ─────────── Línea del ecosistema (personal / empresa) ─────────── */
 /* `flex` + `width: fit-content` (no `inline-flex`): así ocupa su propia fila y
