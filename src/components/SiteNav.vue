@@ -1,35 +1,27 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted, onUnmounted } from 'vue'
 import { messages, type Locale } from '../i18n'
-import '@dotrino/topbar' // barra superior estándar del ecosistema (marca + volver + idioma + perfil + support + modal de perfil)
+import '@dotrino/topbar' // barra superior estándar del ecosistema (marca + volver + idioma + perfil + support)
 import '@dotrino/install' // botón "Instalar app" (va en el slot end del topbar)
 
-// El topbar es DUEÑO del modal "Mi perfil": le pasamos identity+reputation (props
-// JS) y él abre <dotrino-profile> solo, deriva el avatar y maneja el back. Así el
-// home NO fija la versión de @dotrino/profile (viaja dentro de @dotrino/topbar).
-const props = defineProps<{ hasBack: boolean; identity?: any; reputation?: any; profileTheme?: Record<string, string> | null }>()
+const props = defineProps<{ hasBack: boolean; identity?: any; reputation?: any }>()
 const locale = defineModel<Locale>('locale', { required: true })
 const menuOpen = defineModel<boolean>('open', { required: true })
-const emit = defineEmits<{
-  navigate: [sectionId: string]; contact: []
-  'profile-open': []; 'profile-name': [e: CustomEvent]; 'profile-close': []
-}>()
+const emit = defineEmits<{ navigate: [sectionId: string]; contact: [] }>()
 
 const t = computed(() => messages[locale.value])
 // Wiki del ecosistema (wiki.dotrino.com), en el idioma activo.
 const wikiHome = computed(() => (locale.value === 'en' ? 'https://wiki.dotrino.com/en/' : 'https://wiki.dotrino.com/'))
 
-// Ref al elemento del topbar → le seteamos identity/reputation/tema (propiedades
-// JS) y desde App.vue se llama openProfile(editable) para el onboarding del apodo.
+// Ref al elemento del topbar → le seteamos identity/reputation (propiedades JS): con ellas
+// el botón de perfil enseña el avatar del perfil activo y el menú de perfiles.
 const topbarRef = ref<any>(null)
 watchEffect(() => {
   const tb = topbarRef.value
   if (!tb) return
   tb.identity = props.identity ?? null
   tb.reputation = props.reputation ?? null
-  tb.profileTheme = props.profileTheme ?? null
 })
-defineExpose({ openProfile: (editable = false) => topbarRef.value?.openMyProfile({ editable }) })
 
 // El idioma lo gobierna el toggle del <dotrino-topbar>; sincronizamos su evento
 // con nuestro modelo (que persiste en LANG_KEY vía el watcher de App.vue).
@@ -61,9 +53,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       support-discord="https://discord.gg/D648uq7cth"
       support-contact
       @dotrino-lang="onLang"
-      @dotrino-profile="emit('profile-open')"
-      @dotrino-profile-name="(e: Event) => emit('profile-name', e as CustomEvent)"
-      @dotrino-profile-close="emit('profile-close')"
       @cc-support-contact="emit('contact')"
     >
       <!-- Enlaces de sección (slot central) -->
@@ -154,6 +143,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   width: 38px; height: 38px;
   background: var(--surface); border-color: var(--line-2); color: var(--text);
 }
+/* El menú de perfiles hereda el fondo de la barra, que aquí es translúcido: va sólido. */
+.site-topbar::part(profile-menu) { background: var(--surface); }
 
 /* ───────── Enlaces de sección (slotted → light DOM, estilo directo) ───────── */
 .nav-links { display: flex; gap: 1.8rem; }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, provide, onMounted } from 'vue'
+import { ref, shallowRef, computed, watch, provide, onMounted } from 'vue'
 import { detectLocale, LANG_KEY, type Locale } from './i18n'
 import type { AppEntry } from './data/apps'
 import SiteNav from './components/SiteNav.vue'
@@ -42,14 +42,12 @@ const openContact = () => { contactOpen.value = true }
 window.addEventListener('hashchange', () => { if (window.location.hash === '#contacto') contactOpen.value = true })
 
 /* ---------------- Mi perfil ----------------
-   El topbar (<dotrino-topbar>) es DUEÑO del modal "Mi perfil": le pasamos la
-   identidad + reputación del vault id.dotrino.com y él abre <dotrino-profile
-   mode="self"> solo (deriva el avatar del perfil activo y maneja el back). Así el
-   home NO fija la versión de @dotrino/profile: viaja dentro de @dotrino/topbar. */
-const identityInst = ref<any>(null)
-const reputationInst = ref<any>(null)
-const siteNavRef = ref<any>(null)
-const profileModalOpen = ref(false)
+   El botón de perfil es del <dotrino-topbar>: le pasamos la identidad + reputación del
+   vault id.dotrino.com y él enseña el menú de perfiles (cambiar, abrir, crear, adoptar,
+   iniciar sesión). El perfil se edita en profile.dotrino.com (§6.1). */
+// shallowRef: el Proxy reactivo de Vue rompe el postMessage de la identidad.
+const identityInst = shallowRef<any>(null)
+const reputationInst = shallowRef<any>(null)
 let _identity: any = null
 const ensureIdentity = async () => {
   if (_identity) return _identity
@@ -58,7 +56,7 @@ const ensureIdentity = async () => {
 }
 
 // Conecta identidad + reputación al montar → se las pasa al topbar (que deriva el
-// avatar del perfil activo y abre el modal). Cambiar de perfil se hace en profile.dotrino.com.
+// avatar del perfil activo y lista los perfiles en su menú).
 onMounted(async () => {
   const id = await ensureIdentity()
   if (!id) return
@@ -66,21 +64,6 @@ onMounted(async () => {
   try { reputationInst.value = createVaultReputation(id) } catch (_) { reputationInst.value = null }
 })
 
-/* "Exigir apodo": acciones que se firman con la identidad (p. ej. enviar una
-   solicitud de app) requieren nickname. Si falta, se abre el modal EDITABLE (el
-   topbar lo abre con allow-edit) y la acción pendiente se reanuda al guardar el
-   nombre. Mismo patrón que pronóstico y otras apps. Se expone a los hijos vía provide. */
-const pendingAction = ref<null | (() => void)>(null)
-async function ensureNick (run: () => void) {
-  const id = await ensureIdentity()
-  if (id && !id.me?.nickname) {
-    pendingAction.value = run
-    profileModalOpen.value = true
-    await siteNavRef.value?.openProfile(true) // editable: poner el apodo aquí mismo
-    return
-  }
-  run()
-}
 const getMyIdentity = async () => {
   const id = await ensureIdentity()
   return {
@@ -89,45 +72,18 @@ const getMyIdentity = async () => {
     signData: (data: any) => id?.signData?.(data),
   }
 }
-provide('ensureNick', ensureNick)
 provide('getMyIdentity', getMyIdentity)
-
-// Eventos del modal (lo abre/cierra el topbar). Al guardar el nombre, reanuda la
-// acción pendiente (ensureNick). profileModalOpen alimenta el chevron de volver.
-const onProfileOpen = () => { profileModalOpen.value = true }
-const onProfileName = (e: any) => {
-  const n = e?.detail?.name
-  if (n && pendingAction.value) {
-    const run = pendingAction.value
-    pendingAction.value = null
-    run()
-  }
-}
-const onProfileClose = () => { profileModalOpen.value = false; pendingAction.value = null }
-
-// Tema del modal de perfil acorde al home (Cool & Cozy: claro + azul, fuentes propias).
-const profileTheme = {
-  '--ccp-bg': '#ffffff', '--ccp-bg-2': '#f4f7f9', '--ccp-bg-3': '#eaeff3', '--ccp-bg-4': '#e3e9ed',
-  '--ccp-border': '#cfd8de', '--ccp-text': '#181c1e', '--ccp-muted': '#4a5560',
-  '--ccp-accent': '#00658c', '--ccp-accent-2': '#00506f', '--ccp-accent-text': '#ffffff', '--ccp-gold': '#c98a00', '--ccp-derived': '#b07f00',
-  '--ccp-online': '#00897b', '--ccp-affinity': '#2f8fd6', '--ccp-input-bg': '#f1f4f6', '--ccp-radius': '16px',
-  '--ccp-font': "'Hanken Grotesk', system-ui, sans-serif",
-  '--ccp-font-headline': "'Bricolage Grotesque', system-ui, sans-serif",
-  '--ccp-font-mono': "'JetBrains Mono', ui-monospace, monospace",
-}
 
 /* ---------------- Volver unificado (@dotrino/nav) ----------------
    El botón físico / chevron cierra el modal de info, el menú móvil o el de
    contacto, y solo después abandona el sitio. */
 useBackLayer(infoApp, { onClose: () => { infoApp.value = null } })
 useBackLayer(menuOpen)
-// El modal de perfil registra su PROPIA capa de "volver" dentro del topbar (dueño
-// del modal); aquí solo reflejamos su estado abierto en hasBack (chevron visible).
 useBackLayer(contactOpen, { onClose: () => { contactOpen.value = false } })
 
 // dotrino.com es el root del ecosistema: el chevron solo aparece cuando hay
 // algo "atrás" (un modal o el menú abierto).
-const hasBack = computed(() => !!(infoApp.value || menuOpen.value || profileModalOpen.value || contactOpen.value))
+const hasBack = computed(() => !!(infoApp.value || menuOpen.value || contactOpen.value))
 
 /* ---------------- Navegación dentro del home ----------------
    Una sola vista: los enlaces del navbar solo hacen scroll a su sección. */
@@ -144,18 +100,13 @@ const scrollToSection = (sectionId: string) => {
 <template>
   <div class="app">
     <SiteNav
-      ref="siteNavRef"
       v-model:locale="locale"
       v-model:open="menuOpen"
       :has-back="hasBack"
       :identity="identityInst"
       :reputation="reputationInst"
-      :profile-theme="profileTheme"
       @navigate="scrollToSection"
       @contact="openContact"
-      @profile-open="onProfileOpen"
-      @profile-name="onProfileName"
-      @profile-close="onProfileClose"
     />
 
     <div class="compact-spacer"></div>
