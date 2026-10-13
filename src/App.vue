@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, shallowRef, computed, watch, provide, onMounted } from 'vue'
-import { detectLocale, LANG_KEY, type Locale } from './i18n'
+import { detectLocale, localePath, LANG_KEY, type Locale } from './i18n'
 import type { AppEntry } from './data/apps'
 import SiteNav from './components/SiteNav.vue'
 import AppsCatalog from './components/AppsCatalog.vue'
@@ -24,6 +24,11 @@ watch(
   (l) => {
     localStorage.setItem(LANG_KEY, l)
     document.documentElement.lang = l
+    // La dirección sigue al idioma (`/` ↔ `/en/`), sin recargar ni perder el #fragment.
+    const path = localePath(l)
+    if (window.location.pathname !== path) {
+      window.history.replaceState(window.history.state, '', path + window.location.search + window.location.hash)
+    }
   },
   { immediate: true },
 )

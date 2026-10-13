@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/gen-icons.mjs && vue-tsc -b && vite build && node scripts/gen-routes.mjs",
+    "build": "node scripts/gen-icons.mjs && vue-tsc -b && vite build && node scripts/prerender.mjs && node scripts/gen-routes.mjs",
     "preview": "vite preview",
     "lint:fix": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "type-check": "vue-tsc -b"

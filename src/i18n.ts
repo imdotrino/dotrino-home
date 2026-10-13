@@ -7,10 +7,22 @@
 export type Locale = 'es' | 'en'
 export const LANG_KEY = 'dotrino.lang'
 
+/* Cada idioma tiene su dirección: `/` es el español y `/en/` el inglés, cada una con su
+   título y su descripción ya escritos en el HTML (scripts/prerender.mjs). Por eso el
+   idioma lo decide la DIRECCIÓN y no el navegador: un buscador lee con el navegador en
+   inglés, y si eso mandara vería texto inglés bajo el título español. Lo único que pasa
+   por encima es lo que el usuario eligió con el botón (y entonces la dirección lo sigue). */
+const EN_PATH = /(^|\/)en\/?$/
+
+/** La dirección del home en ese idioma, partiendo de la actual. */
+export const localePath = (locale: Locale): string => {
+  const home = window.location.pathname.replace(EN_PATH, '$1')
+  return locale === 'en' ? `${home}en/` : home
+}
+
 export const detectLocale = (): Locale => {
-  const saved = localStorage.getItem(LANG_KEY)
-  if (saved === 'es' || saved === 'en') return saved
-  return (navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es'
+  if (EN_PATH.test(window.location.pathname)) return 'en'
+  return localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'es'
 }
 
 export const messages = {
