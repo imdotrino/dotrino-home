@@ -3,6 +3,7 @@
    usuario la abre (ver ../recents.ts). */
 
 import ssoLogo from '../assets/apps/sso.svg'
+import namesLogo from '../assets/apps/names.svg'
 import chatLogo from '../assets/apps/chat.svg'
 import messengerLogo from '../assets/apps/messenger.svg'
 import qrshareLogo from '../assets/apps/qrshare.svg'
@@ -100,6 +101,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Un comando que deja funcionando en tu computadora cualquier herramienta de Dotrino —la bóveda, la terminal, el túnel—. Si te falta algo, lo baja él, sin pedirte permisos de administrador y sin tocar tu sistema. Linux, macOS y Windows.',
       en: 'One command that gets any Dotrino tool running on your computer —the vault, the terminal, the tunnel—. If something is missing it downloads it, without asking for admin rights and without touching your system. Linux, macOS and Windows.',
+    },
+  },
+  {
+    name: 'Nombres',
+    url: 'https://names.dotrino.com/',
+    logo: namesLogo,
+    repo: 'imdotrino/dotrino-names',
+    cat: 'apps',
+    desc: {
+      es: 'Un nombre que lleva a tu cuenta, en vez del código de letras y números: pide uno gratis (dos palabras, como <code>blue-cat</code>) o reserva el que quieras por año, también un dominio que ya sea tuyo. Y ponle nombre a cada uno de tus aparatos, como <code>laptop.blue-cat.dotrino.com</code>. Reservar un nombre es lo único que se paga en Dotrino, y es opcional.',
+      en: 'A name that leads to your account instead of the letters-and-numbers code: get a free one (two words, like <code>blue-cat</code>) or reserve the one you want per year, including a domain you already own. And name each of your devices, like <code>laptop.blue-cat.dotrino.com</code>. Reserving a name is the only paid thing in Dotrino, and it is optional.',
     },
   },
   {
