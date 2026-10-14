@@ -10,6 +10,7 @@ import qrshareLogo from '../assets/apps/qrshare.svg'
 import qrreaderLogo from '../assets/apps/qrreader.svg'
 import qrgeneratorLogo from '../assets/apps/qrgenerator.svg'
 import base64Logo from '../assets/apps/base64.svg'
+import iatosvgLogo from '../assets/apps/iatosvg.svg'
 import myipLogo from '../assets/apps/myip.svg'
 import chessLogo from '../assets/apps/chess.svg'
 import cuarentaLogo from '../assets/apps/cuarenta.svg'
@@ -309,6 +310,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Codifica y decodifica <strong>texto y archivos</strong> en Base64, con soporte para Unicode y una variante <strong>URL-safe</strong>. Codifica un archivo para incrustarlo o decodifica Base64 y descárgalo como archivo. Todo en el navegador, sin subir nada a un servidor.',
       en: 'Encode and decode <strong>text and files</strong> to Base64, with Unicode support and a <strong>URL-safe</strong> variant. Encode a file to embed it, or decode Base64 and download it as a file. All in the browser, nothing uploaded to a server.',
+    },
+  },
+  {
+    name: 'iatosvg',
+    url: 'https://iatosvg.dotrino.com/',
+    logo: iatosvgLogo,
+    repo: 'imdotrino/dotrino-iatosvg',
+    cat: 'apps',
+    desc: {
+      es: 'Convierte tus archivos de <strong>Illustrator (.ai)</strong> a <strong>SVG</strong>: capas, degradados, fotos y mesas de trabajo, leídos del archivo original. Añade la carpeta de fotos enlazadas para tenerlas en alta. Todo pasa en tu equipo: tus diseños no se suben a ningún lado.',
+      en: 'Convert your <strong>Illustrator (.ai)</strong> files to <strong>SVG</strong>: layers, gradients, photos and artboards, read from the original file. Add the folder of linked photos to get them in full size. Everything happens on your device: your designs are not uploaded anywhere.',
     },
   },
   {
