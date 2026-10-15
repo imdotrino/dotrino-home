@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { sendSignedRequest, type MyId } from '../lib/signedRequest'
+import ReplyNotice from './ReplyNotice.vue'
 import { ref, computed, inject } from 'vue'
 import { messages, type Locale } from '../i18n'
 
@@ -97,6 +98,7 @@ function submit() {
         <button type="submit" class="contact-send" :disabled="!canSend">{{ t.contact.send }}</button>
 
         <p v-if="state === 'sent'" class="contact-msg ok">{{ t.contact.thanks }}</p>
+        <ReplyNotice v-if="state === 'sent'" :locale="locale" />
         <p v-else-if="state === 'error'" class="contact-msg err">{{ unsigned ? t.apps.requestUnsigned : t.contact.error }}</p>
       </form>
     </div>

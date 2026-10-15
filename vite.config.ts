@@ -60,7 +60,9 @@ export default defineConfig({
         clientsClaim: true,
         cleanupOutdatedCaches: true,
         runtimeCaching: [],
-        navigateFallback: null
+        navigateFallback: null,
+        // El aviso de respuesta de Dotrino (Web Push → abre el messenger).
+        importScripts: ['dotrino-push-sw.js']
       }
     })
   ],

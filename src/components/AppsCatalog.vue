@@ -5,6 +5,8 @@ import { messages, type Locale } from '../i18n'
 import { apps, defaultRecentApps, inLine, type AppEntry, type Line, type SubKey } from '../data/apps'
 import { recents, loadRecents } from '../recents'
 import { wikiUrl, wikiTitles } from '../wiki'
+import ReplyNotice from './ReplyNotice.vue'
+import { useBackLayer } from '@dotrino/nav/vue'
 
 const props = defineProps<{ locale: Locale }>()
 defineEmits<{ info: [app: AppEntry] }>()
@@ -176,6 +178,9 @@ const reqState = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
    (`sendSignedRequest`). Sin firma no se envía, y se dice. No hace falta apodo. */
 const getMyIdentity = inject<(() => Promise<MyId>) | null>('getMyIdentity', null)
 const reqUnsigned = ref(false)
+// Al enviar se confirma en un modal, y ahí mismo se ofrece el aviso de respuesta.
+const sentOpen = ref(false)
+useBackLayer(sentOpen, { onClose: () => { sentOpen.value = false } })
 
 async function doSendRequest() {
   const text = reqText.value.trim()
@@ -186,6 +191,7 @@ async function doSendRequest() {
     await sendSignedRequest(getMyIdentity, { text, app: 'home', locale: props.locale })
     reqState.value = 'sent'
     reqText.value = ''
+    sentOpen.value = true
   } catch (e: any) {
     console.error('[app-request]', e?.code || '', e?.message || e)
     reqUnsigned.value = e?.code === 'unsigned' || e?.code === 'unsigned_request' || e?.code === 'bad_signature'
@@ -241,6 +247,15 @@ function submitRequest() {
         <p v-if="reqState === 'sent'" class="app-request-msg ok">{{ t.apps.requestThanks }}</p>
         <p v-else-if="reqState === 'error'" class="app-request-msg err">{{ reqUnsigned ? t.apps.requestUnsigned : t.apps.requestError }}</p>
       </form>
+
+      <div v-if="sentOpen" class="sent-overlay" @click.self="sentOpen = false">
+        <div class="sent-modal" role="dialog" aria-modal="true" data-testid="request-sent">
+          <button type="button" class="sent-x" :aria-label="t.reply.close" @click="sentOpen = false">×</button>
+          <h3 class="sent-title">{{ t.reply.sentTitle }}</h3>
+          <p class="sent-text">{{ t.apps.requestThanks }}</p>
+          <ReplyNotice :locale="locale" />
+        </div>
+      </div>
 
       <div class="apps-search" role="search">
         <svg class="apps-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -346,6 +361,12 @@ function submitRequest() {
 </template>
 
 <style scoped>
+.sent-overlay { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background: rgba(24, 28, 30, 0.42); }
+.sent-modal { position: relative; width: 100%; max-width: 440px; max-height: 88vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--line-2); border-radius: 18px; padding: 2rem 1.6rem 1.6rem; box-shadow: 0 30px 80px rgba(0, 101, 140, 0.18); text-align: left; }
+.sent-x { position: absolute; top: 0.7rem; right: 0.7rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: transparent; color: var(--text-dim); border: none; border-radius: 50%; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.sent-x:hover { background: var(--surface-2); color: var(--text); }
+.sent-title { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; color: var(--text); margin: 0 0 0.4rem; }
+.sent-text { color: var(--text-dim); margin: 0; }
 /* Enlace al wiki (§9.2): el catálogo presenta; el cómo se instala se cuenta allá. */
 .wiki-link { margin-top: 0.6rem; font-size: 0.88rem; text-align: center; }
 .wiki-link a { color: var(--accent); text-decoration: none; font-weight: 600; }

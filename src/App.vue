@@ -75,6 +75,7 @@ const getMyIdentity = async () => {
     pubkey: id?.me?.publickey || '',
     nickname: id?.me?.nickname || '',
     signData: (data: any) => id?.signData?.(data),
+    profileCard: () => id?.profileCard?.(),
   }
 }
 provide('getMyIdentity', getMyIdentity)

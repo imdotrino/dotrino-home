@@ -10,7 +10,13 @@
  */
 export const FEEDBACK_URL = import.meta.env.VITE_FEEDBACK_URL || 'https://feedback.dotrino.com'
 
-export type MyId = { pubkey: string; nickname: string; signData?: (d: unknown) => Promise<unknown> }
+export type MyId = {
+  pubkey: string
+  nickname: string
+  signData?: (d: unknown) => Promise<unknown>
+  /** Tu tarjeta de perfil (tus aparatos y sus llaves de cifrado): con ella Dotrino te contesta por el messenger. */
+  profileCard?: () => Promise<unknown>
+}
 
 export async function sendSignedRequest (
   getMyIdentity: (() => Promise<MyId>) | null,
@@ -24,10 +30,14 @@ export async function sendSignedRequest (
   const sig = (await me.signData({ op: 'app-request', text: fields.text, ts })) as string | { signature?: string }
   const signature = (typeof sig === 'string' ? sig : sig?.signature) || ''
   if (!signature) throw unsigned('the identity returned no signature')
+  // Sin tarjeta la solicitud llega igual: lo único que se pierde es poder contestarte por el
+  // messenger (no hay con qué sellarte el mensaje). Se dice en la consola.
+  let card: unknown = null
+  try { card = (await me.profileCard?.()) || null } catch (e: any) { console.warn('[app-request] no profile card:', e?.message || e) }
   const res = await fetch(FEEDBACK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...fields, pubkey: me.pubkey, nickname: me.nickname, ts, signature }),
+    body: JSON.stringify({ ...fields, pubkey: me.pubkey, nickname: me.nickname, ts, signature, card }),
   })
   if (!res.ok) {
     const body = await res.json().catch(() => null)
