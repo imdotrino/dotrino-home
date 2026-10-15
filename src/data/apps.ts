@@ -2,6 +2,7 @@
    App.vue. Cada entrada se registra también en el tab "Recientes" cuando el
    usuario la abre (ver ../recents.ts). */
 
+import { noDonations } from '@dotrino/support/policy'
 import ssoLogo from '../assets/apps/sso.svg'
 import namesLogo from '../assets/apps/names.svg'
 import chatLogo from '../assets/apps/chat.svg'
@@ -74,6 +75,9 @@ export type AppEntry = {
      se corrige). Sale de su categoría y va al tab «En revisión» hasta que se arregle. El
      texto dice qué le falta, en lenguaje llano. Lo que le falta lo lista `dotrino-index`. */
   outdated?: { es: string; en: string }
+  /* Se paga algo en ella (reservar un nombre). Dentro de la app iOS no se enseña: App Review
+     no admite vender un servicio digital fuera de In-App Purchase (3.1.1). */
+  paid?: boolean
   apk?: string
   /* La BETA para Android en Google Play (prueba abierta a quien tenga el enlace). Con
      `identity`, la app necesita Identidad Dotrino y se enlaza también. */
@@ -92,7 +96,7 @@ export const linesOf = (a: AppEntry): Line[] =>
 
 export const inLine = (a: AppEntry, line: Line): boolean => linesOf(a).includes(line)
 
-export const apps: AppEntry[] = [
+const allApps: AppEntry[] = [
   {
     name: 'Instalar',
     url: 'https://install.dotrino.com/',
@@ -110,6 +114,7 @@ export const apps: AppEntry[] = [
     logo: namesLogo,
     repo: 'imdotrino/dotrino-names',
     cat: 'apps',
+    paid: true,
     desc: {
       es: 'Un nombre que lleva a tu cuenta, en vez del código de letras y números: pide uno gratis (dos palabras, como <code>blue-cat</code>) o reserva el que quieras por año, también un dominio que ya sea tuyo. Y ponle nombre a cada uno de tus aparatos, como <code>laptop.blue-cat.dotrino.com</code>. Reservar un nombre es lo único que se paga en Dotrino, y es opcional.',
       en: 'A name that leads to your account instead of the letters-and-numbers code: get a free one (two words, like <code>blue-cat</code>) or reserve the one you want per year, including a domain you already own. And name each of your devices, like <code>laptop.blue-cat.dotrino.com</code>. Reserving a name is the only paid thing in Dotrino, and it is optional.',
@@ -577,6 +582,10 @@ export const apps: AppEntry[] = [
     },
   },
 ]
+
+/* Dentro de la app iOS (la regla la decide @dotrino/support, la pieza de monetización) las
+   apps de pago no salen en el catálogo. */
+export const apps: AppEntry[] = noDonations() ? allApps.filter((a) => !a.paid) : allApps
 
 /* Selección inicial del tab "Recientes" cuando aún no hay historial local
    (ver ../recents.ts). Destaca, en orden: los contadores deportivos
