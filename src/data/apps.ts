@@ -111,8 +111,8 @@ export const apps: AppEntry[] = [
     repo: 'imdotrino/dotrino-names',
     cat: 'apps',
     desc: {
-      es: 'Un nombre que lleva a tu cuenta, en vez del código de letras y números: pide uno gratis (dos palabras, como <code>blue-cat</code>) o reserva el que quieras por año, también un dominio que ya sea tuyo. Y ponle nombre a cada uno de tus aparatos, como <code>laptop.blue-cat.dotrino.com</code>. Reservar un nombre es lo único que se paga en Dotrino, y es opcional.',
-      en: 'A name that leads to your account instead of the letters-and-numbers code: get a free one (two words, like <code>blue-cat</code>) or reserve the one you want per year, including a domain you already own. And name each of your devices, like <code>laptop.blue-cat.dotrino.com</code>. Reserving a name is the only paid thing in Dotrino, and it is optional.',
+      es: 'Un nombre que lleva a tu cuenta, en vez del código de letras y números: pide uno gratis (dos palabras, como <code>blue-cat</code>) o reserva el que quieras por año, también un dominio que ya sea tuyo. Y ponle nombre a cada uno de tus aparatos, como <code>laptop.blue-cat.dotrino.com</code>.',
+      en: 'A name that leads to your account instead of the letters-and-numbers code: get a free one (two words, like <code>blue-cat</code>) or reserve the one you want per year, including a domain you already own. And name each of your devices, like <code>laptop.blue-cat.dotrino.com</code>.',
     },
   },
   {
