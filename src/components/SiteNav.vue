@@ -126,7 +126,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 /* Marca: logo 34px + "dotrino" en Comfortaa minúsculas (como el header viejo). */
 .site-topbar::part(brand-icon) { width: 34px; height: 34px; border-radius: 8px; }
 .site-topbar::part(brand-name) {
-  font-family: 'Comfortaa', var(--font-display);
+  font-family: var(--dt-font-brand);
   font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; text-transform: lowercase;
 }
 /* Chevron de "volver": dotrino.com es el root, así que solo aparece cuando hay

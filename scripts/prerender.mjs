@@ -133,7 +133,7 @@ const page = (locale, html, description) => {
 await writeFile(resolve(dist, 'index.html'), page('es', src, es.description), 'utf8')
 
 let enHtml = src
-enHtml = swap(enHtml, '<html lang="es">', '<html lang="en">', 'html lang')
+enHtml = swap(enHtml, '<html lang="es" data-theme="light">', '<html lang="en" data-theme="light">', 'html lang')
 enHtml = swap(enHtml, es.title, en.title, 'title')
 enHtml = swap(enHtml, es.description, en.description, 'description')
 enHtml = swap(enHtml, es.twitter, en.twitter, 'twitter:description')
