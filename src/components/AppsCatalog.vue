@@ -347,6 +347,10 @@ function submitRequest() {
               rel="noopener"
               class="app-beta-link"
             >{{ t.apps.androidBeta }}</a>
+            <p v-if="item.app.stores" class="app-stores">
+              <a v-if="item.app.stores.appStore" :href="item.app.stores.appStore" target="_blank" rel="noopener" class="app-beta-link" data-testid="store-appstore">App Store</a>
+              <a v-if="item.app.stores.play" :href="item.app.stores.play" target="_blank" rel="noopener" class="app-beta-link" data-testid="store-play">Google Play</a>
+            </p>
             <a
               :href="'https://github.com/' + item.app.repo"
               target="_blank"
@@ -568,4 +572,5 @@ function submitRequest() {
 }
 .app-beta-link { display: inline-block; margin: 0.2rem 0 0.4rem; color: var(--accent); font-weight: 600; font-size: 0.85rem; text-decoration: none; }
 .app-beta-link:hover { text-decoration: underline; }
+.app-stores { display: flex; justify-content: center; gap: 1rem; margin: 0; }
 </style>

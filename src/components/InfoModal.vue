@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { messages, type Locale } from '../i18n'
-import { IDENTITY_ANDROID_BETA, type AppEntry } from '../data/apps'
+import { IDENTITY_ANDROID_BETA, IDENTITY_PLAY, type AppEntry } from '../data/apps'
 
 const props = defineProps<{ app: AppEntry; locale: Locale }>()
 defineEmits<{ close: [] }>()
@@ -30,6 +30,11 @@ const t = computed(() => messages[props.locale])
         <template v-if="app.androidBeta">
           <a :href="app.androidBeta.url" target="_blank" rel="noopener" class="app-beta">{{ t.apps.androidBeta }}</a>
           <a v-if="app.androidBeta.identity" :href="IDENTITY_ANDROID_BETA" target="_blank" rel="noopener" class="app-beta">{{ t.apps.identityBeta }}</a>
+        </template>
+        <template v-if="app.stores">
+          <a v-if="app.stores.appStore" :href="app.stores.appStore" target="_blank" rel="noopener" class="app-beta">App Store</a>
+          <a v-if="app.stores.play" :href="app.stores.play" target="_blank" rel="noopener" class="app-beta">Google Play</a>
+          <a v-if="app.stores.play && app.stores.identity" :href="IDENTITY_PLAY" target="_blank" rel="noopener" class="app-beta">{{ t.apps.identityAndroid }}</a>
         </template>
         <button type="button" class="info-modal-close" @click="$emit('close')">{{ t.apps.close }}</button>
       </div>

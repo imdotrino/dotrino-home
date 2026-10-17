@@ -78,10 +78,14 @@ export type AppEntry = {
   /* La BETA para Android en Google Play (prueba abierta a quien tenga el enlace). Con
      `identity`, la app necesita Identidad Dotrino y se enlaza también. */
   androidBeta?: { url: string; identity?: boolean }
+  /* La versión nativa PUBLICADA en las tiendas. Con `identity`, la de Android necesita
+     Identidad Dotrino y se enlaza también (en iOS no hace falta, CONVENCIONES §16.2). */
+  stores?: { appStore?: string; play?: string; identity?: boolean }
 }
 
 /** Identidad Dotrino (Android): guarda las llaves y los perfiles del teléfono para las demás. */
 export const IDENTITY_ANDROID_BETA = 'https://play.google.com/apps/internaltest/4699800053552003281'
+export const IDENTITY_PLAY = 'https://play.google.com/store/apps/details?id=com.dotrino.identity'
 
 /* Cats que NO tienen lectura de empresa: entretenimiento y el launcher del
    teléfono personal. */
@@ -146,11 +150,15 @@ export const apps: AppEntry[] = [
     logo: vaultLogo,
     repo: 'imdotrino/dotrino-vault',
     cat: 'apps',
-    // La app de Dotrino para Android: aprobar desde el teléfono (Pedidos) y tus perfiles.
-    androidBeta: { url: 'https://play.google.com/apps/internaltest/4701203131776122603', identity: true },
+    // La app de Dotrino (iOS y Android): aprobar desde el teléfono (Pedidos) y tus perfiles.
+    stores: {
+      appStore: 'https://apps.apple.com/app/id6817137047',
+      play: 'https://play.google.com/store/apps/details?id=com.dotrino.app',
+      identity: true,
+    },
     desc: {
-      es: 'Tu bóveda personal: guarda toda tu información —archivos, contactos, contraseñas y lo que usan tus apps— en un solo lugar seguro, dentro de tu propia computadora. No en la nube de una empresa: en tu máquina, bajo tu control. Tus dispositivos acceden de forma segura y tú decides quién entra. Es un programa que instalas en tu computadora: hay instalador para Linux y, en Windows y macOS, se pone a andar con un comando o con Docker. Sin anuncios, sin rastreo.',
-      en: 'Your personal vault: keep all your information —files, contacts, passwords and whatever your apps use— in one safe place, on your own computer. Not on a company’s cloud: on your machine, under your control. Your devices connect securely and you decide who gets in. It is a program you install on your computer: there is an installer for Linux and, on Windows and macOS, one command or Docker gets it running. No ads, no tracking.',
+      es: 'Tu bóveda personal: guarda toda tu información —archivos, contactos, contraseñas y lo que usan tus apps— en un solo lugar seguro, dentro de tu propia computadora. No en la nube de una empresa: en tu máquina, bajo tu control. Tus dispositivos acceden de forma segura y tú decides quién entra. Es un programa que instalas en tu computadora: hay instalador para Linux y, en Windows y macOS, se pone a andar con un comando o con Docker. Con la app Dotrino para iPhone y Android, apruebas desde tu teléfono quién entra. Sin anuncios, sin rastreo.',
+      en: 'Your personal vault: keep all your information —files, contacts, passwords and whatever your apps use— in one safe place, on your own computer. Not on a company’s cloud: on your machine, under your control. Your devices connect securely and you decide who gets in. It is a program you install on your computer: there is an installer for Linux and, on Windows and macOS, one command or Docker gets it running. With the Dotrino app for iPhone and Android, you approve from your phone who gets in. No ads, no tracking.',
     },
   },
   {
