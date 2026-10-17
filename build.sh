@@ -11,4 +11,4 @@ fi
 echo ">> Compilando dotrino..."
 npm run build
 
-echo ">> Build OK -> ../api/src/public/"
+echo ">> Build OK -> dist/"
