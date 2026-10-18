@@ -36,6 +36,7 @@ import middlebotLogo from '../assets/apps/middlebot.svg'
 import contentLogo from '../assets/apps/content.svg'
 import walletLogo from '../assets/apps/wallet.svg'
 import factureroLogo from '../assets/apps/facturero.svg'
+import expensesLogo from '../assets/apps/expenses.svg'
 import installLogo from '../assets/apps/install.svg'
 import inspectorLogo from '../assets/apps/inspector.svg'
 import vaultLogo from '../assets/apps/vault.svg'
@@ -195,6 +196,18 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Apunta la cámara a un cuadro, un cartel o una foto y verás una imagen o un video cobrar vida encima. Tú preparas tus propias obras en tu teléfono: la foto no sale de él. Sin anuncios ni rastreo.',
       en: 'Point the camera at a painting, a poster or a photo and watch an image or a video come alive on top of it. You prepare your own works on your phone: the photo never leaves it. No ads, no tracking.',
+    },
+  },
+  {
+    name: 'Expenses',
+    url: 'https://expenses.dotrino.com/',
+    logo: expensesLogo,
+    repo: 'imdotrino/dotrino-expenses',
+    cat: 'apps',
+    wip: true,
+    desc: {
+      es: 'Lleva tus ingresos y gastos del mes en un calendario. Anota a mano o con una frase como «almuerzo 4.50», programa lo que se repite cada mes (el sueldo, el arriendo) y mira en qué se va el dinero, por categoría. Todo queda en tu almacén. Sin anuncios, sin rastreo.',
+      en: 'Keep your monthly income and expenses in a calendar. Record by hand or with a sentence like “lunch 4.50”, schedule what repeats every month (salary, rent) and see where the money goes, by category. Everything stays in your storage. No ads, no tracking.',
     },
   },
   {
