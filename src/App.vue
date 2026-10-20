@@ -4,6 +4,7 @@ import { detectLocale, localePath, LANG_KEY, type Locale } from './i18n'
 import type { AppEntry } from './data/apps'
 import SiteNav from './components/SiteNav.vue'
 import AppsCatalog from './components/AppsCatalog.vue'
+import IntroVideo from './components/IntroVideo.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import InfoModal from './components/InfoModal.vue'
 import ContactModal from './components/ContactModal.vue'
@@ -116,6 +117,7 @@ const scrollToSection = (sectionId: string) => {
     />
 
     <div class="compact-spacer"></div>
+    <IntroVideo :locale="locale" />
     <AppsCatalog :locale="locale" @info="openInfo" />
 
     <SiteFooter :locale="locale" />

@@ -38,6 +38,10 @@ export const messages = {
     },
     langToggle: 'EN',
     langLabel: 'Cambiar idioma a inglés',
+    intro: {
+      label: 'Video: qué es Dotrino',
+      youtube: 'Ver en YouTube',
+    },
     apps: {
       title: 'Aplicaciones',
       text: 'Las aplicaciones del ecosistema. Todas hablan el mismo idioma, así que lo tuyo viaja de una a otra.',
@@ -107,6 +111,10 @@ export const messages = {
     },
     langToggle: 'ES',
     langLabel: 'Switch language to Spanish',
+    intro: {
+      label: 'Video: what is Dotrino',
+      youtube: 'Watch on YouTube',
+    },
     apps: {
       title: 'Applications',
       text: 'The apps of the ecosystem. They all speak the same language, so what’s yours travels from one to the next.',
