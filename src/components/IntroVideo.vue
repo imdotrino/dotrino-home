@@ -5,13 +5,13 @@ import { messages, type Locale } from '../i18n'
 /* El video de "qué es Dotrino", servido desde el propio dominio: nada de
    reproductor de YouTube embebido (cargaría JS de terceros y su rastreo).
    Arranca PAUSADO y no descarga nada hasta que se pulsa play (preload="none");
-   la portada es el primer cuadro, que es el logo. YouTube queda como enlace. */
+   la portada es el primer cuadro, que es el logo. */
 const props = defineProps<{ locale: Locale }>()
 const t = computed(() => messages[props.locale].intro)
 
-const VIDEOS: Record<Locale, { src: string; youtube: string }> = {
-  es: { src: '/video/dotrino-es.mp4', youtube: 'https://youtu.be/oDXJWGe3aKI' },
-  en: { src: '/video/dotrino-en.mp4', youtube: 'https://youtu.be/LAMbrqlUe8M' },
+const VIDEOS: Record<Locale, string> = {
+  es: '/video/dotrino-es.mp4',
+  en: '/video/dotrino-en.mp4',
 }
 const video = computed(() => VIDEOS[props.locale])
 </script>
@@ -20,16 +20,15 @@ const video = computed(() => VIDEOS[props.locale])
   <section class="intro-video" :aria-label="t.label">
     <!-- :key fuerza a recargar la fuente al cambiar de idioma -->
     <video
-      :key="video.src"
+      :key="video"
       class="player"
       controls
       preload="none"
       playsinline
       poster="/video/poster.jpg"
-      :src="video.src"
+      :src="video"
       data-testid="intro-video"
     ></video>
-    <a class="yt" :href="video.youtube" target="_blank" rel="noopener" data-testid="intro-youtube">{{ t.youtube }}</a>
   </section>
 </template>
 
@@ -39,10 +38,6 @@ const video = computed(() => VIDEOS[props.locale])
   max-width: 560px;
   margin: 40px auto 0;
   padding: 0 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
 }
 .player {
   width: 100%;
@@ -52,12 +47,6 @@ const video = computed(() => VIDEOS[props.locale])
   box-shadow: 0 18px 40px rgba(var(--accent-rgb), 0.12);
   display: block;
 }
-.yt {
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  text-decoration: none;
-}
-.yt:hover { color: var(--accent); text-decoration: underline; }
 @media (max-width: 640px) {
   /* en móvil el topbar va en dos filas (~113 px) y el espaciador solo cubre 64 */
   .intro-video { max-width: none; margin-top: 76px; }

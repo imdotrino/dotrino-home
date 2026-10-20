@@ -40,7 +40,6 @@ export const messages = {
     langLabel: 'Cambiar idioma a inglés',
     intro: {
       label: 'Video: qué es Dotrino',
-      youtube: 'Ver en YouTube',
     },
     apps: {
       title: 'Aplicaciones',
@@ -113,7 +112,6 @@ export const messages = {
     langLabel: 'Switch language to Spanish',
     intro: {
       label: 'Video: what is Dotrino',
-      youtube: 'Watch on YouTube',
     },
     apps: {
       title: 'Applications',
