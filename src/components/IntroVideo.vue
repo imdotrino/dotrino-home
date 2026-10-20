@@ -34,9 +34,10 @@ const video = computed(() => VIDEOS[props.locale])
 </template>
 
 <style scoped>
+/* En escritorio, pequeño: acompaña al catálogo sin taparlo. En móvil, todo el ancho. */
 .intro-video {
-  max-width: 960px;
-  margin: 0 auto 28px;
+  max-width: 560px;
+  margin: 40px auto 0;
   padding: 0 16px;
   display: flex;
   flex-direction: column;
@@ -57,4 +58,8 @@ const video = computed(() => VIDEOS[props.locale])
   text-decoration: none;
 }
 .yt:hover { color: var(--accent); text-decoration: underline; }
+@media (max-width: 640px) {
+  /* en móvil el topbar va en dos filas (~113 px) y el espaciador solo cubre 64 */
+  .intro-video { max-width: none; margin-top: 76px; }
+}
 </style>
