@@ -204,10 +204,9 @@ export const apps: AppEntry[] = [
     logo: expensesLogo,
     repo: 'imdotrino/dotrino-expenses',
     cat: 'apps',
-    wip: true,
     desc: {
-      es: 'Lleva tus ingresos y gastos del mes en un calendario. Anota a mano o con una frase como «almuerzo 4.50», programa lo que se repite cada mes (el sueldo, el arriendo) y mira en qué se va el dinero, por categoría. Todo queda en tu almacén. Sin anuncios, sin rastreo.',
-      en: 'Keep your monthly income and expenses in a calendar. Record by hand or with a sentence like “lunch 4.50”, schedule what repeats every month (salary, rent) and see where the money goes, by category. Everything stays in your storage. No ads, no tracking.',
+      es: 'Lleva tus ingresos y gastos del mes en un calendario. Anota a mano, con una frase como «almuerzo 4.50», dictando o con los avisos del banco de tu correo; programa lo que se repite cada mes y te avisa el día del pago. Si quieres, usa tu propia IA. Todo queda en tu almacén.',
+      en: 'Keep your monthly income and expenses in a calendar. Record by hand, with a sentence like “lunch 4.50”, by voice or from your bank’s emails; schedule what repeats every month and get a reminder on the due day. Use your own AI if you want. Everything stays in your storage.',
     },
   },
   {
