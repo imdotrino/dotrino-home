@@ -5,7 +5,7 @@ import { messages, type Locale } from '../i18n'
 /* El video de "qué es Dotrino", servido desde el propio dominio: nada de
    reproductor de YouTube embebido (cargaría JS de terceros y su rastreo).
    Arranca PAUSADO y no descarga nada hasta que se pulsa play (preload="none");
-   la portada es el primer cuadro, que es el logo. */
+   la portada solo dice "¿Qué es Dotrino?", en el idioma activo. */
 const props = defineProps<{ locale: Locale }>()
 const t = computed(() => messages[props.locale].intro)
 
@@ -14,6 +14,7 @@ const VIDEOS: Record<Locale, string> = {
   en: '/video/dotrino-en.mp4',
 }
 const video = computed(() => VIDEOS[props.locale])
+const poster = computed(() => `/video/poster-${props.locale}.jpg`)
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const video = computed(() => VIDEOS[props.locale])
       controls
       preload="none"
       playsinline
-      poster="/video/poster.jpg"
+      :poster="poster"
       :src="video"
       data-testid="intro-video"
     ></video>
