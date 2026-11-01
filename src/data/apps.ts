@@ -530,6 +530,9 @@ export const apps: AppEntry[] = [
     logo: terminalLogo,
     repo: 'imdotrino/dotrino-terminal',
     cat: 'developers',
+    stores: {
+      appStore: 'https://apps.apple.com/app/id6819536211',
+    },
     desc: {
       es: 'Una terminal para tu computadora (Linux y macOS) cuyas ventanas también puedes abrir desde el navegador de tu teléfono o de otro aparato, y retomarlas tal como las dejaste. Solo entran los aparatos que enlaces con tu bóveda, y todo viaja cifrado de punta a punta. Sin cuentas, sin rastreo.',
       en: 'A terminal for your computer (Linux and macOS) whose windows you can also open from the browser on your phone or another device, and pick up right where you left them. Only devices you link to your vault get in, and everything is end-to-end encrypted. No accounts, no tracking.',
