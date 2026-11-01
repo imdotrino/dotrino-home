@@ -532,6 +532,8 @@ export const apps: AppEntry[] = [
     cat: 'developers',
     stores: {
       appStore: 'https://apps.apple.com/app/id6819536211',
+      play: 'https://play.google.com/store/apps/details?id=com.dotrino.terminal',
+      identity: true,
     },
     desc: {
       es: 'Una terminal para tu computadora (Linux y macOS) cuyas ventanas también puedes abrir desde el navegador de tu teléfono o de otro aparato, y retomarlas tal como las dejaste. Solo entran los aparatos que enlaces con tu bóveda, y todo viaja cifrado de punta a punta. Sin cuentas, sin rastreo.',
