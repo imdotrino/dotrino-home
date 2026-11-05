@@ -44,6 +44,7 @@ import profileLogo from '../assets/apps/profile.svg'
 import reputationLogo from '../assets/apps/reputation.svg'
 import passmanagerLogo from '../assets/apps/passmanager.svg'
 import arLogo from '../assets/apps/ar.svg'
+import recorderLogo from '../assets/apps/recorder.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -207,6 +208,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Lleva tus ingresos y gastos del mes en un calendario. Anota a mano, con una frase como «almuerzo 4.50», dictando o con los avisos del banco de tu correo; programa lo que se repite cada mes y te avisa el día del pago. Si quieres, usa tu propia IA. Todo queda en tu almacén.',
       en: 'Keep your monthly income and expenses in a calendar. Record by hand, with a sentence like “lunch 4.50”, by voice or from your bank’s emails; schedule what repeats every month and get a reminder on the due day. Use your own AI if you want. Everything stays in your storage.',
+    },
+  },
+  {
+    name: 'Grabadora',
+    url: 'https://recorder.dotrino.com/',
+    logo: recorderLogo,
+    repo: 'imdotrino/dotrino-recorder',
+    cat: 'apps',
+    desc: {
+      es: 'Graba audio con calidad: sin pérdida (WAV de 24 o 16 bit) o comprimido para que ocupe poco. Mira el nivel de cada canal, te avisa si satura, ajusta la ganancia y elige el micrófono. Tus grabaciones se quedan en tu aparato: escúchalas, cámbiales el nombre o descárgalas.',
+      en: 'Record good-quality audio: lossless (24 or 16 bit WAV) or compressed so it takes little space. See the level of each channel, get a warning if it clips, adjust the gain and pick the microphone. Your recordings stay on your device: play them, rename them or download them.',
     },
   },
   {
