@@ -45,6 +45,7 @@ import reputationLogo from '../assets/apps/reputation.svg'
 import passmanagerLogo from '../assets/apps/passmanager.svg'
 import arLogo from '../assets/apps/ar.svg'
 import recorderLogo from '../assets/apps/recorder.svg'
+import notesLogo from '../assets/apps/notes.svg'
 
 // Subcategorías del tab "Juegos": solo / multijugador / configurables.
 export type SubKey = 'solo' | 'multi' | 'config'
@@ -208,6 +209,17 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Lleva tus ingresos y gastos del mes en un calendario. Anota a mano, con una frase como «almuerzo 4.50», dictando o con los avisos del banco de tu correo; programa lo que se repite cada mes y te avisa el día del pago. Si quieres, usa tu propia IA. Todo queda en tu almacén.',
       en: 'Keep your monthly income and expenses in a calendar. Record by hand, with a sentence like “lunch 4.50”, by voice or from your bank’s emails; schedule what repeats every month and get a reminder on the due day. Use your own AI if you want. Everything stays in your storage.',
+    },
+  },
+  {
+    name: 'Notes',
+    url: 'https://notes.dotrino.com/',
+    logo: notesLogo,
+    repo: 'imdotrino/dotrino-notes',
+    cat: 'apps',
+    desc: {
+      es: 'Un bloc de notas que te sigue: escribe en el teléfono y sigue en la computadora. Fija las importantes arriba y busca en todas. Tus notas se guardan en tu almacén y viajan cifradas por tu bóveda a tus otros aparatos; un punto verde te dice cuándo están en todos.',
+      en: 'A notepad that follows you: write on your phone and continue on your computer. Pin the important ones to the top and search them all. Your notes are kept in your storage and travel encrypted through your vault to your other devices; a green dot tells you when they are on all of them.',
     },
   },
   {
