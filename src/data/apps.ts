@@ -619,10 +619,9 @@ export const apps: AppEntry[] = [
     logo: passmanagerLogo,
     repo: 'imdotrino/dotrino-passmanager',
     cat: 'apps',
-    wip: true,
     desc: {
-      es: 'Guarda tus contraseñas y tus códigos de dos pasos <strong>en tu propia bóveda</strong>, no en un servidor ajeno. Cuando entras a un sitio, el navegador recibe la contraseña de ese sitio y nada más — no una copia de todas. Trae lo que ya tienes desde otros gestores, y te la llevas cuando quieras.',
-      en: 'Keeps your passwords and two-step codes <strong>in your own vault</strong>, not on someone else\'s server. When you open a site, the browser gets that site\'s password and nothing else — not a copy of them all. Bring what you already have from other managers, and take it with you whenever you want.',
+      es: 'Guarda tus contraseñas y tus códigos de dos pasos <strong>en tu propia bóveda</strong>, no en un servidor ajeno. Cuando entras a un sitio, el navegador recibe la contraseña de ese sitio y nada más — no una copia de todas. Es una extensión para Chrome y Firefox, también en Android, y te llevas tus contraseñas cuando quieras.',
+      en: 'Keeps your passwords and two-step codes <strong>in your own vault</strong>, not on someone else\'s server. When you open a site, the browser gets that site\'s password and nothing else — not a copy of them all. It is an extension for Chrome and Firefox, Android included, and you can take your passwords with you whenever you want.',
     },
   },
 ]
