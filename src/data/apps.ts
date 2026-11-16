@@ -30,6 +30,7 @@ import sudokuLogo from '../assets/apps/sudoku.svg'
 import offroadLogo from '../assets/apps/offroad.svg'
 import tunnelLogo from '../assets/apps/tunnel.svg'
 import terminalLogo from '../assets/apps/terminal.svg'
+import remoteDesktopLogo from '../assets/apps/remote-desktop.svg'
 import iaLogo from '../assets/apps/ia.svg'
 import telegramBotLogo from '../assets/apps/telegram-bot.svg'
 import middlebotLogo from '../assets/apps/middlebot.svg'
@@ -562,6 +563,18 @@ export const apps: AppEntry[] = [
     desc: {
       es: 'Una terminal para tu computadora (Linux y macOS) cuyas ventanas también puedes abrir desde el navegador de tu teléfono o de otro aparato, y retomarlas tal como las dejaste. Solo entran los aparatos que enlaces con tu bóveda, y todo viaja cifrado de punta a punta. Sin cuentas, sin rastreo.',
       en: 'A terminal for your computer (Linux and macOS) whose windows you can also open from the browser on your phone or another device, and pick up right where you left them. Only devices you link to your vault get in, and everything is end-to-end encrypted. No accounts, no tracking.',
+    },
+  },
+  {
+    name: 'Escritorio remoto',
+    url: 'https://remote-desktop.dotrino.com/',
+    logo: remoteDesktopLogo,
+    repo: 'imdotrino/dotrino-remote-desktop',
+    cat: 'apps',
+    wip: true,
+    desc: {
+      es: 'Usa las ventanas de tu computadora desde el navegador de tu teléfono o de otro aparato tuyo. No envía una foto de la pantalla sino lo que hay en ella —botones, menús y textos—, así que se ve nítido y funciona con una conexión lenta. Solo entran los aparatos que enlaces con tu bóveda, y todo viaja cifrado de punta a punta. Por ahora, computadoras con Linux.',
+      en: 'Use your computer’s windows from the browser on your phone or another device of yours. It doesn’t send a picture of the screen but what is on it —buttons, menus and text—, so it looks sharp and works on a slow connection. Only devices you link to your vault get in, and everything is end-to-end encrypted. For now, Linux computers.',
     },
   },
   {
