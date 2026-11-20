@@ -287,8 +287,8 @@ export const apps: AppEntry[] = [
     repo: 'imdotrino/dotrino-temp',
     cat: 'social',
     desc: {
-      es: 'Un chat sin cuenta y sin historial para pasarte algo que hay que copiar. Entras a un canal de hasta 3 letras, como <code>temp.dotrino.com/abc</code>, y cada mensaje se borra a los 60 segundos. Ves cuántas personas hay, y si entra alguien te avisa antes de que envíes nada.',
-      en: 'A chat with no account and no history, for passing along something you need to copy. Join a channel of up to 3 letters, like <code>temp.dotrino.com/abc</code>, and every message is deleted after 60 seconds. You see how many people are there, and if someone joins you are told before you send anything.',
+      es: 'Un chat sin registro y sin historial para pasarte algo que hay que copiar. Entras a un canal de hasta 3 letras, como <code>temp.dotrino.com/abc</code>, y cada mensaje se borra a los 60 segundos. Ves quién está, con su apodo y el código de su cuenta, y si entra alguien te avisa antes de que envíes nada.',
+      en: 'A chat with no sign-up and no history, for passing along something you need to copy. Join a channel of up to 3 letters, like <code>temp.dotrino.com/abc</code>, and every message is deleted after 60 seconds. You see who is there, with their nickname and account code, and if someone joins you are told before you send anything.',
     },
   },
   {
