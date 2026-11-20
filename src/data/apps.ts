@@ -5,7 +5,7 @@
 import ssoLogo from '../assets/apps/sso.svg'
 import namesLogo from '../assets/apps/names.svg'
 import chatLogo from '../assets/apps/chat.svg'
-import efimeralLogo from '../assets/apps/efimeral.svg'
+import tempLogo from '../assets/apps/temp.svg'
 import messengerLogo from '../assets/apps/messenger.svg'
 import qrshareLogo from '../assets/apps/qrshare.svg'
 import qrreaderLogo from '../assets/apps/qrreader.svg'
@@ -281,14 +281,14 @@ export const apps: AppEntry[] = [
     },
   },
   {
-    name: 'Efimeral',
-    url: 'https://efimeral.dotrino.com/',
-    logo: efimeralLogo,
-    repo: 'imdotrino/dotrino-efimeral',
+    name: 'Temp',
+    url: 'https://temp.dotrino.com/',
+    logo: tempLogo,
+    repo: 'imdotrino/dotrino-temp',
     cat: 'social',
     desc: {
-      es: 'Un chat sin cuenta y sin historial para pasarte algo que hay que copiar. Entras a un canal de hasta 3 letras, como <code>efimeral.dotrino.com/abc</code>, y cada mensaje se borra a los 60 segundos. Ves cuántas personas hay, y si entra alguien te avisa antes de que envíes nada.',
-      en: 'A chat with no account and no history, for passing along something you need to copy. Join a channel of up to 3 letters, like <code>efimeral.dotrino.com/abc</code>, and every message is deleted after 60 seconds. You see how many people are there, and if someone joins you are told before you send anything.',
+      es: 'Un chat sin cuenta y sin historial para pasarte algo que hay que copiar. Entras a un canal de hasta 3 letras, como <code>temp.dotrino.com/abc</code>, y cada mensaje se borra a los 60 segundos. Ves cuántas personas hay, y si entra alguien te avisa antes de que envíes nada.',
+      en: 'A chat with no account and no history, for passing along something you need to copy. Join a channel of up to 3 letters, like <code>temp.dotrino.com/abc</code>, and every message is deleted after 60 seconds. You see how many people are there, and if someone joins you are told before you send anything.',
     },
   },
   {
